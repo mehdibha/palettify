@@ -1,0 +1,78 @@
+.word-animation {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-right: 5px;
+  margin-right: -5px;
+}
+
+.word-animation {
+  background-color: hsl(var(--foreground));
+  background-image: -webkit-image-set(
+    url("https://designmodo.com/wp-content/themes/designmodo/custom-pages/postcards/assets/img/text_background@1x.webp")
+      1x,
+    url("https://designmodo.com/wp-content/themes/designmodo/custom-pages/postcards/assets/img/text_background@1x.webp")
+      2x
+  );
+  background-image: image-set(
+    "https://designmodo.com/wp-content/themes/designmodo/custom-pages/postcards/assets/img/text_background@1x.webp"
+      1x,
+    "https://designmodo.com/wp-content/themes/designmodo/custom-pages/postcards/assets/img/text_background@1x.webp"
+      2x
+  );
+  background-repeat: repeat;
+  background-size: 1024px;
+  -webkit-animation:
+    71s diagonal-flow infinite linear,
+    23s hue-rotate infinite linear;
+  animation:
+    71s diagonal-flow infinite linear,
+    23s hue-rotate infinite linear;
+}
+
+@keyframes diagonal-flow {
+  0% {
+    background-position: 100px 100px;
+  }
+
+  100% {
+    background-position: -5020px 4196px;
+  }
+}
+
+@-webkit-keyframes hue-rotate {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    -webkit-filter: hue-rotate(-60deg);
+    filter: hue-rotate(-60deg);
+  }
+
+  100% {
+    -webkit-filter: hue-rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes hue-rotate {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    -webkit-filter: hue-rotate(-60deg);
+    filter: hue-rotate(-60deg);
+  }
+
+  100% {
+    -webkit-filter: hue-rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}

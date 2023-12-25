@@ -1,0 +1,3 @@
+{
+  "extends": "@palettify/ts-config/base.json"
+}

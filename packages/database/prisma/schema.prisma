@@ -1,0 +1,185 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String?
+  username      String?
+  gh_username   String?
+  email         String?        @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  customer      Customer?
+  subscription  Subscription[]
+  Invoice       Invoice[]
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  refresh_token_expires_in Int?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Customer {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  stripeCustomerId String   @unique @map(name: "stripe_customer_id")
+  billingAddress   Json?    @map(name: "billing_address")
+  paymentMethod    Json?    @map(name: "payment_method")
+  userId           String   @unique @map(name: "user_id")
+  user             User     @relation(fields: [userId], references: [id])
+}
+
+model Product {
+  id              String   @id @default(cuid())
+  stripeProductId String   @unique @map(name: "stripe_product_id")
+  active          Boolean
+  name            String
+  features        String[]
+  description     String?
+  image           String?
+  metadata        Json?
+  price           Price[]
+
+  @@index([stripeProductId])
+}
+
+model Price {
+  id              String               @id @default(cuid())
+  stripePriceId   String               @unique @map("stripe_price_id")
+  active          Boolean
+  description     String?
+  unitAmount      Int?                 @map("unit_amount")
+  currency        String
+  type            PricingType
+  interval        PricingPlanInterval?
+  intervalCount   Int?                 @map("interval_count")
+  trialPeriodDays Int?                 @map("trial_period_days")
+  metadata        Json?
+  productId       String               @map("product_id")
+  product         Product              @relation(fields: [productId], references: [id], onDelete: Cascade)
+  subscription    Subscription[]
+  Invoice         Invoice[]
+
+  @@index([stripePriceId])
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  stripeSubscriptionId String             @unique @map("stripe_subscription_id")
+  status               SubscriptionStatus
+  cancelAtPeriodEnd    Boolean            @map("cancel_at_period_end")
+  created              DateTime           @default(now())
+  currentPeriodStart   DateTime           @default(now()) @map("current_period_start")
+  currentPeriodEnd     DateTime           @default(now()) @map("current_period_end")
+  endedAt              DateTime?          @map("ended_at")
+  cancelAt             DateTime?          @map("cancel_at")
+  canceledAt           DateTime?          @map("canceled_at")
+  trialStart           DateTime?          @map("trial_start")
+  trialEnd             DateTime?          @map("trial_end")
+  userId               String             @map("user_id")
+  user                 User               @relation(fields: [userId], references: [id])
+  priceId              String             @map("price_id")
+  price                Price              @relation(fields: [priceId], references: [id])
+  Invoice              Invoice[]
+
+  @@index([stripeSubscriptionId])
+}
+
+model Invoice {
+  id              Int            @id @default(autoincrement())
+  stripeInvoiceId String         @unique @map("stripe_invoice_id")
+  status          InvoiceStatus?
+  amount          Float          @map("amount_due")
+  createdAt       DateTime       @default(now())
+  userId          String         @map("user_id")
+  user            User           @relation(fields: [userId], references: [id])
+  subscriptionId  String         @map("subscription_id")
+  subscription    Subscription   @relation(fields: [subscriptionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  priceId         String         @map("price_id")
+  price           Price          @relation(fields: [priceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([stripeInvoiceId])
+}
+
+model Email {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  email     String   @unique
+}
+
+enum PricingPlanInterval {
+  day
+  week
+  month
+  year
+}
+
+enum SubscriptionStatus {
+  trialing
+  active
+  canceled
+  incomplete
+  incomplete_expired
+  past_due
+  unpaid
+  paused
+}
+
+enum PricingType {
+  one_time
+  recurring
+}
+
+enum InvoiceStatus {
+  draft
+  open
+  paid
+  uncollectible
+  void
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@palettify/utils",
+  "version": "0.1.1",
+  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "react-string-replace": "^1.1.1",
+    "tailwind-merge": "^2.0.0"
+  },
+  "devDependencies": {
+    "@palettify/eslint-config": "*",
+    "@palettify/ts-config": "*",
+    "tsup": "^6.0.1",
+    "typescript": "^5.2.2"
+  }
+}

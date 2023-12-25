@@ -1,0 +1,38 @@
+{
+  "name": "@palettify/database",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo node_modules dist",
+    "lint": "eslint \"src/**/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "prisma generate",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:seed": "tsx src/seed.ts",
+    "dev": "tsup --watch",
+    "format": "prisma format",
+    "studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.6.0"
+  },
+  "devDependencies": {
+    "@palettify/eslint-config": "*",
+    "@palettify/ts-config": "*",
+    "prisma": "^5.6.0",
+    "rimraf": "^3.0.2",
+    "tsup": "^6.0.1",
+    "tsx": "^3.7.1",
+    "typescript": "^5.2.2"
+  }
+}

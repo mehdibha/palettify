@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "NEXTAUTH_URL",
+    "NEXT_PUBLIC_ROOT_DOMAIN",
+    "POSTGRES_PRISMA_URL",
+    "POSTGRES_URL_NON_POOLING",
+    "AUTH_GITHUB_SECRET",
+    "AUTH_GITHUB_ID",
+    "NEXTAUTH_SECRET",
+    "AUTH_GOOGLE_CLIENT_ID",
+    "AUTH_GOOGLE_CLIENT_SECRET",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    "STRIPE_SECRET_KEY",
+    "STRIPE_SECRET_KEY_LIVE",
+    "STRIPE_WEBHOOK_SECRET",
+    "NEXT_PUBLIC_VERCEL_ENV"
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build", "@palettify/database#db:generate"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "typecheck": { "dependsOn": ["^build"], "cache": false },
+    "dev": {
+      "dependsOn": ["^build", "@palettify/database#db:generate"],
+      "cache": false
+    },
+    "clean": {
+      "cache": false
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:seed": {
+      "cache": false
+    }
+  }
+}
