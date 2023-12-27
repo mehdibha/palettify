@@ -23,6 +23,7 @@
     "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
+    "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "sharp": "^0.33.0",

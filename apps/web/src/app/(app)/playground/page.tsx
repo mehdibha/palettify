@@ -1,3 +1,5 @@
+import { UpdateSiteAppearance } from "@/modules/theme-previewer/components/theme-form";
+
 export default function PalettesPage() {
-  return <div className="">Playground</div>;
+  return <UpdateSiteAppearance />;
 }

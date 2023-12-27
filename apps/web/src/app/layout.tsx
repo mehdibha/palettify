@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Metadata, Viewport } from "next";
-import Image from "next/image";
 import { Analytics } from "@vercel/analytics/react";
 import "@palettify/ui/styles/shared-globals.css";
 import { cn } from "@palettify/utils";
@@ -59,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Analytics />
           <div className="relative">
-            <Banner />
+            {/* <Banner /> */}
             <Suspense fallback={<div className="h-[64px]" />}>
               <Header />
             </Suspense>
@@ -71,22 +70,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
-const BackgroundTop = () => {
-  return (
-    <div className="absolute -top-20 z-[-1] h-[calc(100vh+162px)] w-full object-cover opacity-60 md:h-[calc(100vh+120px)]">
-      <Image fill src="/images/hero.png" alt="hero" />
-    </div>
-  );
-};
-
-const BackgroundBottom = () => {
-  return (
-    <img
-      src="/images/cta.png"
-      alt="background"
-      className="absolute bottom-[-50px] z-[-1] opacity-20"
-      loading="lazy"
-    />
-  );
-};
