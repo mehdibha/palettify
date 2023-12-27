@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRightIcon } from "@palettify/ui";
-import { cn } from "@palettify/utils";
+import { cn, stringReplace } from "@palettify/utils";
 
 interface FeaturesProps {
   className?: string;
+  headline: string;
   features: {
     title: string;
     description: string;
@@ -17,24 +18,29 @@ interface FeaturesProps {
 }
 
 export const Features = (props: FeaturesProps) => {
-  const { features, className } = props;
+  const { headline, features, className } = props;
   return (
-    <section
-      className={cn(
-        "container flex max-w-7xl flex-col space-y-20 md:space-y-28",
-        className
-      )}
-    >
-      {features.map((feature, index) => (
-        <Feature
-          key={index}
-          title={feature.title}
-          description={feature.description}
-          image={feature.image}
-          cta={feature.cta}
-          direction={index % 2 === 0 ? "row" : "reverse"}
-        />
-      ))}
+    <section className={cn("container", className)}>
+      <h2 className="font-display text-center text-4xl lg:text-5xl">
+        {stringReplace(headline, /\*\*(.*?)\*\*/g, (match, index) => (
+          <span key={index} className="word-animation">
+            {match}
+          </span>
+        ))}
+      </h2>
+      <div className="mt-12 flex justify-center">
+        <div className="grid grid-cols-2 justify-center gap-10">
+          {features.map((feature, index) => (
+            <Feature
+              key={index}
+              title={feature.title}
+              description={feature.description}
+              image={feature.image}
+              cta={feature.cta}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
@@ -47,39 +53,27 @@ interface FeatureProps {
     label: string;
     href: string;
   };
-  direction?: "col" | "reverse" | "row";
 }
 
 const Feature = (props: FeatureProps) => {
-  const { title, description, cta, image, direction = "row" } = props;
+  const { title, description, cta, image } = props;
   return (
-    <div
-      className={cn("flex flex-col-reverse items-center gap-12", {
-        "md:flex-row": direction === "row",
-        "md:flex-row-reverse": direction === "reverse",
-        "md:flex-col-reverse md:text-center": direction === "col",
-      })}
-    >
+    <div className="gap4 flex flex-col items-center rounded-3xl border p-10">
       {image && (
         <img
           alt="feature"
-          height={200}
-          width={200}
+          height={100}
+          width={100}
           src={image}
-          className="h-32 object-contain"
+          className="object-contain"
         />
       )}
-      <div>
+      <div className="mt-8">
         <h2 className="font-display text-3xl font-bold">{title}</h2>
         <p className="text-muted-foreground mt-4 text-lg">{description}</p>
         <Link
           href={cta.href}
-          className={cn(
-            "mt-2 flex items-center space-x-2 font-bold opacity-70 hover:opacity-100",
-            {
-              "md:mx-auto md:justify-center": direction === "col",
-            }
-          )}
+          className="mt-2 flex items-center space-x-2 font-bold opacity-70 hover:opacity-100"
         >
           <span>{cta.label}</span>
           <span>

@@ -1,14 +1,9 @@
-import NextLogo from "@/assets/images/companies/next-js";
-import PioneerLogo from "@/assets/images/companies/pioneer";
-import PrismaLogo from "@/assets/images/companies/prisma";
-import VercelLogo from "@/assets/images/companies/vercel";
-import YCombinatorLogo from "@/assets/images/companies/y-combinator";
 import { APP_URL } from "./constants";
 
 export const siteConfig = {
   global: {
     url: "https://palettify.co",
-    name: "palettify",
+    name: "Palettify",
     logo: "/images/logo.png",
     title: "palettify | A monorepo starter to speed up your development",
     description:
@@ -29,18 +24,18 @@ export const siteConfig = {
   header: {
     nav: {
       links: [
-        { href: "/pricing", label: "Pricing" },
+        { href: "/palettes", label: "Palettes" },
         { href: "/blog", label: "Blog" },
       ],
     },
     cta: {
       primary: {
-        label: "Get palettify",
-        href: APP_URL,
+        label: "Playground",
+        href: "/playground",
       },
       secondary: {
         label: "Sign in",
-        href: APP_URL,
+        href: "/login",
       },
     },
   },
@@ -56,54 +51,36 @@ export const siteConfig = {
   },
   homePage: {
     hero: {
-      headline: "A **monorepo starter** to speed up\n your development",
+      headline: "Get an instant **preview**\n for your theme",
       subheadline:
-        "Turbocharge your project with this monorepo starter. It comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more.",
+        "Get an instant preview for your theme with palettify. Export your theme in one click.",
       cta: [
-        { label: "Go to App", href: APP_URL },
+        { label: "Go to playground", href: "/playground" },
         { label: "Star on GitHub", href: "https://github.com/mehdibha/palettify" },
       ],
       demoVideo: {
         src: null,
       },
-      companies: [
-        { name: "Vercel", logo: VercelLogo },
-        { name: "Pioneer", logo: PioneerLogo },
-        { name: "Y Combinator", logo: YCombinatorLogo },
-        { name: "Next.js", logo: NextLogo },
-        { name: "Prisma", logo: PrismaLogo },
-      ],
     },
     features: {
+      headline: "supported laibriaries",
       features: [
         {
-          title: "Next.js",
-          description:
-            "Explore the latest Next.js 14 features: App dir, Routing, Layouts, Loading UI, API routes, Server components, Server actions, and more.",
-          image: "/images/features/nextjs.png",
+          title: "MUI",
+          description: "Discover our theme previewer for MUI",
+          image: "https://mui.com/static/logo.svg",
           cta: {
-            label: "See more",
-            href: "https://github.com/mehdibha/palettify",
+            label: "Go to playground",
+            href: "/playground?librairy=mui",
           },
         },
         {
-          title: "Stripe",
-          description:
-            "Integration with Stripe Checkout and the Stripe customer portal, Automatic syncing of pricing plans and subscription statuses via Stripe webhooks",
-          image: "/images/features/stripe.png",
+          title: "shadcn-ui",
+          description: "Discover our theme previewer for shadcn",
+          image: "/images/shadcn.svg",
           cta: {
-            label: "See more",
-            href: "https://github.com/mehdibha/palettify",
-          },
-        },
-        {
-          title: "SEO",
-          description:
-            "SEO friendly, support for meta tags, sitemap.xml, robots.txt, canonical URLs, and automatic JSON-LD schema generation, and more.",
-          image: "/images/features/seo.png",
-          cta: {
-            label: "See more",
-            href: "https://github.com/mehdibha/palettify",
+            label: "Go to playground",
+            href: "/playground?librairy=shadcn",
           },
         },
       ],

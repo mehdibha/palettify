@@ -17,11 +17,10 @@ interface HeroProps {
   demoVideo: {
     src: string | null;
   };
-  companies: company[];
 }
 
 export const Hero = (props: HeroProps) => {
-  const { headline, subheadline, cta, demoVideo, companies } = props;
+  const { headline, subheadline, cta, demoVideo } = props;
   return (
     <section className="px-6">
       <h1 className="font-display text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
@@ -58,21 +57,6 @@ export const Hero = (props: HeroProps) => {
           </div>
         </div>
       )}
-      <div className="mt-28">
-        <p className="text-muted-foreground text-center text-xl font-semibold">
-          Backed by these companies
-        </p>
-        <ul role="list" className="mt-8 flex flex-wrap items-center justify-center gap-8">
-          {companies.map((company, index) => {
-            const Logo = company.logo;
-            return (
-              <li key={company.name} className="">
-                <Logo height={30} className="fill-muted-foreground" />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
     </section>
   );
 };

@@ -12,9 +12,12 @@ export default function HomePage() {
         subheadline={siteConfig.homePage.hero.subheadline}
         cta={siteConfig.homePage.hero.cta}
         demoVideo={siteConfig.homePage.hero.demoVideo}
-        companies={siteConfig.homePage.hero.companies}
       />
-      <Features className="mt-40" features={siteConfig.homePage.features.features} />
+      <Features
+        className="mt-40"
+        headline={siteConfig.homePage.features.headline}
+        features={siteConfig.homePage.features.features}
+      />
       <Testimonials
         headline={siteConfig.homePage.testimonial.headline}
         subheadline={siteConfig.homePage.testimonial.subheadline}

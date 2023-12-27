@@ -29,7 +29,7 @@ export const Header = () => {
     animate(
       refCTA.current,
       {
-        x: scrolled ? 160 : 220,
+        x: scrolled ? 120 : 180,
         opacity: scrolled ? 1 : 0,
       },
       { duration: 0.3 }
@@ -72,14 +72,13 @@ export const Header = () => {
             <div
               suppressHydrationWarning
               className={cn("relative transition-all duration-300", {
-                "ml-[40px] mr-[160px]": scrolled,
+                "ml-[40px] mr-[120px]": scrolled,
               })}
             >
               <motion.div
                 ref={refLogo}
                 className="absolute"
                 initial={{ x: -100, y: 4, opacity: 0 }}
-                // className="top-1/2"
               >
                 <Link href="/">
                   <Image
