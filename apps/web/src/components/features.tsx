@@ -60,15 +60,15 @@ const Feature = (props: FeatureProps) => {
         "md:flex-col-reverse md:text-center": direction === "col",
       })}
     >
-      {image && <img
-        alt="feature"
-        height={200}
-        width={200}
-        src={image}
-        className={cn(
-          "rounded-3xl border shadow-xl"
-        )}
-      />}
+      {image && (
+        <img
+          alt="feature"
+          height={200}
+          width={200}
+          src={image}
+          className="h-32 object-contain"
+        />
+      )}
       <div>
         <h2 className="font-display text-3xl font-bold">{title}</h2>
         <p className="text-muted-foreground mt-4 text-lg">{description}</p>

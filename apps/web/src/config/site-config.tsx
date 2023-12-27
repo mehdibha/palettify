@@ -7,13 +7,13 @@ import { APP_URL } from "./constants";
 
 export const siteConfig = {
   global: {
-    url: "https://palettify.mehdibha.com",
+    url: "https://palettify.co",
     name: "palettify",
     logo: "/images/logo.png",
     title: "palettify | A monorepo starter to speed up your development",
     description:
       "Turbocharge your project with this monorepo starter. It comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more.",
-    keywords: ["Next.js", "React","Tailwind CSS","Shadcn-ui","Server components"],
+    keywords: ["Next.js", "React", "Tailwind CSS", "Shadcn-ui", "Server components"],
     authors: [
       {
         name: "mehdibha",
@@ -21,7 +21,7 @@ export const siteConfig = {
       },
     ],
     creator: "mehdibha",
-    thumbnail: "/images/thumbnail.png",
+    thumbnail: "/images/og-image.png",
     twitter: {
       creator: "@mehdibha_",
     },
@@ -60,8 +60,8 @@ export const siteConfig = {
       subheadline:
         "Turbocharge your project with this monorepo starter. It comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more.",
       cta: [
-        { label: "Go To App", href: APP_URL },
-        { label: "Github Repo", href: "https://github.com/mehdibha/palettify" },
+        { label: "Go to App", href: APP_URL },
+        { label: "Star on GitHub", href: "https://github.com/mehdibha/palettify" },
       ],
       demoVideo: {
         src: null,
@@ -80,7 +80,7 @@ export const siteConfig = {
           title: "Next.js",
           description:
             "Explore the latest Next.js 14 features: App dir, Routing, Layouts, Loading UI, API routes, Server components, Server actions, and more.",
-          // image: "/images/features/feature03.png",
+          image: "/images/features/nextjs.png",
           cta: {
             label: "See more",
             href: "https://github.com/mehdibha/palettify",
@@ -90,7 +90,7 @@ export const siteConfig = {
           title: "Stripe",
           description:
             "Integration with Stripe Checkout and the Stripe customer portal, Automatic syncing of pricing plans and subscription statuses via Stripe webhooks",
-          // image: "/images/features/feature02.png",
+          image: "/images/features/stripe.png",
           cta: {
             label: "See more",
             href: "https://github.com/mehdibha/palettify",
@@ -100,7 +100,7 @@ export const siteConfig = {
           title: "SEO",
           description:
             "SEO friendly, support for meta tags, sitemap.xml, robots.txt, canonical URLs, and automatic JSON-LD schema generation, and more.",
-          // image: "/images/features/feature01.png",
+          image: "/images/features/seo.png",
           cta: {
             label: "See more",
             href: "https://github.com/mehdibha/palettify",
@@ -110,8 +110,7 @@ export const siteConfig = {
     },
     testimonial: {
       headline: "Our community **loves** us",
-      subheadline:
-        "",
+      subheadline: "",
       testimonials: [
         {
           content:
@@ -147,10 +146,10 @@ export const siteConfig = {
       ],
     },
     cta: {
-      headline: "proudly **open source**",
-      subheadline: "palettify is open source and available on github",
+      headline: "Proudly **open source**",
+      subheadline: "palettify is open source and available on GitHub",
       cta: {
-        label: "Github Repo",
+        label: "GitHub Repo",
         href: "https://github.com/mehdibha/palettify",
       },
     },
@@ -166,36 +165,32 @@ export const siteConfig = {
         description: "Good for getting started.",
         href: APP_URL,
         features: [
-          "Free hosting on 'notionfol.io'",
-          "Choose any template",
-          "Customer support",
+          "Free hosting on 'palettify.co'",
           "Optimized SEO",
-          "Has 'Built with Notionfol.io' branding",
+          "Has 'Built with palettify' branding",
         ],
       },
       {
         featured: true,
-        name: "Personal site",
+        name: "Pro",
         price: { monthly: "$19", yearly: "$15" },
-        billing: "per site / month",
+        billing: "per month",
         description: "Perfect for small / medium sized businesses.",
         href: APP_URL,
         features: [
           "Everything in Free.",
-          "Connect to your custom domain",
           "Basic analytics",
-          "Remove 'Built with Notionfol.io' branding",
+          "Remove 'Built with palettify' branding",
         ],
       },
       {
-        name: "Pro site",
+        name: "Entreprise",
         price: { monthly: "$39", yearly: "$31" },
-        billing: "per site / month",
+        billing: "per month",
         description: "For even the biggest enterprise companies.",
         href: APP_URL,
         features: [
           "Everything in Personal site.",
-          "Manual publishing controls",
           "Advanced analytics",
           "Priority support",
         ],
@@ -204,45 +199,30 @@ export const siteConfig = {
     faq: [
       {
         question: "How does palettify works?",
-        answer: <p></p>,
-      },
-      {
-        question: "What is Notion?",
-        answer: <p></p>,
-      },
-      {
-        question: "Can I create a website without code?",
-        answer: <p></p>,
-      },
-      {
-        question: "How many sites can I have?",
-        answer: <p></p>,
+        answer:
+          "palettify is a monorepo starter that comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more. It's a great way to start your next project.",
       },
       {
         question: "How do I create a website with palettify?",
-        answer: <p></p>,
+        answer: "You can create a website with palettify by following the documentation.",
       },
       {
         question: "How much does palettify cost?",
-        answer: <p></p>,
+        answer: "It's free to use palettify",
       },
       {
         question: "Can I use palettify for free?",
-        answer: <p></p>,
+        answer: "Yes, you can use palettify for free.",
       },
     ],
     cta: {
-      headline: "Get started for **free**",
-      subheadline: "No credit card required. Cancel anytime.",
-      cta: {
-        label: "Try Notionfol.io free",
-        href: APP_URL,
-      },
+      headline: "Proudly **open-source**",
+      subheadline: "palettify is open source and available on GitHub",
+      cta: { label: "Star on GitHub", href: "https://github.com/mehdibha/palettify" },
     },
   },
   blogPage: {
     headline: "Blog",
-    subheadline:
-      "Learn more about palettify and write your posts with MDX.",
+    subheadline: "Learn more about palettify and write your posts with MDX.",
   },
 };

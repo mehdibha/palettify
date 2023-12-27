@@ -2,12 +2,12 @@
   "name": "@palettify/tailwind-config",
   "version": "0.1.1",
   "main": "index.ts",
-  "publishConfig": {
-    "access": "public"
-  },
+  "sideEffects": false,
+  "private": true,
   "types": "index.ts",
   "devDependencies": {
     "tailwindcss": "^3.2.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "@tailwindcss/typography": "^0.5.10"
   }
 }

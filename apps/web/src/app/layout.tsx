@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { Metadata, Viewport } from "next";
 import Image from "next/image";
+import { Analytics } from "@vercel/analytics/react";
 import "@palettify/ui/styles/shared-globals.css";
 import { cn } from "@palettify/utils";
-import { Analytics } from "@vercel/analytics/react";
 import { Banner } from "@/components/banner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Analytics />
           <div className="relative">
             <Banner />
-            <Suspense fallback={null}>
+            <Suspense fallback={<div className="h-[64px]" />}>
               <Header />
             </Suspense>
             <div className="min-h-[calc(100vh-64px)] pb-36">{children}</div>

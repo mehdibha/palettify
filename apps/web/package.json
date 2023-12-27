@@ -19,14 +19,19 @@
     "framer-motion": "^10.12.18",
     "next": "^14.0.3",
     "next-auth": "^4.24.4",
+    "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "sharp": "^0.33.0",
+    "sugar-high": "^0.5.6",
+    "vfile": "^6.0.1",
+    "vfile-matter": "^5.0.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@palettify/eslint-config": "*",
     "@palettify/tailwind-config": "*",
     "@palettify/ts-config": "*",
@@ -37,6 +42,7 @@
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.2.2"
   }
 }

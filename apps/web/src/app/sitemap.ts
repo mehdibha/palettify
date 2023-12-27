@@ -3,7 +3,6 @@ import { MetadataRoute } from "next";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   //TODO: fix this
 
-
   // const domain = `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
 
   // const templates = (await getAllTemplates()).map((template) => template.name);
@@ -46,5 +45,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // }));
 
   // return [...mainRoutes, ...secondaryRoutes, ...tertiaryRoutes, ...nonRelevantRoutes];
-  return []
+  return [];
 }

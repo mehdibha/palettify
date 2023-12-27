@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@palettify/utils";
 import { Command as CommandPrimitive } from "cmdk";
 import { X } from "lucide-react";
+import { cn } from "@palettify/utils";
 import { Badge } from "./badge";
 import { Command, CommandGroup, CommandItem } from "./command";
 

@@ -54,7 +54,7 @@ export const SitesGrid = (props: SitesGridProps) => {
           <CardWrapper
             href={site.href}
             key={index}
-            className="bg-card col-span-12 cursor-pointer overflow-hidden rounded-xl border border-gray-300 shadow-md transition-all hover:border-gray-400 hover:opacity-80 hover:shadow-lg dark:border-gray-700 dark:hover:border-gray-600 sm:col-span-6 md:col-span-4 lg:col-span-3"
+            className="bg-card col-span-12 cursor-pointer overflow-hidden rounded-xl border border-gray-300 shadow-md transition-all hover:border-gray-400 hover:opacity-80 hover:shadow-lg sm:col-span-6 md:col-span-4 lg:col-span-3 dark:border-gray-700 dark:hover:border-gray-600"
           >
             <div className="relative flex h-[200px] items-center justify-center overflow-hidden bg-gray-600">
               {site.image && (

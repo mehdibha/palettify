@@ -16,7 +16,7 @@ interface HeroProps {
   }[];
   demoVideo: {
     src: string | null;
-  } ;
+  };
   companies: company[];
 }
 
@@ -51,11 +51,13 @@ export const Hero = (props: HeroProps) => {
           </Button>
         )}
       </div>
-      {demoVideo?.src && <div className="container mt-20 max-w-4xl">
-        <div className="aspect-video overflow-hidden rounded-3xl border bg-slate-800 shadow-xl ">
-          <video muted autoPlay loop playsInline src={demoVideo.src} />
+      {demoVideo?.src && (
+        <div className="container mt-20 max-w-4xl">
+          <div className="aspect-video overflow-hidden rounded-3xl border bg-slate-800 shadow-xl ">
+            <video muted autoPlay loop playsInline src={demoVideo.src} />
+          </div>
         </div>
-      </div>}
+      )}
       <div className="mt-28">
         <p className="text-muted-foreground text-center text-xl font-semibold">
           Backed by these companies

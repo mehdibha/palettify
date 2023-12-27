@@ -38,8 +38,8 @@ export const Banner = () => {
       </div>
       <p className="text-sm leading-6">
         <span className="mr-2">
-          <strong className="font-semibold">palettify •</strong> We are going live
-          soon! Get notified when launched.
+          <strong className="font-semibold">palettify •</strong> We are going live soon!
+          Get notified when launched.
         </span>
         <CollectEmailsModal>
           <Button size="sm" color="primary">

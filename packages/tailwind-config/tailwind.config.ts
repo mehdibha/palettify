@@ -1,4 +1,6 @@
+import typographyPlugin from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
+import animatePlugin from "tailwindcss-animate";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
@@ -20,6 +22,14 @@ const config: Config = {
       },
     },
     extend: {
+      typography: {
+        quoteless: {
+          css: {
+            "blockquote p:first-of-type::before": { content: "none" },
+            "blockquote p:first-of-type::after": { content: "none" },
+          },
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -83,6 +93,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [typographyPlugin, animatePlugin],
 };
 export default config;

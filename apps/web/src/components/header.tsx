@@ -4,9 +4,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { motion, useAnimate } from "framer-motion";
 import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon } from "@palettify/ui";
 import { cn } from "@palettify/utils";
-import { motion, useAnimate } from "framer-motion";
 import { useScroll } from "@/hooks/use-scroll";
 import { siteConfig } from "@/config";
 
@@ -21,7 +21,7 @@ export const Header = () => {
     animate(
       refLogo.current,
       {
-        x: scrolled ? -40 : -100,
+        x: scrolled ? -35 : -100,
         opacity: scrolled ? 1 : 0,
       },
       { duration: 0.3 }
@@ -54,9 +54,9 @@ export const Header = () => {
             src={siteConfig.global.logo}
             alt={siteConfig.global.name}
             loading="lazy"
-            width={30}
-            height={30}
-            className="aspect-[auto 30 / 30] object-cover"
+            width={20}
+            height={20}
+            // className="aspect-[auto 30 / 30] object-cover"
           />
           <span className="inline-block font-bold">{siteConfig.global.name}</span>
         </Link>
@@ -78,15 +78,16 @@ export const Header = () => {
               <motion.div
                 ref={refLogo}
                 className="absolute"
-                initial={{ x: -100, y: -2, opacity: 0 }}
+                initial={{ x: -100, y: 4, opacity: 0 }}
+                // className="top-1/2"
               >
                 <Link href="/">
                   <Image
                     src={siteConfig.global.logo}
                     alt={siteConfig.global.name}
                     loading="lazy"
-                    width={30}
-                    height={30}
+                    width={20}
+                    height={20}
                     className="aspect-[auto 30 / 30] object-cover"
                   />
                 </Link>

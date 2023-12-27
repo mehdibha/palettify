@@ -2,6 +2,8 @@
 
 import React, { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import {
   Button,
   Dialog,
@@ -15,8 +17,6 @@ import {
   useToast,
 } from "@palettify/ui";
 import { Form } from "@palettify/ui";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { collectEmail } from "@/modules/email/actions";
 
 interface CollectEmailsModalProps {

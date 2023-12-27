@@ -36,7 +36,7 @@ export function Testimonials(props: TestimonialProps) {
             href={testimonial.href}
             target="_blank"
             className={cn(
-              "border dark:border-gray-200 border-gray-300 bg-card/40 hover:bg-card/90 rounded-xl border p-6 shadow-xl backdrop-blur-sm transition-colors  lg:w-1/4",
+              "bg-card/40 hover:bg-card/90 rounded-xl border p-6 shadow-xl backdrop-blur-sm transition-colors lg:w-1/4",
               {
                 "opacity-80": index === 0 || index === 2,
                 "z-10 lg:scale-110": index === 1,
