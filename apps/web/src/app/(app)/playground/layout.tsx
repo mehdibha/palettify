@@ -14,7 +14,7 @@ export default async function DashboardLayout(props: DashboardLayoutProps) {
         <div className="lg:w-[500px]">
           <div className="container px-8">{children}</div>
         </div>
-        <Preview subdomain={"site.subdomain"} />
+        <Preview />
       </div>
     </div>
   );
