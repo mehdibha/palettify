@@ -3,7 +3,6 @@ import { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import "@palettify/ui/styles/shared-globals.css";
 import { cn } from "@palettify/utils";
-import { Banner } from "@/components/banner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { display, inter } from "@/styles/fonts";
