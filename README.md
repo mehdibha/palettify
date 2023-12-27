@@ -11,11 +11,11 @@
   </a>
   <h1 align="center">palettify</h1>
   <p align="center">
-    Turbocharge your project with this monorepo starter. It comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more.
+    Get an instant theme preview for your popular react ui librairies. mui, shadcn-ui, and more.
   </p>
   <p>
     
-   <a href="https://palettify.co">View Demo</a>
+   <a href="https://palettify.co">Visit site</a>
     ·
     <a href="https://github.com/mehdibha/palettify/issues">Report Bug</a>
     ·
@@ -49,21 +49,10 @@
 <img src="https://palettify.co/images/thumbnail.png" />
 </details>
 
-### Features
+### Supports
 
-- Monorepo with Turborepo
-- Responsive marketing site
-- SEO friendly
-- blog using MDX
-- Server and Client Components
-- Authentication using NextAuth.js
-- UI components built using shadcn-ui
-- Dark and light mode
-- ORM using Prisma
-- Subscriptions using Stripe
-- Responsive dashboard
-- Validations using Zod
-- Written in TypeScript
+- MUI
+- shadcn-ui
 
 ### Built with
 
@@ -80,22 +69,10 @@ If you want to clone the project and use palettify as your starter project
 
 - Star the repo
 - Fork this project
-- config env variable (see .env.exemple)
 
 ## Roadmap
 
-- [x] Init project
-- [x] Linting tools
-- [x] Home page
-- [x] Pricing page
-- [x] Blog
-- [ ] App layout
-- [ ] Subscriptions using stripe
-- [ ] Add Vercel deploy button
-
-## Sites using palettify
-
-We will be happy to mention you here, just make a pull request and we will add you
+- 
 
 <!-- CONTRIBUTING -->
 
