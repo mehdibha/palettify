@@ -1,5 +1,5 @@
 {
-  "name": "marketing",
+  "name": "web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
+    "@next-auth/prisma-adapter": "^1.0.7",
     "@palettify/database": "*",
     "@palettify/ui": "*",
     "@palettify/utils": "*",
@@ -25,17 +26,18 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "sharp": "^0.33.0",
+    "stripe": "^14.10.0",
     "sugar-high": "^0.5.6",
     "vfile": "^6.0.1",
     "vfile-matter": "^5.0.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10",
     "@palettify/eslint-config": "*",
     "@palettify/tailwind-config": "*",
     "@palettify/ts-config": "*",
     "@palettify/types": "*",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^18.11.17",
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.4",
