@@ -72,7 +72,7 @@ If you want to clone the project and use palettify as your starter project
 
 ## Roadmap
 
-- 
+-
 
 <!-- CONTRIBUTING -->
 
