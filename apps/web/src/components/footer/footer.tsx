@@ -9,7 +9,6 @@ import {
   MailIcon,
   TwitterIcon,
 } from "@palettify/ui";
-// import { ThemeToggle } from "@/components/theme-toggle";
 import { siteConfig } from "@/config";
 import { Wrapper } from "./wrapper";
 
@@ -52,8 +51,6 @@ export const Footer = async () => {
                   }
                 })}
               </div>
-              {/* <Separator orientation="vertical" />
-              <ThemeToggle /> */}
             </div>
           </div>
         </div>

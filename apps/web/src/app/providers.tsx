@@ -5,7 +5,7 @@ import { Toaster } from "@palettify/ui";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider defaultTheme="light">
+    <ThemeProvider forcedTheme="light">
       <Toaster />
       {children}
     </ThemeProvider>
