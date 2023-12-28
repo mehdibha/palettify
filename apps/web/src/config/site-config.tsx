@@ -63,7 +63,7 @@ export const siteConfig = {
       },
     },
     features: {
-      headline: "supported laibriaries",
+      headline: "supported libraries",
       features: [
         {
           title: "MUI",
