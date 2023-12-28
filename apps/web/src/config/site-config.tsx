@@ -24,7 +24,7 @@ export const siteConfig = {
   header: {
     nav: {
       links: [
-        { href: "/palettes", label: "Palettes" },
+        { href: "/themes", label: "Themes" },
         { href: "/blog", label: "Blog" },
       ],
     },

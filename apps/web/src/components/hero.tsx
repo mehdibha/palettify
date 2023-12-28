@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@palettify/ui";
 import { stringReplace } from "@palettify/utils";
+import styles from "./styles.module.css";
 
 type company = {
   name: string;
@@ -22,7 +23,7 @@ interface HeroProps {
 export const Hero = (props: HeroProps) => {
   const { headline, subheadline, cta, demoVideo } = props;
   return (
-    <section className="px-6">
+    <section className="relative px-6">
       <h1 className="font-display text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
         {headline.split("\n").map((line, index) => (
           <span key={index}>
