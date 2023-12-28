@@ -10,7 +10,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { cn } from "@palettify/utils";
-import { Label } from "@/modules/shadcn-uilabel";
+import { Label } from "@/modules/shadcn-ui/ui/label";
 
 const Form = FormProvider;
 

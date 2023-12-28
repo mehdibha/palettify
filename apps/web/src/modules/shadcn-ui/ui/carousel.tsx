@@ -6,7 +6,7 @@ import useEmblaCarousel, {
   type EmblaPluginType as CarouselPlugin,
 } from "embla-carousel-react";
 import { cn } from "@palettify/utils";
-import { Button } from "@/modules/shadcn-uibutton";
+import { Button } from "@/modules/shadcn-ui/ui/button";
 
 type CarouselProps = {
   opts?: CarouselOptions;
