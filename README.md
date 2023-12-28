@@ -72,8 +72,8 @@ If you want to clone the project and use palettify as your starter project
 
 ## Roadmap
 
-- [X] Site structure
-- [X] Home page
+- [x] Site structure
+- [x] Home page
 - [ ] Playground page
 - [ ] Themes page
 - [ ] User management
