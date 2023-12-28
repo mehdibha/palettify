@@ -10,6 +10,7 @@ import {
 } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { Preview as LibraryPreview } from "@/modules/theme-previewer/components/preview";
 
 export const Preview = () => {
   const [mobileView, setMobileView] = React.useState(false);
@@ -38,12 +39,14 @@ export const Preview = () => {
             </Button>
           </div>
         </div>
-        <div
-          className={cn("bg-background/50 h-full w-full", {
-            "flex items-center justify-center p-2": mobileView,
-          })}
-        >
-          <div>site here</div>
+        <div className="overflow-y-scroll">
+          <div
+            className={cn("bg-background/50 h-full w-full", {
+              "flex items-center justify-center p-2": mobileView,
+            })}
+          >
+            <LibraryPreview library="shadcn" />
+          </div>
         </div>
       </div>
     </PreviewWrapper>
