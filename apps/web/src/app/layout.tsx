@@ -57,10 +57,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Analytics />
           <div
-            className="grad relative"
-            style={{
-              background: "linear-gradient(to bottom right, #FBD7FF 10%, #FFDEC1 80%)",
-            }}
+            className="grad relative bg-gradient-to-br from-[#FBD7FF] from-10% to-[#FFDEC1] to-80%  dark:from-[#3f3541] dark:to-[#1d1917]"
+            // style={{
+            //   background: "linear-gradient(to bottom right, #FBD7FF 10%, #FFDEC1 80%)",
+            // }}
           >
             {/* <Banner /> */}
             <Suspense fallback={<div className="h-[64px]" />}>

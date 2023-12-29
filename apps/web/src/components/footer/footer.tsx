@@ -10,6 +10,7 @@ import {
   TwitterIcon,
 } from "@palettify/ui";
 import { siteConfig } from "@/config";
+import { ThemeToggle } from "../theme-toggle";
 import { Wrapper } from "./wrapper";
 
 const links = siteConfig.footer.socialLinks;
@@ -51,6 +52,8 @@ export const Footer = async () => {
                   }
                 })}
               </div>
+              <Separator orientation="vertical" />
+              <ThemeToggle />
             </div>
           </div>
         </div>
