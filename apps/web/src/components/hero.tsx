@@ -61,8 +61,8 @@ export const Hero = (props: HeroProps) => {
           </Button>
         )}
       </div>
-      <div className="mx-auto mt-20 flex max-w-[800px] flex-wrap justify-center gap-2">
-        {Array(44)
+      <div className="mx-auto mt-20 flex max-w-[1000px] flex-wrap justify-center gap-2">
+        {Array(84)
           .fill(0)
           .map((_, index) => (
             <div
@@ -70,28 +70,38 @@ export const Hero = (props: HeroProps) => {
               className={cn(
                 "animate-in direction-alternate-reverse zoom-in-50 repeat-infinite fade-in-25 duration-1500 h-7 w-7 rounded",
                 {
-                  "bg-slate-500 ": index % 22 === 0,
-                  "bg-gray-500 delay-100": index % 22 === 1,
-                  "bg-zinc-500 delay-200": index % 22 === 2,
-                  "bg-neutral-500 delay-300": index % 22 === 3,
-                  "delay-400 bg-stone-500": index % 22 === 4,
-                  "bg-red-500 delay-500": index % 22 === 5,
-                  "delay-600 bg-orange-500": index % 22 === 6,
-                  "bg-amber-500 delay-700": index % 22 === 7,
-                  "delay-800 bg-yellow-500": index % 22 === 8,
-                  "delay-900 bg-lime-500": index % 22 === 9,
-                  "bg-green-500 delay-1000": index % 22 === 10,
-                  "delay-1100 bg-emerald-500": index % 22 === 11,
-                  "delay-1200 bg-teal-500": index % 22 === 12,
-                  "delay-1300 bg-cyan-500": index % 22 === 13,
-                  "delay-1400 bg-sky-500": index % 22 === 14,
-                  "delay-1500 bg-blue-500": index % 22 === 15,
-                  "delay-1600 bg-indigo-500": index % 22 === 16,
-                  "delay-1700 bg-violet-500": index % 22 === 17,
-                  "delay-1800 bg-purple-500": index % 22 === 18,
-                  "delay-1900 bg-fuchsia-500": index % 22 === 19,
-                  "delay-2200 bg-pink-500": index % 22 === 20,
-                  "delay-2300 bg-rose-500": index % 22 === 21,
+                  "bg-red-400": index % 32 === 0,
+                  "bg-red-400 delay-100": index % 32 === 1,
+                  "bg-red-400 delay-200": index % 32 === 2,
+                  "bg-red-500 delay-300": index % 32 === 3,
+                  "delay-400 bg-red-600": index % 32 === 4,
+                  "bg-red-700 delay-500": index % 32 === 5,
+                  "delay-600 bg-orange-600": index % 32 === 6,
+                  "delay-600 bg-orange-500": index % 32 === 7,
+                  "delay-800 bg-amber-500": index % 32 === 8,
+                  "delay-900 bg-amber-500": index % 32 === 9,
+                  "bg-yellow-500 delay-1000": index % 32 === 10,
+                  "delay-1100 bg-yellow-500": index % 32 === 11,
+                  "delay-1200 bg-lime-500": index % 32 === 12,
+                  "delay-1300 bg-lime-500": index % 32 === 13,
+                  "delay-1400 bg-green-500": index % 32 === 14,
+                  "delay-1500 bg-green-600": index % 32 === 15,
+                  "delay-1600 bg-emerald-500": index % 32 === 16,
+                  "delay-1700 bg-emerald-500": index % 32 === 17,
+                  "delay-1800 bg-teal-500": index % 32 === 18,
+                  "delay-1900 bg-teal-500": index % 32 === 19,
+                  "delay-2000 bg-cyan-500": index % 32 === 20,
+                  "delay-2100 bg-cyan-500": index % 32 === 21,
+                  "delay-2200 bg-sky-500": index % 32 === 22,
+                  "delay-2300 bg-sky-500": index % 32 === 23,
+                  "delay-2400 bg-blue-500": index % 32 === 24,
+                  "delay-2500 bg-indigo-500": index % 32 === 25,
+                  "delay-2600 bg-violet-500": index % 32 === 26,
+                  "delay-2700 bg-purple-500": index % 32 === 27,
+                  "delay-2800 bg-fuchsia-600": index % 32 === 28,
+                  "delay-2900 bg-pink-500": index % 32 === 29,
+                  "delay-3000 bg-rose-400": index % 32 === 30,
+                  "delay-3100 bg-rose-400": index % 32 === 31,
                 }
               )}
             />
