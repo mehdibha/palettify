@@ -56,7 +56,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={cn(inter.variable, display.variable)} suppressHydrationWarning>
         <Providers>
           <Analytics />
-          <div className="relative">
+          <div
+            className="grad relative"
+            style={{
+              background: "linear-gradient(to bottom right, #FBD7FF 10%, #FFDEC1 80%)",
+            }}
+          >
             {/* <Banner /> */}
             <Suspense fallback={<div className="h-[64px]" />}>
               <Header />

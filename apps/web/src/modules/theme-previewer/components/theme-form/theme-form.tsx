@@ -71,7 +71,7 @@ export const UpdateSiteAppearance = (props: FormProps) => {
             Save changes
           </Button>
         </div> */}
-        <div className="mt-8">
+        <div className="">
           <div className="flex space-x-2">
             <LibrarySelect
               selectedLibrary={selectedLibrary}

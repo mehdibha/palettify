@@ -27,7 +27,7 @@ export const Preview = () => {
 
   return (
     <PreviewWrapper fullScreen={fullScreen}>
-      <div className="bg-card h-full overflow-hidden rounded-md pb-10 shadow">
+      <div className="bg-card h-full overflow-hidden rounded-md pb-10 shadow-xl">
         <div className="relative flex w-full items-center justify-between px-2 py-1">
           <span />
           <div className="flex items-center">
@@ -63,7 +63,7 @@ const PreviewWrapper = (props: PreviewWrapperProps) => {
   return (
     <div
       className={cn(
-        "fixed right-0 top-0 h-[calc(100vh)] w-[calc(100%-500px+16px)] overflow-hidden p-4 pt-[72px]",
+        "fixed right-0 top-0 h-[calc(100vh)] w-[calc(100%-500px+16px)] overflow-hidden p-4 pt-[64px]",
         {
           "z-[100000] block h-screen w-full p-0 xl:w-full xl:pt-0": fullScreen,
         }
