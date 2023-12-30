@@ -46,8 +46,10 @@
 ## About The Project
 
 <details open><summary>Screenshot</summary>
-<img src="https://palettify.co/images/demo.gif" />
-  ![](https://github.com/mehdibha/palettify/blob/main/apps/web/public/images/demo.gif)
+  <img src="https://palettify.co/images/thumbnail.png" />
+</details>
+<details open><summary>Demo</summary>
+  ![](https://palettify.co/images/demo.gif)
 </details>
 
 ### Supports
