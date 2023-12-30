@@ -26,6 +26,10 @@ html {
   min-width: 360px;
 }
 
+body {
+  overflow-y: scroll
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
 

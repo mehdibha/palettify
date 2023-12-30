@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export function DashboardPage() {
   return (
-    <div className="flex flex-col">
+    <div className="light-mode flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />

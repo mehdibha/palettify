@@ -40,7 +40,7 @@ export function LibrarySelect(props: LibrarySelectProps) {
           variant="filled"
           role="combobox"
           aria-expanded={open}
-          className="w-[150px] justify-between"
+          className="w-[120px] justify-between"
         >
           {selectedLibrary
             ? options.find((mode) => mode.value === selectedLibrary)?.label
@@ -48,7 +48,7 @@ export function LibrarySelect(props: LibrarySelectProps) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[150px] p-0">
+      <PopoverContent className="w-[120px] p-0">
         <Command>
           <CommandGroup>
             {options.map((mode) => (

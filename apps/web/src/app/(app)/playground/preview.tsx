@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import { useFormContext } from "react-hook-form";
 import {
   Button,
   Maximize2Icon,
   Minimize2Icon,
   MonitorIcon,
+  ScrollArea,
   SmartphoneIcon,
 } from "@palettify/ui";
 import { cn } from "@palettify/utils";
@@ -15,6 +17,7 @@ import { Preview as LibraryPreview } from "@/modules/theme-previewer/components/
 export const Preview = () => {
   const [mobileView, setMobileView] = React.useState(false);
   const [fullScreen, setFullScreen] = React.useState(false);
+  const form = useFormContext();
   useScrollLock(fullScreen);
 
   const handleChangeMobileView = () => {
@@ -39,15 +42,15 @@ export const Preview = () => {
             </Button>
           </div>
         </div>
-        <div className="overflow-y-scroll">
+        <ScrollArea className="h-full w-full">
           <div
             className={cn("bg-background/50 h-full w-full", {
               "flex items-center justify-center p-2": mobileView,
             })}
           >
-            <LibraryPreview library="shadcn" />
+            <LibraryPreview library={form.watch("library")} />
           </div>
-        </div>
+        </ScrollArea>
       </div>
     </PreviewWrapper>
   );

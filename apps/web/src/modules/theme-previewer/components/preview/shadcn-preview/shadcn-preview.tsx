@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { DashboardPage } from "./dashboard";
+import { DynamicThemeWrapper } from "./dynamic-theme-wrapper";
 import { StyledJsxRegistry } from "./registry";
-
-// import { DynamicThemeWrapper } from "./dynamic-theme-wrapper";
 
 export const ShadcnPreview = () => {
   return (
     <StyledJsxRegistry>
-      <DashboardPage />
+      <DynamicThemeWrapper>
+        <DashboardPage />
+      </DynamicThemeWrapper>
     </StyledJsxRegistry>
   );
 };

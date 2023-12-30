@@ -16,11 +16,11 @@ import { cn } from "@palettify/utils";
 const options = [
   {
     value: "light",
-    label: "Light theme",
+    label: "Light",
   },
   {
     value: "dark",
-    label: "Dark theme",
+    label: "Dark",
   },
 ];
 
@@ -40,15 +40,15 @@ export function ThemeSelect(props: ThemeSelectProps) {
           variant="filled"
           role="combobox"
           aria-expanded={open}
-          className="w-[150px] justify-between"
+          className="w-[100px] justify-between"
         >
           {selectedTheme
             ? options.find((mode) => mode.value === selectedTheme)?.label
-            : "Select theme..."}
+            : "Select..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[150px] p-0">
+      <PopoverContent className="w-[100px] p-0">
         <Command>
           <CommandGroup>
             {options.map((mode) => (

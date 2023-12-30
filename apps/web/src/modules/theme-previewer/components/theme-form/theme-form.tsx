@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import { useTheme } from "next-themes";
 import { HslColor } from "react-colorful";
-import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem } from "@palettify/ui";
+import { useFormContext } from "react-hook-form";
+import { Button, CopyIcon, FormControl, FormField, FormItem } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { ColorInput } from "./color-input";
+import CopyButton from "./copy-button";
 import { LibrarySelect } from "./library-select";
 import { ThemeSelect } from "./theme-select";
 
@@ -16,115 +18,116 @@ interface FormProps {
 export const UpdateSiteAppearance = (props: FormProps) => {
   const { className } = props;
 
-  const [selectedMode, setSelectedMode] = React.useState<"light" | "dark">("dark");
-  const [selectedLibrary, setSelectedLibrary] = React.useState<"shadcn" | "mui">(
-    "shadcn"
-  );
+  const form = useFormContext();
 
-  const resolvedTheme = {
-    mode: "light",
-    background: "0 0% 100%",
-    foreground: "240 10% 3.9%",
-    card: "230 15% 85%",
-    cardForeground: "240 10% 3.9%",
-    popover: "0 0% 100%",
-    popoverForeground: "240 10% 3.9%",
-    primary: "358 60% 34%",
-    primaryForeground: "355.7 100% 97.3%",
-    secondary: "24.6 95% 53.1%",
-    secondaryForeground: "60 9.1% 97.8%",
-    muted: "240 4.8% 95.9%",
-    mutedForeground: "240 3.8% 46.1%",
-    accent: "226 14% 90%",
-    accentForeground: "240 5.9% 10%",
-    destructive: "0 84.2% 60.2%",
-    destructiveForeground: "0 0% 98%",
-    success: "142 67% 20%",
-    successForeground: "0 85.7% 97.3%",
-    border: "240 6% 70%",
-    input: "240 5.9% 90%",
-    ring: "217 76% 31%",
-    radius: "0.5rem",
+  const { theme, setTheme } = useTheme();
+  const mode = theme as "dark" | "light";
+  const handleChangeTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
-  const form = useForm({
-    values: {
-      theme: resolvedTheme,
-    },
-  });
-
-  const handleChangeTheme = (theme: "light" | "dark") => {
-    setSelectedMode(theme);
-  };
   const handleChangeLibrary = (library: "shadcn" | "mui") => {
-    setSelectedLibrary(library);
+    form.setValue("library", library);
   };
 
   async function onSubmit(values: any) {}
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn("", className)}>
-        {/* <div className="flex justify-end space-x-2">
-          <Button disabled>Cancel</Button>
-          <Button color="primary" loading={isPending}>
-            Save changes
-          </Button>
-        </div> */}
-        <div className="">
-          <div className="flex space-x-2">
-            <LibrarySelect
-              selectedLibrary={selectedLibrary}
-              onChange={handleChangeLibrary}
-            />
-            <ThemeSelect selectedTheme={selectedMode} onChange={handleChangeTheme} />
-          </div>
-          {Object.keys(themeForm).map((themeKey) => {
-            const theme = themeForm[themeKey];
-            return (
-              <ColorContainer key={themeKey} title={theme.label}>
-                {theme.fields.map((field) => (
-                  <div
-                    key={field.name}
-                    className="mt-2 flex items-center justify-between"
-                  >
-                    <span>{field.label}</span>
-                    <FormField
-                      control={form.control}
-                      name={`theme.${field.name}` as any}
-                      render={({ field }) => {
-                        const values = field.value.split(" ");
-
-                        const h = parseInt(values[0], 10);
-                        const s = parseInt(values[1], 10);
-                        const l = parseInt(values[2], 10);
-
-                        const color: HslColor = { h, s, l };
-                        return (
-                          <FormItem>
-                            <FormControl>
-                              {/* @ts-ignore */}
-                              <ColorInput
-                                color={color}
-                                onChange={(newColor: HslColor) => {
-                                  field.onChange(
-                                    `${newColor.h} ${newColor.s}% ${newColor.l}%`
-                                  );
-                                }}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  </div>
-                ))}
-              </ColorContainer>
-            );
-          })}
+    <form onSubmit={form.handleSubmit(onSubmit)} className={cn("", className)}>
+      <div className="">
+        <div className="flex space-x-2">
+          <LibrarySelect
+            selectedLibrary={form.watch("library")}
+            onChange={handleChangeLibrary}
+          />
+          <ThemeSelect selectedTheme={mode} onChange={handleChangeTheme} />
+          <CopyButton />
         </div>
-      </form>
-    </Form>
+        {Object.keys(themeForm).map((themeKey) => {
+          const themeSection = themeForm[themeKey];
+          return (
+            <ColorContainer key={themeKey} title={themeSection.label}>
+              {mode === "light" &&
+                themeSection.fields.map((field) => {
+                  return (
+                    <div
+                      key={field.name}
+                      className="mt-2 flex items-center justify-between"
+                    >
+                      <span>{field.label}</span>
+                      <FormField
+                        control={form.control}
+                        name={`lightTheme.${field.name}` as any}
+                        render={({ field }) => {
+                          const values = field.value.split(" ");
+
+                          const h = parseInt(values[0], 10);
+                          const s = parseInt(values[1], 10);
+                          const l = parseInt(values[2], 10);
+
+                          const color: HslColor = { h, s, l };
+                          return (
+                            <FormItem>
+                              <FormControl>
+                                <ColorInput
+                                  color={color}
+                                  onChange={(newColor: HslColor) => {
+                                    field.onChange(
+                                      `${newColor.h} ${newColor.s}% ${newColor.l}%`
+                                    );
+                                  }}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              {mode === "dark" &&
+                themeSection.fields.map((field) => {
+                  return (
+                    <div
+                      key={field.name}
+                      className="mt-2 flex items-center justify-between"
+                    >
+                      <span>{field.label}</span>
+                      <FormField
+                        control={form.control}
+                        name={`darkTheme.${field.name}` as any}
+                        render={({ field }) => {
+                          const values = field.value.split(" ");
+
+                          const h = parseInt(values[0], 10);
+                          const s = parseInt(values[1], 10);
+                          const l = parseInt(values[2], 10);
+
+                          const color: HslColor = { h, s, l };
+                          return (
+                            <FormItem>
+                              <FormControl>
+                                <ColorInput
+                                  color={color}
+                                  onChange={(newColor: HslColor) => {
+                                    field.onChange(
+                                      `${newColor.h} ${newColor.s}% ${newColor.l}%`
+                                    );
+                                  }}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+            </ColorContainer>
+          );
+        })}
+      </div>
+    </form>
   );
 };
 
@@ -247,19 +250,6 @@ const themeForm = {
       {
         label: "Foreground",
         name: "destructiveForeground",
-      },
-    ],
-  },
-  success: {
-    label: "Success",
-    fields: [
-      {
-        label: "Background",
-        name: "success",
-      },
-      {
-        label: "Foreground",
-        name: "successForeground",
       },
     ],
   },

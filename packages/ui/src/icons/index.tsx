@@ -43,4 +43,5 @@ export {
   Maximize2 as Maximize2Icon,
   Palette as PaletteIcon,
   Trash2 as DeleteIcon,
+  Check as CheckIcon,
 } from "lucide-react";

@@ -55,19 +55,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={cn(inter.variable, display.variable)} suppressHydrationWarning>
         <Providers>
-          <Analytics />
-          <div
-            className="grad relative bg-gradient-to-br from-[#e4e9ea] from-10% to-[#FFDEC1] to-80%  dark:from-[#3f3541] dark:to-[#1d1917]"
-            // style={{
-            //   background: "linear-gradient(to bottom right, #FBD7FF 10%, #FFDEC1 80%)",
-            // }}
-          >
-            {/* <Banner /> */}
-            <Suspense fallback={<div className="h-[64px]" />}>
-              <Header />
-            </Suspense>
-            <div className="min-h-[calc(100vh-64px)] pb-36">{children}</div>
-            <Footer />
+          <div className="theme-nature">
+            <Analytics />
+            <div className="grad relative bg-gradient-to-br from-[#e4e9ea] from-10% to-[#FFDEC1] to-80%  dark:from-[#3f3541] dark:to-[#1d1917]">
+              <Suspense fallback={<div className="h-[64px]" />}>
+                <Header />
+              </Suspense>
+              <div className="min-h-[calc(100vh-64px)] pb-36">{children}</div>
+              <Footer />
+            </div>
           </div>
         </Providers>
       </body>
