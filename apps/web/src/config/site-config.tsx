@@ -5,10 +5,18 @@ export const siteConfig = {
     url: "https://palettify.co",
     name: "Palettify",
     logo: "/images/logo.png",
-    title: "palettify | A monorepo starter to speed up your development",
+    title: "palettify - instant preview for your theme",
     description:
-      "Turbocharge your project with this monorepo starter. It comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more.",
-    keywords: ["Next.js", "React", "Tailwind CSS", "Shadcn-ui", "Server components"],
+      "Get an instant preview for your theme with palettify. Export your theme in one click.",
+    keywords: [
+      "Theme",
+      "Theme customizer",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Shadcn-ui",
+      "Server components",
+    ],
     authors: [
       {
         name: "mehdibha",
