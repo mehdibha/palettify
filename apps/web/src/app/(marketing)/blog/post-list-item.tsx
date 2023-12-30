@@ -23,7 +23,7 @@ export const PostListItem = (props: PostListItemProps) => {
     <Link href={href}>
       <li className="group relative cursor-pointer">
         {/* background */}
-        <div className="absolute left-0 top-0 z-[-1] h-full w-full rounded-xl border bg-[rgba(50,50,50,0.1)] opacity-50 shadow-md transition-all duration-300 group-hover:opacity-100 dark:bg-[rgba(230,230,230,0.1)] dark:from-transparent dark:via-transparent dark:to-transparent" />
+        <div className="absolute left-0 top-0 z-0 h-full w-full rounded-xl border bg-[rgba(50,50,50,0.1)] opacity-50 shadow-md transition-all duration-300 group-hover:opacity-100 dark:bg-[rgba(230,230,230,0.1)] dark:from-transparent dark:via-transparent dark:to-transparent" />
         {/* content */}
         <div className="flex space-x-2 p-6 sm:flex-row">
           <div className="w-full">
