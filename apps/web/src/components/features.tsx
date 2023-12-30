@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@palettify/ui";
 import { cn, stringReplace } from "@palettify/utils";
@@ -60,7 +61,7 @@ const Feature = (props: FeatureProps) => {
   return (
     <div className="gap4 flex flex-col items-center rounded-3xl border p-10">
       {image && (
-        <img
+        <Image
           alt="feature"
           height={100}
           width={100}

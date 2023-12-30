@@ -116,8 +116,7 @@ export const siteConfig = {
           author: {
             name: "Iyed",
             role: "Passionate developer",
-            avatar:
-              "https://www.iyed.dev/_next/image?url=%2Fimages%2Favatar.png&w=256&q=75",
+            avatar: "https://github.com/imansour12.png",
           },
         },
       ],

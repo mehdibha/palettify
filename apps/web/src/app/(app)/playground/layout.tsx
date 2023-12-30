@@ -1,4 +1,7 @@
+"use client";
+
 import { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import { FormProvider } from "./form-provider";
 import { Preview } from "./preview";
 
@@ -8,6 +11,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout(props: DashboardLayoutProps) {
   const { children } = props;
+  useSearchParams();
 
   return (
     <FormProvider>

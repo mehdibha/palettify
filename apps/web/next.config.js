@@ -3,12 +3,12 @@
  */
 module.exports = {
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        hostname: "github.com",
+      },
+    ],
   },
   reactStrictMode: false,
-  transpilePackages: [
-    "@palettify/ui",
-    "@palettify/utils",
-    "@palettify/database",
-  ],
+  transpilePackages: ["@palettify/ui", "@palettify/utils", "@palettify/database"],
 };

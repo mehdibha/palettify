@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn, stringReplace } from "@palettify/utils";
 
@@ -45,10 +46,12 @@ export function Testimonials(props: TestimonialProps) {
           >
             <p className="mb-4">{testimonial.content}</p>
             <div className="flex items-center gap-4">
-              <img
-                className="h-8 rounded-full lg:h-10"
+              <Image
+                className="aspect-square h-10 w-10 rounded-full "
+                width={100}
+                height={100}
                 src={testimonial.author.avatar}
-                alt="danielroe"
+                alt={testimonial.author.name}
               />
               <div className="text-sm">
                 <p className="u-text-gray-900 font-semibold">{testimonial.author.name}</p>

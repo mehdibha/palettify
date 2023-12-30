@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   Badge,
   Button,
@@ -44,9 +45,8 @@ export const SubscriptionsList = (props: SubscriptionsListProps) => {
               subscriptions.map((subscription) => (
                 <TableRow key={subscription.id}>
                   <TableCell className="font-medium">
-                    <img
+                    <Image
                       alt={subscription.siteName ?? ""}
-                      // className="w-20 h-20"
                       className="rounded"
                       src={subscription.image ?? "/images/placeholder.png"}
                     />
