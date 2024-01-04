@@ -20,16 +20,16 @@ export default async function PostPage(props: PostPageProps) {
 
   return (
     <div className="mt-20">
-      <h1 className="mb-4 text-4xl font-bold">{post.metadata.title}</h1>
-      <div className="flex items-center space-x-2">
+      <h1 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl">
+        {post.metadata.title}
+      </h1>
+      <div className="flex flex-wrap items-center gap-2">
         <p>Published in {formatDate(post.metadata.publishedAt)}</p>
-        <p>•</p>
+        <span>•</span>
         <p>{post.timeToRead} min read</p>
-        <p>•</p>
-        <div className="flex space-x-1">
-          {post.metadata.keywords &&
-            post.metadata.keywords.map((tag) => <Badge key={tag}>{tag}</Badge>)}
-        </div>
+        <span>•</span>
+        {post.metadata.keywords &&
+          post.metadata.keywords.map((tag) => <Badge key={tag}>{tag}</Badge>)}
       </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert prose-lead:leading-none mt-20 max-w-full">
         {post.content && <MDX source={post.content} />}
