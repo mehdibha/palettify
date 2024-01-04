@@ -58,6 +58,41 @@ export default function PalettesPage() {
       secondary: "#ffeb3b",
       card: "#ffffff",
     },
+    {
+      "background": "#2C3E50",
+      "foreground": "#ECF0F1",
+      "primary": "#3498DB",
+      "secondary": "#E74C3C",
+      "card": "#34495E"
+    },
+    {
+      "background": "#EDEDED",
+      "foreground": "#333333",
+      "primary": "#673AB7",
+      "secondary": "#FFC107",
+      "card": "#FFFFFF"
+    },
+    {
+      "background": "#E0F7FA",
+      "foreground": "#37474F",
+      "primary": "#4CAF50",
+      "secondary": "#FF5722",
+      "card": "#FFFFFF"
+    },
+    {
+      "background": "#F5F5F5",
+      "foreground": "#212121",
+      "primary": "#9C27B0",
+      "secondary": "#607D8B",
+      "card": "#FFFFFF"
+    },
+    {
+      "background": "#FFECB3",
+      "foreground": "#333333",
+      "primary": "#FF9800",
+      "secondary": "#795548",
+      "card": "#FFF8E1"
+    },
   ];
 
   return (
