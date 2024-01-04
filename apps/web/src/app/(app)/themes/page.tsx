@@ -67,7 +67,7 @@ export default function PalettesPage() {
         Get inspired by thousands of themes and easily export for your popular react ui
         library.
       </p>
-      <div className="mt-20 grid grid-cols-5 gap-6">
+      <div className="mt-20 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {trendingThemes.map((theme) => (
           <ThemeCard {...theme} />
         ))}
