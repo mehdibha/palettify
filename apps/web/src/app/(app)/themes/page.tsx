@@ -14,10 +14,10 @@ export default function PalettesPage() {
       foreground: "#333",
       primary: "#009688",
       secondary: "#ff5722",
-      card: "#ffffff",
+      card: "#c0c0c0",
     },
     {
-      background: "#1c1c1c",
+      background: "linear-gradient(to bottom right, #e4e9ea 10%, #FFDEC1 80%)",
       foreground: "#fff",
       primary: "#4caf50",
       secondary: "#2196f3",
@@ -28,7 +28,7 @@ export default function PalettesPage() {
       foreground: "#333",
       primary: "#ff4081",
       secondary: "#03a9f4",
-      card: "#ffffff",
+      card: "#c0c0c0",
     },
     {
       background: "#121212",
@@ -42,7 +42,7 @@ export default function PalettesPage() {
       foreground: "#333",
       primary: "#ff9800",
       secondary: "#8bc34a",
-      card: "#ffffff",
+      card: "#c0c0c0",
     },
     {
       background: "#212121",
@@ -56,7 +56,7 @@ export default function PalettesPage() {
       foreground: "#333",
       primary: "#607d8b",
       secondary: "#ffeb3b",
-      card: "#ffffff",
+      card: "#525252",
     },
   ];
 
@@ -67,9 +67,9 @@ export default function PalettesPage() {
         Get inspired by thousands of themes and easily export for your popular react ui
         library.
       </p>
-      <div className="mt-20 grid grid-cols-5 gap-6">
-        {trendingThemes.map((theme) => (
-          <ThemeCard {...theme} />
+      <div className="xs:grid-cols-2 mt-20  grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {trendingThemes.map((theme, index) => (
+          <ThemeCard key={index} {...theme} />
         ))}
       </div>
     </div>

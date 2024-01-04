@@ -38,7 +38,7 @@ export const Header = () => {
   }, [scrolled]);
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header className="animate-in fade-in slide-in-from-top-2 sticky top-0 z-50 w-full duration-500">
       <div className="container relative flex h-16 items-center justify-between px-4 sm:px-8 ">
         <Link
           href="/"

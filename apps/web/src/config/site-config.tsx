@@ -98,33 +98,36 @@ export const siteConfig = {
       subheadline: "",
       testimonials: [
         {
-          content:
-            "Consectetur adipiscing elit. Sed euismod, diam quis accumsan fermentum, odio nibh ultricies od. diam quis accumsan fermentum, odio nibh ultricies odio. ut odio. fusce nec diam et dolor efficitur aliquam.",
-          href: "https://www.ahmedbk.com",
+          content: "Love this",
+          href: "https://twitter.com/port_dev/status/1742437552433279045",
           author: {
-            name: "Ahmed BK",
-            role: "Sr front-end developer at ispoke.to",
-            avatar: "https://github.com/ahmedbenkhalifa.png",
-          },
-        },
-        {
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam quis accumsan fermentum, odio nibh ultricies od. ut odio. fusce nec diam et dolor efficitur aliquam. aenean euismod, diam quis accumsan fermentum, odio nibh ultricies odio, ut odio. fusce nec diam et dolor efficitur aliquam. aenean euismod. ",
-          href: "https://figitma.com",
-          author: {
-            name: "Hamza Bouissa",
-            role: "Founder of Figitma",
-            avatar: "https://github.com/hamzabouissi.png",
-          },
-        },
-        {
-          content:
-            "Sed euismod, diam quis accumsan fermentum, odio nibh ultricies od. Dielit. Sed euismod, diam quis accumsan fermentum, odio nibh ultricies od. ut odio. fusce nec diam et dolor efficitur aliquam. aenean euismod, diam quis accumsan.",
-          href: "https://www.iyed.dev",
-          author: {
-            name: "Iyed",
+            name: "port",
             role: "Passionate developer",
-            avatar: "https://github.com/imansour12.png",
+            avatar:
+              "https://pbs.twimg.com/profile_images/1652909540461912064/WEIE2q8H_400x400.png",
+            verified: true,
+          },
+        },
+        {
+          content: "Awesome. Would be great if we could pick from some pre-built themes!",
+          href: "https://twitter.com/shadcn/status/1742408367564292589",
+          author: {
+            name: "Shadcn",
+            role: "Author of shadcn-ui",
+            verified: true,
+            avatar:
+              "https://pbs.twimg.com/profile_images/1593304942210478080/TUYae5z7_400x400.jpg",
+          },
+        },
+        {
+          content: "Wow nice but light  theme is amazing🫡.",
+          href: "https://twitter.com/_mohd_mustaqim/status/1742385036798640508",
+          author: {
+            name: "Md Mustaqim Alam",
+            role: "Front-end Developer",
+            avatar:
+              "https://pbs.twimg.com/profile_images/1740190887055941632/1ozsfIoE_400x400.jpg",
+            verified: false,
           },
         },
       ],

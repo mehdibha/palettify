@@ -75,6 +75,15 @@ model Customer {
   user             User     @relation(fields: [userId], references: [id])
 }
 
+model Theme {
+  id        String   @id @default(cuid())
+  name      String
+  type      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  settings  Json
+}
+
 model Product {
   id              String   @id @default(cuid())
   stripeProductId String   @unique @map(name: "stripe_product_id")

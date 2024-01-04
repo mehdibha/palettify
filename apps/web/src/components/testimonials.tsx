@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BadgeCheckIcon, VerifiedIcon } from "@palettify/ui";
 import { cn, stringReplace } from "@palettify/utils";
 
 interface TestimonialProps {
@@ -54,7 +55,12 @@ export function Testimonials(props: TestimonialProps) {
                 alt={testimonial.author.name}
               />
               <div className="text-sm">
-                <p className="u-text-gray-900 font-semibold">{testimonial.author.name}</p>
+                <p className="u-text-gray-900 flex items-center space-x-1 font-semibold">
+                  <span>{testimonial.author.name}</span>{" "}
+                  {testimonial.author.verified && (
+                    <VerifiedIcon size={16} color="rgba(29,155,240,1.00)" />
+                  )}
+                </p>
                 <p className="u-text-gray-500">{testimonial.author.role}</p>
               </div>
             </div>

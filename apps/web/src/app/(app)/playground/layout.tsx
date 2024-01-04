@@ -18,7 +18,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
       <div className="min-h-screen">
         <div className="lg:w-[500px]">
           <div className="container px-8">
-            <div className="bg-card rounded-xl border p-4 shadow-xl">{children}</div>
+            <div className="bg-background rounded-xl p-4 shadow-xl">{children}</div>
           </div>
         </div>
         <Preview />

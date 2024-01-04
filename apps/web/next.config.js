@@ -7,6 +7,9 @@ module.exports = {
       {
         hostname: "github.com",
       },
+      {
+        hostname: "pbs.twimg.com",
+      },
     ],
   },
   reactStrictMode: false,

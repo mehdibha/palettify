@@ -1,6 +1,7 @@
 // export * from "lucide-react";
 export * from "./google-icon";
 export * from "./npm-icon";
+export * from "./checked-icon";
 
 export {
   X as XIcon,
@@ -44,4 +45,7 @@ export {
   Palette as PaletteIcon,
   Trash2 as DeleteIcon,
   Check as CheckIcon,
+  BadgeCheck as BadgeCheckIcon,
+  ArrowBigUp as ArrowBigUpIcon,
+  ArrowBigDown as ArrowBigDownIcon,
 } from "lucide-react";

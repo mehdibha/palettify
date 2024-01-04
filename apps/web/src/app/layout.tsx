@@ -53,11 +53,18 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.variable, display.variable)} suppressHydrationWarning>
+      <body
+        className={cn(
+          "bg-gradient-to-br from-[#e4e9ea] from-10% to-[#FFDEC1] to-80% dark:from-[#3f3541] dark:to-[#1d1917]",
+          inter.variable,
+          display.variable
+        )}
+        suppressHydrationWarning
+      >
         <Providers>
           <div className="theme-nature">
             <Analytics />
-            <div className="grad relative bg-gradient-to-br from-[#e4e9ea] from-10% to-[#FFDEC1] to-80%  dark:from-[#3f3541] dark:to-[#1d1917]">
+            <div className="grad relative">
               <Suspense fallback={<div className="h-[64px]" />}>
                 <Header />
               </Suspense>
