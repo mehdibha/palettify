@@ -89,7 +89,8 @@ export const ThemeCard = (props: ThemeCardProps) => {
       </div>
       <ScrollArea
         className="h-[300px] rounded border shadow"
-        type="always"
+        // type="always"
+        scrollHideDelay={0}
         style={{ background: background }}
       >
         {/* Navbar */}
@@ -197,7 +198,7 @@ export const ThemeCard = (props: ThemeCardProps) => {
           </div>
         </div>
       </ScrollArea>
-      <div className="mt-2 flex w-full overflow-hidden rounded-md border shadow">
+      <div className="mt-2 flex w-full space-x-2">
         {[
           { label: "Background", value: background },
           // { label: "Foreground", value: foreground },
@@ -212,7 +213,7 @@ export const ThemeCard = (props: ThemeCardProps) => {
             <div
               key={index}
               className={cn(
-                "group/palette h-12 w-[1px] grow cursor-pointer overflow-hidden px-2 py-1 duration-300 hover:w-[45%]"
+                "group/palette h-12 w-[1px] grow cursor-pointer overflow-hidden rounded px-2 py-1 shadow duration-300 hover:w-[45%]"
               )}
               onClick={() => {
                 handleCopy(item.value);

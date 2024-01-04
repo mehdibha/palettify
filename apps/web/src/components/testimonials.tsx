@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheckIcon, VerifiedIcon } from "@palettify/ui";
+import { VerifiedIcon } from "@palettify/ui";
 import { cn, stringReplace } from "@palettify/utils";
 
 interface TestimonialProps {
@@ -12,6 +12,7 @@ interface TestimonialProps {
       name: string;
       role: string;
       avatar: string;
+      verified: boolean;
     };
     href: string;
   }[];
