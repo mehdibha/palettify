@@ -15,7 +15,7 @@ export const TagsSelect = (props: TagsSelectProps) => {
   const { tags, selectedTags, handleTagClick, className } = props;
 
   return (
-    <div className={cn("flex flex-wrap gap-4", className)}>
+    <div className={cn("flex flex-wrap gap-2", className)}>
       {tags.map((tag) => {
         const selected = selectedTags.findIndex((elem) => elem === tag) > -1;
         const onClick = () => {
