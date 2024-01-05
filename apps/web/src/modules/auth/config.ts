@@ -7,7 +7,7 @@ import { prisma } from "@palettify/database";
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
-  // debug: true,
+  debug: true,
   providers: [
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,

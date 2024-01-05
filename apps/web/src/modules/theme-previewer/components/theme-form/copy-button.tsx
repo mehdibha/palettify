@@ -15,7 +15,7 @@ import {
   CheckIcon,
 } from "@palettify/ui";
 
-export default function CopyButton() {
+export function CopyButton() {
   const [isCopied, setIsCopied] = React.useState(false);
   const form = useFormContext();
 

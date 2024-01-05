@@ -8,6 +8,9 @@ module.exports = {
         hostname: "github.com",
       },
       {
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
         hostname: "pbs.twimg.com",
       },
     ],

@@ -4,10 +4,10 @@ import React from "react";
 import { useTheme } from "next-themes";
 import { HslColor } from "react-colorful";
 import { useFormContext } from "react-hook-form";
-import { Button, CopyIcon, FormControl, FormField, FormItem } from "@palettify/ui";
+import { Button, FormControl, FormField, FormItem } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { ColorInput } from "./color-input";
-import CopyButton from "./copy-button";
+import { CopyButton } from "./copy-button";
 import { LibrarySelect } from "./library-select";
 import { ThemeSelect } from "./theme-select";
 
@@ -34,8 +34,11 @@ export const UpdateSiteAppearance = (props: FormProps) => {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className={cn("", className)}>
-      <div className="">
-        <div className="flex space-x-2">
+      <div>
+        <div className="mb-4 flex justify-end">
+          <Button color="primary">Save changes</Button>
+        </div>
+        <div className="flex flex-wrap justify-between gap-2">
           <LibrarySelect
             selectedLibrary={form.watch("library")}
             onChange={handleChangeLibrary}

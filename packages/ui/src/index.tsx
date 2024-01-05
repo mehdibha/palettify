@@ -23,6 +23,7 @@ export * from "./components/multi-select";
 export * from "./components/multi-select-freesolo";
 export * from "./components/scroll-area";
 export * from "./components/tooltip";
+export * from "./components/avatar";
 
 // hooks
 export * from "./hooks/use-toast";

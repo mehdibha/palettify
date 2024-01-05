@@ -76,12 +76,13 @@ model Customer {
 }
 
 model Theme {
-  id        String   @id @default(cuid())
-  name      String
-  type      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  settings  Json
+  id           Int      @id @default(autoincrement())
+  name         String
+  slug         String   @unique
+  tags         String[]
+  darkPalette  Json     @map(name: "dark_palette")
+  lightPalette Json     @map(name: "light_palette")
+  radius       Float
 }
 
 model Product {
@@ -160,6 +161,11 @@ model Email {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
   email     String   @unique
+}
+
+enum PaletteMode {
+  light
+  dark
 }
 
 enum PricingPlanInterval {

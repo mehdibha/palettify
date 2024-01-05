@@ -14,7 +14,13 @@ import { cn } from "@palettify/utils";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { Preview as LibraryPreview } from "@/modules/theme-previewer/components/preview";
 
-export const Preview = () => {
+interface PreviewProps {
+  className?: string;
+}
+
+export const Preview = (props: PreviewProps) => {
+  const { className } = props;
+
   const [mobileView, setMobileView] = React.useState(false);
   const [fullScreen, setFullScreen] = React.useState(false);
   const form = useFormContext();
@@ -29,7 +35,7 @@ export const Preview = () => {
   };
 
   return (
-    <PreviewWrapper fullScreen={fullScreen}>
+    <PreviewWrapper className={className} fullScreen={fullScreen}>
       <div className="bg-card h-full overflow-hidden rounded-md pb-10 shadow-xl">
         <div className="relative flex w-full items-center justify-between px-2 py-1">
           <span />
@@ -59,17 +65,19 @@ export const Preview = () => {
 interface PreviewWrapperProps {
   children: React.ReactNode;
   fullScreen?: boolean;
+  className?: string;
 }
 
 const PreviewWrapper = (props: PreviewWrapperProps) => {
-  const { fullScreen, children } = props;
+  const { fullScreen, className, children } = props;
   return (
     <div
       className={cn(
         "fixed right-0 top-0 h-[calc(100vh)] w-[calc(100%-500px+16px)] overflow-hidden p-4 pt-[64px]",
         {
           "z-[100000] block h-screen w-full p-0 xl:w-full xl:pt-0": fullScreen,
-        }
+        },
+        className
       )}
     >
       {children}

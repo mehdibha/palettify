@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -12,7 +12,13 @@ import { siteConfig } from "@/config";
 
 const config = siteConfig.header;
 
-export const Header = () => {
+interface HeaderProps {
+  children?: React.ReactNode;
+}
+
+export const Header = (props: HeaderProps) => {
+  const { children } = props;
+
   const { scrolled } = useScroll();
   const [refLogo, animate] = useAnimate();
   const [refCTA] = useAnimate();
@@ -106,9 +112,12 @@ export const Header = () => {
         </div>
         <div
           suppressHydrationWarning
-          className={cn("hidden space-x-2 transition-all duration-300 lg:flex ", {
-            "translate-x-[10px] opacity-0": scrolled,
-          })}
+          className={cn(
+            "hidden items-center space-x-2 transition-all duration-300 lg:flex",
+            {
+              "translate-x-[10px] opacity-0": scrolled,
+            }
+          )}
         >
           <Button href={config.cta.secondary.href} variant="text" size="sm">
             {config.cta.secondary.label}
@@ -116,6 +125,7 @@ export const Header = () => {
           <Button href={config.cta.primary.href} color="primary" size="sm">
             {config.cta.primary.label}
           </Button>
+          {children}
         </div>
         <MobileNav />
       </div>
