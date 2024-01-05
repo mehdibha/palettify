@@ -24,6 +24,9 @@ export * from "./components/multi-select-freesolo";
 export * from "./components/scroll-area";
 export * from "./components/tooltip";
 export * from "./components/avatar";
+export * from "./components/menu";
+export * from "./components/tabs";
+export * from "./components/card";
 
 // hooks
 export * from "./hooks/use-toast";

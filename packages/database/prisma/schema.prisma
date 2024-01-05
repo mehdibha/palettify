@@ -76,7 +76,7 @@ model Customer {
 }
 
 model Theme {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(cuid())
   name         String
   slug         String   @unique
   tags         String[]

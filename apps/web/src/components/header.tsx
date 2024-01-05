@@ -1,23 +1,32 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion, useAnimate } from "framer-motion";
 import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { siteConfig } from "@/config";
+import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
+import { UserMenu } from "./user-menu";
 
 const config = siteConfig.header;
 
 interface HeaderProps {
+  user?: {
+    id: string;
+    name: string;
+    username: string;
+    email: string;
+    image: string;
+  } | null;
   children?: React.ReactNode;
 }
 
 export const Header = (props: HeaderProps) => {
-  const { children } = props;
+  const { user, children } = props;
 
   const { scrolled } = useScroll();
   const [refLogo, animate] = useAnimate();
@@ -113,19 +122,23 @@ export const Header = (props: HeaderProps) => {
         <div
           suppressHydrationWarning
           className={cn(
-            "hidden items-center space-x-2 transition-all duration-300 lg:flex",
+            "hidden items-center space-x-4 transition-all duration-300 lg:flex",
             {
               "translate-x-[10px] opacity-0": scrolled,
             }
           )}
         >
-          <Button href={config.cta.secondary.href} variant="text" size="sm">
-            {config.cta.secondary.label}
-          </Button>
-          <Button href={config.cta.primary.href} color="primary" size="sm">
-            {config.cta.primary.label}
-          </Button>
-          {children}
+          <div className="flex items-center space-x-2">
+            {!user && (
+              <Button href={config.cta.secondary.href} variant="text" size="sm">
+                {config.cta.secondary.label}
+              </Button>
+            )}
+            <Button href={config.cta.primary.href} color="primary" size="sm">
+              {config.cta.primary.label}
+            </Button>
+          </div>
+          {user && <UserMenu user={user} />}
         </div>
         <MobileNav />
       </div>
@@ -149,7 +162,6 @@ interface NavProps {
 const Nav = (props: NavProps) => {
   const { items, direction = "row", onNavItemClick } = props;
   const pathname = usePathname();
-  useSearchParams();
 
   return (
     <nav
