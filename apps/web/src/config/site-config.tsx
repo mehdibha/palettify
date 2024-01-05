@@ -41,10 +41,10 @@ export const siteConfig = {
         label: "Playground",
         href: "/playground",
       },
-      secondary: {
-        label: "Sign in",
-        href: "/login",
-      },
+      // secondary: {
+      //   label: "Sign in",
+      //   href: "/login",
+      // },
     },
   },
   footer: {
@@ -81,6 +81,7 @@ export const siteConfig = {
             label: "Go to playground",
             href: "/playground?librairy=mui",
           },
+          soon: true,
         },
         {
           title: "shadcn-ui",

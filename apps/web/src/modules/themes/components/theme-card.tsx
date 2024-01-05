@@ -79,13 +79,13 @@ export const ThemeCard = (props: ThemeCardProps) => {
             })}
           />
         </div>
-        <Link
+        {/* <Link
           href={"/playground?theme="}
           className="flex items-center space-x-2 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 hover:group-hover/card:opacity-100"
         >
           <span className="mb-1">open in playground</span>
           <ArrowRightIcon size={16} />
-        </Link>
+        </Link> */}
       </div>
       <ScrollArea
         className="h-[300px] rounded border shadow"

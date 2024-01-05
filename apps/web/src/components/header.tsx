@@ -110,9 +110,11 @@ export const Header = () => {
             "translate-x-[10px] opacity-0": scrolled,
           })}
         >
-          <Button href={config.cta.secondary.href} variant="text" size="sm">
-            {config.cta.secondary.label}
-          </Button>
+          {/* {config.cta.secondary && (
+            <Button href={config.cta.secondary.href} variant="text" size="sm">
+              {config.cta.secondary.label}
+            </Button>
+          )} */}
           <Button href={config.cta.primary.href} color="primary" size="sm">
             {config.cta.primary.label}
           </Button>
@@ -206,7 +208,7 @@ const MobileNav = () => {
               direction="column"
               onNavItemClick={handleClose}
             />
-            <Button href={config.cta.primary.href} size="sm">
+            <Button href={config.cta.primary.href} color="primary" size="sm">
               {config.cta.primary.label}
             </Button>
           </div>

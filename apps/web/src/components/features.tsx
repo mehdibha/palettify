@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRightIcon } from "@palettify/ui";
+import { ArrowRightIcon, Badge, Button } from "@palettify/ui";
 import { cn, stringReplace } from "@palettify/utils";
 
 interface FeaturesProps {
@@ -15,6 +15,7 @@ interface FeaturesProps {
       label: string;
       href: string;
     };
+    soon?: boolean;
   }[];
 }
 
@@ -38,6 +39,7 @@ export const Features = (props: FeaturesProps) => {
               description={feature.description}
               image={feature.image}
               cta={feature.cta}
+              soon={feature.soon}
             />
           ))}
         </div>
@@ -54,12 +56,18 @@ interface FeatureProps {
     label: string;
     href: string;
   };
+  soon?: boolean;
 }
 
 const Feature = (props: FeatureProps) => {
-  const { title, description, cta, image } = props;
+  const { title, description, cta, image, soon = false } = props;
   return (
-    <div className="gap4 flex flex-col items-center rounded-3xl border p-10">
+    <div className="relative flex flex-col items-center rounded-3xl border p-10">
+      {soon && (
+        <Badge className="absolute right-3 top-3" color="primary">
+          soon
+        </Badge>
+      )}
       {image && (
         <Image
           alt="feature"
@@ -72,15 +80,20 @@ const Feature = (props: FeatureProps) => {
       <div className="mt-8">
         <h2 className="font-display text-3xl font-bold">{title}</h2>
         <p className="text-muted-foreground mt-4 text-lg">{description}</p>
-        <Link
-          href={cta.href}
-          className="mt-2 flex items-center space-x-2 font-bold opacity-70 hover:opacity-100"
-        >
-          <span>{cta.label}</span>
-          <span>
-            <ArrowRightIcon size={16} className="relative top-[2px]" />
-          </span>
-        </Link>
+        <div className="mt-4 flex justify-end">
+          <Button
+            disabled={soon}
+            size="sm"
+            variant="text"
+            href={cta.href}
+            className="font-bold"
+          >
+            <span className="mr-1">{cta.label}</span>
+            <span>
+              <ArrowRightIcon size={16} className="relative top-[2px]" />
+            </span>
+          </Button>
+        </div>
       </div>
     </div>
   );
