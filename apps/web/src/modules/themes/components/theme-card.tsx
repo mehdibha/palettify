@@ -38,7 +38,7 @@ export const ThemeCard = (props: ThemeCardProps) => {
   };
 
   return (
-    <div className="group/card bg-card/20 hover:bg-card/70 rounded-lg p-2 pt-1 duration-150 hover:shadow-md">
+    <div className="group/card bg-card/20 hover:bg-card/70 rounded-lg p-2 pt-1 shadow-sm duration-150 hover:shadow-md">
       <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
         <Link
           href={"/playground?theme="}

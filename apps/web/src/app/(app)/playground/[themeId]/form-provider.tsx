@@ -2,67 +2,80 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
+import type { Theme } from "@palettify/database";
 import { Form } from "@palettify/ui";
 
 const lightTheme = {
-  background: "0 0% 100%",
-  foreground: "222.2 47.4% 11.2%",
-  muted: "210 40% 96.1%",
-  mutedForeground: "215.4 16.3% 46.9%",
-  popover: "0 0% 100%",
-  popoverForeground: "222.2 47.4% 11.2%",
-  border: "214.3 31.8% 91.4%",
-  input: "214.3 31.8% 91.4%",
-  card: "0 0% 100%",
-  cardForeground: "222.2 47.4% 11.2%",
-  primary: "222.2 47.4% 11.2%",
-  primaryForeground: "210 40% 98%",
-  secondary: "210 40% 96.1%",
-  secondaryForeground: "222.2 47.4% 11.2%",
-  accent: "210 40% 96.1%",
-  accentForeground: "222.2 47.4% 11.2%",
-  destructive: "0 100% 50%",
-  destructiveForeground: "210 40% 98%",
-  ring: "215 20.2% 65.1%",
-  radius: "0.5rem",
+  background: "#ffffff",
+  foreground: "#000000",
+  card: "#ffffff",
+  cardForeground: "#070708",
+  popover: "#ffffff",
+  popoverForeground: "#09090b",
+  primary: "#18181b",
+  primaryForeground: "#000000",
+  secondary: "#f4f4f5",
+  secondaryForeground: "#18181b",
+  muted: "#f4f4f5",
+  mutedForeground: "#71717a",
+  accent: "#f4f4f5",
+  accentForeground: "#18181b",
+  destructive: "#dc2828",
+  destructiveForeground: "#fafafa",
+  border: "#e4e4e7",
+  input: "#d6c6e8",
+  ring: "#a1a1aa",
+  radius: 0.5,
 };
 
 const darkTheme = {
-  background: "224 71% 4%",
-  foreground: "213 31% 91%",
-  muted: "223 47% 11%",
-  mutedForeground: "215.4 16.3% 56.9%",
-  accent: "216 34% 17%",
-  accentForeground: "210 40% 98%",
-  popover: "224 71% 4%",
-  popoverForeground: "215 20.2% 65.1%",
-  border: "216 34% 17%",
-  input: "216 34% 17%",
-  card: "224 71% 4%",
-  cardForeground: "213 31% 91%",
-  primary: "210 40% 98%",
-  primaryForeground: "222.2 47.4% 1.2%",
-  secondary: "222.2 47.4% 11.2%",
-  secondaryForeground: "210 40% 98%",
-  destructive: "0 63% 31%",
-  destructiveForeground: "210 40% 98%",
-  ring: "216 34% 17%",
-  radius: "0.5rem",
+  background: "#09090b",
+  foreground: "#fafafa",
+  card: "#09090b",
+  cardForeground: "#fafafa",
+  popover: "#09090b",
+  popoverForeground: "#fafafa",
+  primary: "#fafafa",
+  primaryForeground: "#18181b",
+  secondary: "#27272a",
+  secondaryForeground: "#fafafa",
+  muted: "#27272a",
+  mutedForeground: "#a1a1aa",
+  accent: "#27272a",
+  accentForeground: "#fafafa",
+  destructive: "#801e1e",
+  destructiveForeground: "#fafafa",
+  border: "#27272a",
+  input: "#27272a",
+  ring: "#d4d4d8",
+  radius: 0.5,
 };
 
 interface FormProviderProps {
   children: React.ReactNode;
+  theme: Theme | null;
 }
 
 export const FormProvider = (props: FormProviderProps) => {
-  const { children } = props;
+  const { theme, children } = props;
+
+  const [mounted, setMounted] = React.useState(false);
 
   const form = useForm({
     values: {
       library: "shadcn",
-      lightTheme,
-      darkTheme,
+      lightTheme: theme?.lightPalette ?? lightTheme,
+      darkTheme: theme?.darkPalette ?? darkTheme,
     },
   });
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return <Form {...form}>{children}</Form>;
 };

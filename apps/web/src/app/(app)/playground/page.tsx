@@ -1,10 +1,7 @@
 import { redirect } from "next/navigation";
-import { getSession } from "@/modules/auth/services";
+import { createTheme } from "@/modules/themes/services";
 
 export default async function Page() {
-  const session = await getSession();
-
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
-  redirect("/playground/theme19198191");
+  const theme = await createTheme();
+  redirect(`/playground/${theme.id}`);
 }

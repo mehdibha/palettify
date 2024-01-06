@@ -1,11 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useTransition } from "react";
+import { useParams } from "next/navigation";
 import { useTheme } from "next-themes";
-import { HslColor } from "react-colorful";
 import { useFormContext } from "react-hook-form";
-import { Button, FormControl, FormField, FormItem } from "@palettify/ui";
+import {
+  Button,
+  FormControl,
+  FormField,
+  FormItem,
+  Input,
+  Label,
+  useToast,
+} from "@palettify/ui";
 import { cn } from "@palettify/utils";
+import { updateTheme } from "@/modules/themes/actions";
 import { ColorInput } from "./color-input";
 import { CopyButton } from "./copy-button";
 import { LibrarySelect } from "./library-select";
@@ -15,30 +24,53 @@ interface FormProps {
   className?: string;
 }
 
-export const UpdateSiteAppearance = (props: FormProps) => {
+export const ThemeForm = (props: FormProps) => {
   const { className } = props;
 
+  const { themeId } = useParams();
+  const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
   const form = useFormContext();
-
   const { theme, setTheme } = useTheme();
+
   const mode = theme as "dark" | "light";
+
   const handleChangeTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
   const handleChangeLibrary = (library: "shadcn" | "mui") => {
     form.setValue("library", library);
   };
 
-  async function onSubmit(values: any) {}
+  async function onSubmit(values: any) {
+    startTransition(async () => {
+      if (typeof themeId === "string") {
+        const result = await updateTheme({
+          id: themeId,
+          lightPalette: values.lightTheme,
+          darkPalette: values.lightTheme,
+        });
+        if (result?.error) {
+          toast({ title: result?.error, variant: "destructive" });
+        }
+        if (result.success) {
+          toast({
+            title: "Your theme has been saved",
+          });
+        }
+      }
+    });
+  }
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className={cn("", className)}>
       <div>
         <div className="mb-4 flex justify-end">
-          <Button color="primary">Save changes</Button>
+          <Button loading={isPending} type="submit" color="primary">
+            Save changes
+          </Button>
         </div>
-        <div className="flex flex-wrap justify-between gap-2">
+        <div className="flex flex-wrap justify-start gap-2">
           <LibrarySelect
             selectedLibrary={form.watch("library")}
             onChange={handleChangeLibrary}
@@ -62,22 +94,13 @@ export const UpdateSiteAppearance = (props: FormProps) => {
                         control={form.control}
                         name={`lightTheme.${field.name}` as any}
                         render={({ field }) => {
-                          const values = field.value.split(" ");
-
-                          const h = parseInt(values[0], 10);
-                          const s = parseInt(values[1], 10);
-                          const l = parseInt(values[2], 10);
-
-                          const color: HslColor = { h, s, l };
                           return (
                             <FormItem>
                               <FormControl>
                                 <ColorInput
-                                  color={color}
-                                  onChange={(newColor: HslColor) => {
-                                    field.onChange(
-                                      `${newColor.h} ${newColor.s}% ${newColor.l}%`
-                                    );
+                                  color={field.value}
+                                  onChange={(newColor: string) => {
+                                    field.onChange(newColor);
                                   }}
                                 />
                               </FormControl>
@@ -100,22 +123,13 @@ export const UpdateSiteAppearance = (props: FormProps) => {
                         control={form.control}
                         name={`darkTheme.${field.name}` as any}
                         render={({ field }) => {
-                          const values = field.value.split(" ");
-
-                          const h = parseInt(values[0], 10);
-                          const s = parseInt(values[1], 10);
-                          const l = parseInt(values[2], 10);
-
-                          const color: HslColor = { h, s, l };
                           return (
                             <FormItem>
                               <FormControl>
                                 <ColorInput
-                                  color={color}
-                                  onChange={(newColor: HslColor) => {
-                                    field.onChange(
-                                      `${newColor.h} ${newColor.s}% ${newColor.l}%`
-                                    );
+                                  color={field.value}
+                                  onChange={(newColor: string) => {
+                                    field.onChange(newColor);
                                   }}
                                 />
                               </FormControl>
@@ -129,6 +143,39 @@ export const UpdateSiteAppearance = (props: FormProps) => {
             </ColorContainer>
           );
         })}
+        <div className="mt-4 rounded-md border p-4">
+          <Label>Radius</Label>
+          {mode === "light" && (
+            <FormField
+              control={form.control}
+              name="lightTheme.radius"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                  </FormItem>
+                );
+              }}
+            />
+          )}
+          {mode === "dark" && (
+            <FormField
+              control={form.control}
+              name="darkTheme.radius"
+              render={({ field }) => {
+                return (
+                  <FormItem className="mt-2">
+                    <FormControl>
+                      <Input type="number" {...field} />
+                    </FormControl>
+                  </FormItem>
+                );
+              }}
+            />
+          )}
+        </div>
       </div>
     </form>
   );
@@ -280,15 +327,6 @@ const themeForm = {
       {
         label: "Background",
         name: "ring",
-      },
-    ],
-  },
-  radius: {
-    label: "Radius",
-    fields: [
-      {
-        label: "Background",
-        name: "radius",
       },
     ],
   },

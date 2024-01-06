@@ -23,6 +23,7 @@ model User {
   customer      Customer?
   subscription  Subscription[]
   Invoice       Invoice[]
+  themes        Theme[]
 }
 
 model Account {
@@ -77,12 +78,14 @@ model Customer {
 
 model Theme {
   id           String   @id @default(cuid())
-  name         String
-  slug         String   @unique
+  name         String?
+  slug         String?  @unique
   tags         String[]
-  darkPalette  Json     @map(name: "dark_palette")
-  lightPalette Json     @map(name: "light_palette")
-  radius       Float
+  darkPalette  Json?    @map(name: "dark_palette")
+  lightPalette Json?    @map(name: "light_palette")
+  radius       Float?
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       String?
 }
 
 model Product {

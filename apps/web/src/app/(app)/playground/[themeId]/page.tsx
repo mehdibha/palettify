@@ -1,7 +1,7 @@
-import { UpdateSiteAppearance } from "@/modules/theme-previewer/components/theme-form";
+import { ThemeForm } from "@/modules/theme-previewer/components/theme-form";
 
 function PalettesPage() {
-  return <UpdateSiteAppearance />;
+  return <ThemeForm />;
 }
 
 export default PalettesPage;

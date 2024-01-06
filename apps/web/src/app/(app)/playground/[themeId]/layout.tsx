@@ -1,28 +1,20 @@
-"use client";
-
 import React, { ReactNode } from "react";
+import { getThemeById } from "@/modules/themes/services";
 import { FormProvider } from "./form-provider";
 import { Preview } from "./preview";
 
 interface DashboardLayoutProps {
+  params: { themeId: string };
   children: ReactNode;
 }
 
-export default function DashboardLayout(props: DashboardLayoutProps) {
-  const { children } = props;
-
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
+export default async function DashboardLayout(props: DashboardLayoutProps) {
+  const { params, children } = props;
+  const { themeId } = params;
+  const theme = await getThemeById(themeId);
 
   return (
-    <FormProvider>
+    <FormProvider theme={theme}>
       <div className="min-h-screen">
         <div className="lg:w-[460px]">
           <div className="container px-8">
