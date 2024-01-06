@@ -7,30 +7,39 @@ import {
   ArrowBigDownIcon,
   ArrowBigUpIcon,
   ArrowRightIcon,
+  Button,
   CopyIcon,
+  HeartIcon,
+  MoreVerticalIcon,
   ScrollArea,
   useToast,
 } from "@palettify/ui";
 import { cn } from "@palettify/utils";
+import { ThemeCardMenu } from "./theme-card-menu";
 
 interface ThemeCardProps {
-  background?: string;
-  foreground?: string;
-  primary?: string;
-  secondary?: string;
-  card?: string;
+  displayVote?: boolean;
+  palette: {
+    background?: string;
+    foreground?: string;
+    primary?: string;
+    secondary?: string;
+    card?: string;
+  };
 }
 
 export const ThemeCard = (props: ThemeCardProps) => {
+  const { displayVote = true, palette } = props;
+
   const {
     background = "#fff",
     foreground = "#000",
     primary = "#4942E4",
     secondary = "#fcba03",
     card = "#3d3d54",
-  } = props;
+  } = palette;
 
-  const [vote, setVote] = React.useState<null | "up" | "down">(null);
+  const [liked, setLike] = React.useState<boolean>(false);
   const { toast } = useToast();
 
   const handleCopy = (value: string) => {
@@ -39,53 +48,36 @@ export const ThemeCard = (props: ThemeCardProps) => {
   };
 
   return (
-    <div className="group/card hover:bg-card/40 rounded-lg p-2 pt-1 duration-150 hover:shadow-md">
-      <div className="flex flex-row-reverse items-center justify-between px-1">
-        <div className="flex items-center space-x-1">
-          <ArrowBigUpIcon
-            size={30}
-            strokeWidth={1}
-            onClick={() => {
-              if (vote === "up") {
-                setVote(null);
-                return;
-              }
-              setVote("up");
-            }}
-            className={cn("cursor-pointer opacity-70 duration-150 hover:opacity-100", {
-              "fill-green-700 text-green-700": vote === "up",
-            })}
-          />
-          <span
-            className={cn("opacity-70", {
-              "text-green-700 opacity-100": vote === "up",
-              "text-red-600 opacity-100": vote === "down",
-            })}
-          >
-            {vote === "up" ? 1 : 0}
-          </span>
-          <ArrowBigDownIcon
-            size={30}
-            strokeWidth={1}
-            onClick={() => {
-              if (vote === "down") {
-                setVote(null);
-                return;
-              }
-              setVote("down");
-            }}
-            className={cn("cursor-pointer opacity-70 duration-150 hover:opacity-100", {
-              "fill-red-600 text-red-600": vote === "down",
-            })}
-          />
-        </div>
+    <div className="group/card bg-card/20 hover:bg-card/70 rounded-lg p-2 pt-1 duration-150 hover:shadow-md">
+      <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
         <Link
           href={"/playground?theme="}
-          className="flex items-center space-x-2 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 hover:group-hover/card:opacity-100"
+          className="my-1 flex flex-1 items-center space-x-1 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 group-hover/card:hover:opacity-100"
         >
-          <span className="mb-1">open in playground</span>
+          <span>playground</span>
           <ArrowRightIcon size={16} />
         </Link>
+        <a
+          onClick={() => {
+            setLike((prev) => !prev);
+          }}
+          className="flex cursor-pointer items-center space-x-2 opacity-70 duration-150 hover:opacity-100"
+        >
+          <span
+            className={cn("mb-0.5 inline", {
+              "text-red-600": liked,
+            })}
+          >
+            {liked ? 1 : 0}
+          </span>
+          <HeartIcon
+            size={15}
+            className={cn({
+              "fill-red-600 text-red-600": liked,
+            })}
+          />
+        </a>
+        <ThemeCardMenu />
       </div>
       <ScrollArea
         className="h-[300px] rounded border shadow"

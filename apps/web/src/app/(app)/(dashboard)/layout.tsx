@@ -16,7 +16,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
 
   return (
     <Tabs value={pathname} className="container pt-10">
-      <TabsList className="mb-2 rounded-xl">
+      <TabsList className="rounded-xl">
         {[
           {
             href: "/my-themes",
@@ -24,7 +24,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           },
           {
             href: "/saved",
-            label: "Saved themes",
+            label: "Likes",
           },
           {
             href: "/account",
@@ -36,7 +36,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           </TabsTrigger>
         ))}
       </TabsList>
-      {children}
+      <div className="mt-4">{children}</div>
     </Tabs>
   );
 }
