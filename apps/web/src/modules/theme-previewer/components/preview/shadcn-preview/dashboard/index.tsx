@@ -28,7 +28,7 @@ export function DashboardPage() {
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />
-          <MainNav className="mx-6" />
+          <MainNav className="mx-6 hidden xl:block" />
           <div className="ml-auto flex items-center space-x-4">
             <Search />
             <UserNav />
@@ -37,7 +37,7 @@ export function DashboardPage() {
       </div>
       <div className="flex-1 space-y-4 p-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+          <h2 className="mr-2 text-3xl font-bold tracking-tight">Dashboard</h2>
           <div className="flex items-center space-x-2">
             <CalendarDateRangePicker />
             <Button>Download</Button>
@@ -57,7 +57,7 @@ export function DashboardPage() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
@@ -75,7 +75,7 @@ export function DashboardPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">$45,231</div>
                   <p className="text-muted-foreground text-xs">+20.1% from last month</p>
                 </CardContent>
               </Card>
@@ -146,8 +146,8 @@ export function DashboardPage() {
                 </CardContent>
               </Card>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-4">
+            <div className="grid grid-cols-7 gap-4">
+              <Card className="col-span-7 xl:col-span-4">
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
@@ -155,7 +155,7 @@ export function DashboardPage() {
                   <Overview />
                 </CardContent>
               </Card>
-              <Card className="col-span-3">
+              <Card className="col-span-7  xl:col-span-3">
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
                   <CardDescription>You made 265 sales this month.</CardDescription>

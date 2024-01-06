@@ -3,17 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Color from "color";
-import {
-  ArrowBigDownIcon,
-  ArrowBigUpIcon,
-  ArrowRightIcon,
-  Button,
-  CopyIcon,
-  HeartIcon,
-  MoreVerticalIcon,
-  ScrollArea,
-  useToast,
-} from "@palettify/ui";
+import { ArrowRightIcon, CopyIcon, HeartIcon, ScrollArea, useToast } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { ThemeCardMenu } from "./theme-card-menu";
 

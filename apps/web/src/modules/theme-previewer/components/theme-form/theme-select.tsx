@@ -40,7 +40,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
           variant="filled"
           role="combobox"
           aria-expanded={open}
-          className="w-[100px] justify-between"
+          className="w-[90px] min-w-0 justify-between"
         >
           {selectedTheme
             ? options.find((mode) => mode.value === selectedTheme)?.label
@@ -48,7 +48,7 @@ export function ThemeSelect(props: ThemeSelectProps) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[100px] p-0">
+      <PopoverContent className="w-[90px] p-0">
         <Command>
           <CommandGroup>
             {options.map((mode) => (

@@ -9,7 +9,6 @@ import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon } from "@palettify/
 import { cn } from "@palettify/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { siteConfig } from "@/config";
-import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
 import { UserMenu } from "./user-menu";
 
 const config = siteConfig.header;
@@ -228,7 +227,7 @@ const MobileNav = () => {
               direction="column"
               onNavItemClick={handleClose}
             />
-            <Button href={config.cta.primary.href} size="sm">
+            <Button href={config.cta.primary.href} color="primary" size="sm">
               {config.cta.primary.label}
             </Button>
           </div>

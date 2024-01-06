@@ -8,6 +8,7 @@ import {
   Minimize2Icon,
   MonitorIcon,
   ScrollArea,
+  ScrollBar,
   SmartphoneIcon,
 } from "@palettify/ui";
 import { cn } from "@palettify/utils";
@@ -56,6 +57,7 @@ export const Preview = (props: PreviewProps) => {
           >
             <LibraryPreview library={form.watch("library")} />
           </div>
+          <ScrollBar orientation="horizontal" />
         </ScrollArea>
       </div>
     </PreviewWrapper>
@@ -73,7 +75,7 @@ const PreviewWrapper = (props: PreviewWrapperProps) => {
   return (
     <div
       className={cn(
-        "fixed right-0 top-0 h-[calc(100vh)] w-[calc(100%-500px+16px)] overflow-hidden p-4 pt-[64px]",
+        "animate-in fade-in slide-in-from-top-1 fixed right-0 top-0 hidden h-[calc(100vh)] w-[calc(100%-460px+16px)] overflow-hidden p-4 pt-[64px] lg:block",
         {
           "z-[100000] block h-screen w-full p-0 xl:w-full xl:pt-0": fullScreen,
         },

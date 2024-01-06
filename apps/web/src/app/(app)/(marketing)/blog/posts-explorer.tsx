@@ -39,9 +39,9 @@ export const PostsExplorer = (props: PostsExplorerProps) => {
 
   return (
     <div className={className}>
-      <h2 className="mb-5 text-xl font-bold">Search blog by topics</h2>
+      <h2 className="mb-2 mt-4 text-xl font-bold">Search blog by topics</h2>
       <TagsSelect
-        className="mb-4"
+        className="mb-6"
         tags={tags}
         selectedTags={selectedTags}
         handleTagClick={handleTagClick}

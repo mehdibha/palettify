@@ -81,6 +81,7 @@ export const siteConfig = {
             label: "Go to playground",
             href: "/playground?librairy=mui",
           },
+          soon: true,
         },
         {
           title: "shadcn-ui",
