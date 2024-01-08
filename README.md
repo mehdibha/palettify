@@ -78,6 +78,7 @@ If you want to clone the project and use palettify as your starter project
 - [ ] Saved themes
 - [ ] Account page
 - [ ] Landing view in preview
+- [ ] Integrate gradients
 - [ ] MUI integration
 - [ ] Optimization
 
