@@ -6,7 +6,6 @@ import { Preview } from "./preview";
 
 interface PlaygroundPageProps {
   params: { themeId: string };
-  children: ReactNode;
 }
 
 export default async function PlaygroundPage(props: PlaygroundPageProps) {
