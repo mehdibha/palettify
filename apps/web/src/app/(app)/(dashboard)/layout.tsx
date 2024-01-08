@@ -21,18 +21,26 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           {
             href: "/my-themes",
             label: "My themes",
+            disabled: false,
           },
           {
             href: "/saved",
             label: "Likes",
+            disabled: true,
           },
           {
             href: "/account",
             label: "Account",
+            disabled: true,
           },
         ].map((link) => (
-          <TabsTrigger value={link.href} asChild className="rounded-lg">
-            <Link href={link.href}>{link.label}</Link>
+          <TabsTrigger
+            disabled={link.disabled}
+            value={link.href}
+            asChild={!link.disabled}
+            className="rounded-lg"
+          >
+            {link.disabled ? link.label : <Link href={link.href}>{link.label}</Link>}
           </TabsTrigger>
         ))}
       </TabsList>

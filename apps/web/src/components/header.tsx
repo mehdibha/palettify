@@ -25,7 +25,7 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps) => {
-  const { user, children } = props;
+  const { user } = props;
 
   const { scrolled } = useScroll();
   const [refLogo, animate] = useAnimate();
@@ -52,12 +52,12 @@ export const Header = (props: HeaderProps) => {
   }, [scrolled]);
 
   return (
-    <header className="animate-in fade-in slide-in-from-top-2 sticky top-0 z-50 w-full duration-500">
+    <header className="animate-in fade-in slide-in-from-top-2 pointer-events-none sticky top-0 z-50 w-full duration-500">
       <div className="container relative flex h-16 items-center justify-between px-4 sm:px-8 ">
         <Link
           href="/"
           className={cn(
-            "mr-8 flex items-center space-x-2 transition-all duration-300 hover:opacity-80",
+            "pointer-events-auto mr-8 flex items-center space-x-2 transition-all duration-300 hover:opacity-80",
             {
               "translate-x-[-10px] opacity-0": scrolled,
             }
@@ -70,13 +70,12 @@ export const Header = (props: HeaderProps) => {
             loading="lazy"
             width={20}
             height={20}
-            // className="aspect-[auto 30 / 30] object-cover"
           />
           <span className="inline-block font-bold">{siteConfig.global.name}</span>
         </Link>
         <div
           className={cn(
-            "absolute left-1/2 top-1/2 hidden translate-x-[-50%] translate-y-[-50%] rounded-full bg-gray-300/0 px-3 py-[6px] backdrop-blur-md transition-all duration-300 lg:block",
+            "pointer-events-auto absolute left-1/2 top-1/2 mr-8 hidden translate-x-[-50%] translate-y-[-50%] rounded-full bg-gray-300/0 px-3 py-[6px] backdrop-blur-md transition-all duration-300 lg:block",
             {
               "bg-gray-300/50 shadow-md dark:bg-gray-800/70": scrolled,
             }
@@ -121,7 +120,7 @@ export const Header = (props: HeaderProps) => {
         <div
           suppressHydrationWarning
           className={cn(
-            "hidden items-center space-x-4 transition-all duration-300 lg:flex",
+            "pointer-events-auto hidden items-center space-x-4 transition-all duration-300 lg:flex",
             {
               "translate-x-[10px] opacity-0": scrolled,
             }
@@ -198,7 +197,7 @@ const MobileNav = () => {
   };
 
   return (
-    <div className="lg:hidden">
+    <div className="pointer-events-auto lg:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="text" color="neutral" size="icon">

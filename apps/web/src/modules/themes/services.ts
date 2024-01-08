@@ -1,13 +1,79 @@
 import { prisma } from "@palettify/database";
 import { getSession } from "@/modules/auth/services";
 
-export const getThemeById = async (id: string) => {
+export const getThemeById = async (
+  id: string,
+  { palettes = false }: { palettes?: boolean }
+) => {
   const theme = await prisma.theme.findUnique({
     where: {
       id,
     },
+    include: {
+      palettes,
+    },
   });
   return theme;
+};
+
+export const getAllThemesWithMainColors = async () => {
+  const themes = await prisma.theme.findMany({
+    select: {
+      id: true,
+      defaultMode: true,
+      palettes: {
+        select: {
+          mode: true,
+          background: true,
+          foreground: true,
+          primary: true,
+          primaryForeground: true,
+          secondary: true,
+          secondaryForeground: true,
+          card: true,
+          cardForeground: true,
+          muted: true,
+          mutedForeground: true,
+          border: true,
+        },
+      },
+    },
+  });
+  return themes;
+};
+
+export const getUserThemes = async () => {
+  const session = await getSession();
+  if (!session) return [];
+
+  const themes = await prisma.theme.findMany({
+    where: {
+      user: {
+        id: session.user.id,
+      },
+    },
+    select: {
+      id: true,
+      defaultMode: true,
+      palettes: {
+        select: {
+          mode: true,
+          background: true,
+          foreground: true,
+          primary: true,
+          primaryForeground: true,
+          secondary: true,
+          secondaryForeground: true,
+          card: true,
+          cardForeground: true,
+          muted: true,
+          mutedForeground: true,
+          border: true,
+        },
+      },
+    },
+  });
+  return themes;
 };
 
 export const createTheme = async () => {

@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
+import { useTheme } from "next-themes";
 import { useForm } from "react-hook-form";
-import type { Theme } from "@palettify/database";
+import type { ThemeWithPalettes } from "@palettify/database";
 import { Form } from "@palettify/ui";
 
-const lightTheme = {
+const defaultLightPalette = {
   background: "#ffffff",
   foreground: "#000000",
   card: "#ffffff",
@@ -13,7 +14,7 @@ const lightTheme = {
   popover: "#ffffff",
   popoverForeground: "#09090b",
   primary: "#18181b",
-  primaryForeground: "#000000",
+  primaryForeground: "#ffffff",
   secondary: "#f4f4f5",
   secondaryForeground: "#18181b",
   muted: "#f4f4f5",
@@ -25,10 +26,9 @@ const lightTheme = {
   border: "#e4e4e7",
   input: "#d6c6e8",
   ring: "#a1a1aa",
-  radius: 0.5,
 };
 
-const darkTheme = {
+const defaultDarkPalette = {
   background: "#09090b",
   foreground: "#fafafa",
   card: "#09090b",
@@ -48,29 +48,41 @@ const darkTheme = {
   border: "#27272a",
   input: "#27272a",
   ring: "#d4d4d8",
-  radius: 0.5,
 };
+
+const defaultRadius = 0.5;
 
 interface FormProviderProps {
   children: React.ReactNode;
-  theme: Theme | null;
+  theme: ThemeWithPalettes;
 }
 
 export const FormProvider = (props: FormProviderProps) => {
   const { theme, children } = props;
 
+  const { setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const lightPalette =
+    theme?.palettes?.find((palette) => palette.mode === "light") ?? defaultLightPalette;
+  const darkPalette =
+    theme?.palettes?.find((palette) => palette.mode === "dark") ?? defaultDarkPalette;
+  const radius = theme?.radius ?? defaultRadius;
 
   const form = useForm({
     values: {
       library: "shadcn",
-      lightTheme: theme?.lightPalette ?? lightTheme,
-      darkTheme: theme?.darkPalette ?? darkTheme,
+      lightPalette,
+      darkPalette,
+      radius,
+      defaultMode: "light",
+      name: theme?.name ?? "",
     },
   });
 
   React.useEffect(() => {
+    setTheme(theme.defaultMode);
     setMounted(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!mounted) {

@@ -1,36 +1,8 @@
-import { TabsContent } from "@palettify/ui";
 import { ThemeCard } from "@/modules/themes/components/theme-card";
+import { getUserThemes } from "@/modules/themes/services";
 
-export default function Page() {
-  const themes = [
-    {
-      palette: {
-        background: "#fff",
-        foreground: "#000",
-        primary: "#4942E4",
-        secondary: "#fcba03",
-        card: "#3d3d54",
-      },
-    },
-    {
-      palette: {
-        background: "#f7f7f7",
-        foreground: "#333",
-        primary: "#009688",
-        secondary: "#ff5722",
-        card: "#c0c0c0",
-      },
-    },
-    {
-      palette: {
-        background: "linear-gradient(to bottom right, #e4e9ea 10%, #FFDEC1 80%)",
-        foreground: "#fff",
-        primary: "#4caf50",
-        secondary: "#2196f3",
-        card: "#2c2c2c",
-      },
-    },
-  ];
+export default async function Page() {
+  const trendingThemes = await getUserThemes();
 
   return (
     <div>
@@ -39,9 +11,47 @@ export default function Page() {
         Here you can find all the themes you created
       </p>
       <div className="xs:grid-cols-2 mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {themes.map((theme, index) => (
-          <ThemeCard key={index} palette={theme.palette} displayVote={false} />
-        ))}
+        {trendingThemes.map((theme, index) => {
+          if (theme.palettes.length === 0) return null;
+          const palette = theme.palettes.find(
+            (palette) => palette.mode === theme.defaultMode
+          );
+          if (
+            !palette ||
+            !palette.background ||
+            !palette.foreground ||
+            !palette.card ||
+            !palette.primary ||
+            !palette.secondary ||
+            !palette.muted ||
+            !palette.primaryForeground ||
+            !palette.secondaryForeground ||
+            !palette.mutedForeground ||
+            !palette.cardForeground ||
+            !palette.border
+          )
+            return null;
+
+          return (
+            <ThemeCard
+              key={index}
+              themeId={theme.id}
+              palette={{
+                background: palette.background,
+                foreground: palette.foreground,
+                card: palette.card,
+                cardForeground: palette.cardForeground,
+                primary: palette.primary,
+                primaryForeground: palette.primaryForeground,
+                secondary: palette.secondary,
+                secondaryForeground: palette.secondaryForeground,
+                muted: palette.muted,
+                mutedForeground: palette.mutedForeground,
+                border: palette.border,
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -32,57 +32,57 @@ export function CopyButton() {
 
   const variables = `@layer base {
     :root {
-      --background: ${formatColor(form.watch("lightTheme").background)};
-      --foreground: ${formatColor(form.watch("lightTheme").foreground)};
-      --card: ${formatColor(form.watch("lightTheme").card)};
-      --card-foreground: ${formatColor(form.watch("lightTheme").cardForeground)};
-      --popover: ${formatColor(form.watch("lightTheme").popover)};
-      --popover-foreground: ${formatColor(form.watch("lightTheme").popoverForeground)};
-      --primary: ${formatColor(form.watch("lightTheme").primary)};
-      --primary-foreground: ${formatColor(form.watch("lightTheme").primaryForeground)};
-      --secondary: ${formatColor(form.watch("lightTheme").secondary)};
+      --background: ${formatColor(form.watch("lightPalette").background)};
+      --foreground: ${formatColor(form.watch("lightPalette").foreground)};
+      --card: ${formatColor(form.watch("lightPalette").card)};
+      --card-foreground: ${formatColor(form.watch("lightPalette").cardForeground)};
+      --popover: ${formatColor(form.watch("lightPalette").popover)};
+      --popover-foreground: ${formatColor(form.watch("lightPalette").popoverForeground)};
+      --primary: ${formatColor(form.watch("lightPalette").primary)};
+      --primary-foreground: ${formatColor(form.watch("lightPalette").primaryForeground)};
+      --secondary: ${formatColor(form.watch("lightPalette").secondary)};
       --secondary-foreground: ${formatColor(
-        form.watch("lightTheme").secondaryForeground
+        form.watch("lightPalette").secondaryForeground
       )};
-      --muted: ${formatColor(form.watch("lightTheme").muted)};
-      --muted-foreground: ${formatColor(form.watch("lightTheme").mutedForeground)};
-      --accent: ${formatColor(form.watch("lightTheme").accent)};
-      --accent-foreground: ${formatColor(form.watch("lightTheme").accentForeground)};
-      --destructive: ${formatColor(form.watch("lightTheme").destructive)};
+      --muted: ${formatColor(form.watch("lightPalette").muted)};
+      --muted-foreground: ${formatColor(form.watch("lightPalette").mutedForeground)};
+      --accent: ${formatColor(form.watch("lightPalette").accent)};
+      --accent-foreground: ${formatColor(form.watch("lightPalette").accentForeground)};
+      --destructive: ${formatColor(form.watch("lightPalette").destructive)};
       --destructive-foreground: ${formatColor(
-        form.watch("lightTheme").destructiveForeground
+        form.watch("lightPalette").destructiveForeground
       )};
-      --border: ${formatColor(form.watch("lightTheme").border)};
-      --input: ${formatColor(form.watch("lightTheme").input)};
-      --ring: ${formatColor(form.watch("lightTheme").ring)};
-      --radius: ${form.watch("lightTheme").radius};
+      --border: ${formatColor(form.watch("lightPalette").border)};
+      --input: ${formatColor(form.watch("lightPalette").input)};
+      --ring: ${formatColor(form.watch("lightPalette").ring)};
+      --radius: ${form.watch("lightPalette").radius};
     }
   
     .dark {
-      --background: ${formatColor(form.watch("lightTheme").background)};
-      --foreground: ${formatColor(form.watch("lightTheme").foreground)};
-      --card: ${formatColor(form.watch("lightTheme").card)};
-      --card-foreground: ${formatColor(form.watch("lightTheme").cardForeground)};
-      --popover: ${formatColor(form.watch("lightTheme").popover)};
-      --popover-foreground: ${formatColor(form.watch("lightTheme").popoverForeground)};
-      --primary: ${formatColor(form.watch("lightTheme").primary)};
-      --primary-foreground: ${formatColor(form.watch("lightTheme").primaryForeground)};
-      --secondary: ${formatColor(form.watch("lightTheme").secondary)};
+      --background: ${formatColor(form.watch("darkPalette").background)};
+      --foreground: ${formatColor(form.watch("darkPalette").foreground)};
+      --card: ${formatColor(form.watch("darkPalette").card)};
+      --card-foreground: ${formatColor(form.watch("darkPalette").cardForeground)};
+      --popover: ${formatColor(form.watch("darkPalette").popover)};
+      --popover-foreground: ${formatColor(form.watch("darkPalette").popoverForeground)};
+      --primary: ${formatColor(form.watch("darkPalette").primary)};
+      --primary-foreground: ${formatColor(form.watch("darkPalette").primaryForeground)};
+      --secondary: ${formatColor(form.watch("darkPalette").secondary)};
       --secondary-foreground: ${formatColor(
-        form.watch("lightTheme").secondaryForeground
+        form.watch("darkPalette").secondaryForeground
       )};
-      --muted: ${formatColor(form.watch("lightTheme").muted)};
-      --muted-foreground: ${formatColor(form.watch("lightTheme").mutedForeground)};
-      --accent: ${formatColor(form.watch("lightTheme").accent)};
-      --accent-foreground: ${formatColor(form.watch("lightTheme").accentForeground)};
-      --destructive: ${formatColor(form.watch("lightTheme").destructive)};
+      --muted: ${formatColor(form.watch("darkPalette").muted)};
+      --muted-foreground: ${formatColor(form.watch("darkPalette").mutedForeground)};
+      --accent: ${formatColor(form.watch("darkPalette").accent)};
+      --accent-foreground: ${formatColor(form.watch("darkPalette").accentForeground)};
+      --destructive: ${formatColor(form.watch("darkPalette").destructive)};
       --destructive-foreground: ${formatColor(
-        form.watch("lightTheme").destructiveForeground
+        form.watch("darkPalette").destructiveForeground
       )};
-      --border: ${formatColor(form.watch("lightTheme").border)};
-      --input: ${formatColor(form.watch("lightTheme").input)};
-      --ring: ${formatColor(form.watch("lightTheme").ring)};
-      --radius: ${form.watch("lightTheme").radius};
+      --border: ${formatColor(form.watch("darkPalette").border)};
+      --input: ${formatColor(form.watch("darkPalette").input)};
+      --ring: ${formatColor(form.watch("darkPalette").ring)};
+      --radius: ${form.watch("darkPalette").radius};
     }
   }`;
 

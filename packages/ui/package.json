@@ -48,6 +48,7 @@
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
     "cmdk": "^0.2.0",
+    "embla-carousel-react": "^8.0.0-rc18",
     "lucide-react": "^0.292.0"
   },
   "devDependencies": {

@@ -3,7 +3,6 @@ import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
   MoreVerticalIcon,
 } from "@palettify/ui";
@@ -23,7 +22,7 @@ export const ThemeCardMenu = (props: ThemeCardMenuProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        {/* <DropdownMenuItem>Delete</DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

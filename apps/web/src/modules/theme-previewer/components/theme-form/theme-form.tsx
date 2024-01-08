@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useTransition } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useFormContext } from "react-hook-form";
+import { ThemeWithPalettes } from "@palettify/database";
 import {
   Button,
   FormControl,
@@ -15,6 +16,7 @@ import {
 } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { updateTheme } from "@/modules/themes/actions";
+import { CreateThemeModal } from "@/modules/themes/components/create-theme-modal";
 import { ColorInput } from "./color-input";
 import { CopyButton } from "./copy-button";
 import { LibrarySelect } from "./library-select";
@@ -22,16 +24,19 @@ import { ThemeSelect } from "./theme-select";
 
 interface FormProps {
   className?: string;
+  theme: ThemeWithPalettes;
 }
 
 export const ThemeForm = (props: FormProps) => {
-  const { className } = props;
+  const { theme: themeDB, className } = props;
 
+  const router = useRouter();
+  const form = useFormContext();
+  const [open, setOpen] = React.useState(false);
   const { themeId } = useParams();
   const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
-  const form = useFormContext();
   const { theme, setTheme } = useTheme();
+  const [isPending, startTransition] = useTransition();
 
   const mode = theme as "dark" | "light";
 
@@ -47,8 +52,11 @@ export const ThemeForm = (props: FormProps) => {
       if (typeof themeId === "string") {
         const result = await updateTheme({
           id: themeId,
-          lightPalette: values.lightTheme,
-          darkPalette: values.lightTheme,
+          name: values.name,
+          lightPalette: values.lightPalette,
+          darkPalette: values.darkPalette,
+          radius: values.radius,
+          defaultMode: values.defaultMode,
         });
         if (result?.error) {
           toast({ title: result?.error, variant: "destructive" });
@@ -57,18 +65,35 @@ export const ThemeForm = (props: FormProps) => {
           toast({
             title: "Your theme has been saved",
           });
+          router.refresh();
         }
+        setOpen(false);
       }
     });
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className={cn("", className)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
       <div>
-        <div className="mb-4 flex justify-end">
-          <Button loading={isPending} type="submit" color="primary">
-            Save changes
+        <div className="mb-4 flex justify-end space-x-2">
+          <Button
+            onClick={() => {
+              form.reset();
+            }}
+          >
+            Cancel
           </Button>
+          {themeDB.name ? (
+            <Button loading={isPending} type="submit" color="primary">
+              Save changes
+            </Button>
+          ) : (
+            <CreateThemeModal open={open} onOpenChange={setOpen}>
+              <Button loading={isPending} type="submit" color="primary">
+                Save changes
+              </Button>
+            </CreateThemeModal>
+          )}
         </div>
         <div className="flex flex-wrap justify-start gap-2">
           <LibrarySelect
@@ -92,7 +117,7 @@ export const ThemeForm = (props: FormProps) => {
                       <span>{field.label}</span>
                       <FormField
                         control={form.control}
-                        name={`lightTheme.${field.name}` as any}
+                        name={`lightPalette.${field.name}` as any}
                         render={({ field }) => {
                           return (
                             <FormItem>
@@ -121,7 +146,7 @@ export const ThemeForm = (props: FormProps) => {
                       <span>{field.label}</span>
                       <FormField
                         control={form.control}
-                        name={`darkTheme.${field.name}` as any}
+                        name={`darkPalette.${field.name}` as any}
                         render={({ field }) => {
                           return (
                             <FormItem>
@@ -145,36 +170,19 @@ export const ThemeForm = (props: FormProps) => {
         })}
         <div className="mt-4 rounded-md border p-4">
           <Label>Radius</Label>
-          {mode === "light" && (
-            <FormField
-              control={form.control}
-              name="lightTheme.radius"
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                );
-              }}
-            />
-          )}
-          {mode === "dark" && (
-            <FormField
-              control={form.control}
-              name="darkTheme.radius"
-              render={({ field }) => {
-                return (
-                  <FormItem className="mt-2">
-                    <FormControl>
-                      <Input type="number" {...field} />
-                    </FormControl>
-                  </FormItem>
-                );
-              }}
-            />
-          )}
+          <FormField
+            control={form.control}
+            name="lightTheme.radius"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              );
+            }}
+          />
         </div>
       </div>
     </form>

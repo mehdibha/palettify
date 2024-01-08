@@ -13,11 +13,12 @@ export function DynamicThemeWrapper(props: ThemeWrapperProps) {
   const { children } = props;
 
   const form = useFormContext();
-
   const { theme } = useTheme();
-  const darkTheme = form.watch("darkTheme");
-  const lightTheme = form.watch("lightTheme");
-  const resolvedTheme = theme === "dark" ? darkTheme : lightTheme;
+
+  const lightPalette = form.watch("lightPalette");
+  const darkPalette = form.watch("darkPalette");
+  const resolvedPalette = theme === "dark" ? darkPalette : lightPalette;
+  const radius = form.watch("radius");
 
   const formatColor = React.useMemo(
     () => (color: string) => {
@@ -33,75 +34,55 @@ export function DynamicThemeWrapper(props: ThemeWrapperProps) {
     <div className="preview-mode dark:preview-mode">
       <style jsx global>{`
         .preview-mode {
-          --background: ${formatColor(resolvedTheme.background)};
-          --foreground: ${formatColor(resolvedTheme.foreground)};
-          --card: ${formatColor(resolvedTheme.card)};
-          --card-foreground: ${formatColor(resolvedTheme.cardForeground)};
-          --popover: ${formatColor(resolvedTheme.popover)};
-          --popover-foreground: ${formatColor(resolvedTheme.popoverForeground)};
-          --primary: ${formatColor(resolvedTheme.primary)};
-          --primary-foreground: ${formatColor(resolvedTheme.primaryForeground)};
-          --secondary: ${formatColor(resolvedTheme.secondary)};
-          --secondary-foreground: ${formatColor(resolvedTheme.secondaryForeground)};
-          --muted: ${formatColor(resolvedTheme.muted)};
-          --muted-foreground: ${formatColor(resolvedTheme.mutedForeground)};
-          --accent: ${formatColor(resolvedTheme.accent)};
-          --accent-foreground: ${formatColor(resolvedTheme.accentForeground)};
-          --destructive: ${formatColor(resolvedTheme.destructive)};
-          --destructive-foreground: ${formatColor(resolvedTheme.destructiveForeground)};
-          --success: ${formatColor(resolvedTheme.success)};
-          --success-foreground: ${formatColor(resolvedTheme.successForeground)};
-          --border: ${formatColor(resolvedTheme.border)};
-          --input: ${formatColor(resolvedTheme.input)};
-          --ring: ${formatColor(resolvedTheme.ring)};
+          --background: ${formatColor(resolvedPalette.background)};
+          --foreground: ${formatColor(resolvedPalette.foreground)};
+          --card: ${formatColor(resolvedPalette.card)};
+          --card-foreground: ${formatColor(resolvedPalette.cardForeground)};
+          --popover: ${formatColor(resolvedPalette.popover)};
+          --popover-foreground: ${formatColor(resolvedPalette.popoverForeground)};
+          --primary: ${formatColor(resolvedPalette.primary)};
+          --primary-foreground: ${formatColor(resolvedPalette.primaryForeground)};
+          --secondary: ${formatColor(resolvedPalette.secondary)};
+          --secondary-foreground: ${formatColor(resolvedPalette.secondaryForeground)};
+          --muted: ${formatColor(resolvedPalette.muted)};
+          --muted-foreground: ${formatColor(resolvedPalette.mutedForeground)};
+          --accent: ${formatColor(resolvedPalette.accent)};
+          --accent-foreground: ${formatColor(resolvedPalette.accentForeground)};
+          --destructive: ${formatColor(resolvedPalette.destructive)};
+          --destructive-foreground: ${formatColor(resolvedPalette.destructiveForeground)};
+          --success: ${formatColor(resolvedPalette.success)};
+          --success-foreground: ${formatColor(resolvedPalette.successForeground)};
+          --border: ${formatColor(resolvedPalette.border)};
+          --input: ${formatColor(resolvedPalette.input)};
+          --ring: ${formatColor(resolvedPalette.ring)};
+          --radius: ${radius}rem;
         }
         .preview-mode.dark {
-          --background: ${formatColor(resolvedTheme.background)};
-          --foreground: ${formatColor(resolvedTheme.foreground)};
-          --card: ${formatColor(resolvedTheme.card)};
-          --card-foreground: ${formatColor(resolvedTheme.cardForeground)};
-          --popover: ${formatColor(resolvedTheme.popover)};
-          --popover-foreground: ${formatColor(resolvedTheme.popoverForeground)};
-          --primary: ${formatColor(resolvedTheme.primary)};
-          --primary-foreground: ${formatColor(resolvedTheme.primaryForeground)};
-          --secondary: ${formatColor(resolvedTheme.secondary)};
-          --secondary-foreground: ${formatColor(resolvedTheme.secondaryForeground)};
-          --muted: ${formatColor(resolvedTheme.muted)};
-          --muted-foreground: ${formatColor(resolvedTheme.mutedForeground)};
-          --accent: ${formatColor(resolvedTheme.accent)};
-          --accent-foreground: ${formatColor(resolvedTheme.accentForeground)};
-          --destructive: ${formatColor(resolvedTheme.destructive)};
-          --destructive-foreground: ${formatColor(resolvedTheme.destructiveForeground)};
-          --success: ${formatColor(resolvedTheme.success)};
-          --success-foreground: ${formatColor(resolvedTheme.successForeground)};
-          --border: ${formatColor(resolvedTheme.border)};
-          --input: ${formatColor(resolvedTheme.input)};
-          --ring: ${formatColor(resolvedTheme.ring)};
+          --background: ${formatColor(resolvedPalette.background)};
+          --foreground: ${formatColor(resolvedPalette.foreground)};
+          --card: ${formatColor(resolvedPalette.card)};
+          --card-foreground: ${formatColor(resolvedPalette.cardForeground)};
+          --popover: ${formatColor(resolvedPalette.popover)};
+          --popover-foreground: ${formatColor(resolvedPalette.popoverForeground)};
+          --primary: ${formatColor(resolvedPalette.primary)};
+          --primary-foreground: ${formatColor(resolvedPalette.primaryForeground)};
+          --secondary: ${formatColor(resolvedPalette.secondary)};
+          --secondary-foreground: ${formatColor(resolvedPalette.secondaryForeground)};
+          --muted: ${formatColor(resolvedPalette.muted)};
+          --muted-foreground: ${formatColor(resolvedPalette.mutedForeground)};
+          --accent: ${formatColor(resolvedPalette.accent)};
+          --accent-foreground: ${formatColor(resolvedPalette.accentForeground)};
+          --destructive: ${formatColor(resolvedPalette.destructive)};
+          --destructive-foreground: ${formatColor(resolvedPalette.destructiveForeground)};
+          --success: ${formatColor(resolvedPalette.success)};
+          --success-foreground: ${formatColor(resolvedPalette.successForeground)};
+          --border: ${formatColor(resolvedPalette.border)};
+          --input: ${formatColor(resolvedPalette.input)};
+          --ring: ${formatColor(resolvedPalette.ring)};
+          --radius: ${radius}rem;
         }
       `}</style>
       <div className="text-foreground bg-background">{children}</div>
     </div>
   );
 }
-
-// --background: ${resolvedTheme.background};
-//           --foreground: ${resolvedTheme.foreground};
-//           --card: ${resolvedTheme.card};
-//           --card-foreground: ${resolvedTheme.cardForeground};
-//           --popover: ${resolvedTheme.popover};
-//           --popover-foreground: ${resolvedTheme.popoverForeground};
-//           --primary: ${resolvedTheme.primary};
-//           --primary-foreground: ${resolvedTheme.primaryForeground};
-//           --secondary: ${resolvedTheme.secondary};
-//           --secondary-foreground: ${resolvedTheme.secondaryForeground};
-//           --muted: ${resolvedTheme.muted};
-//           --muted-foreground: ${resolvedTheme.mutedForeground};
-//           --accent: ${resolvedTheme.accent};
-//           --accent-foreground: ${resolvedTheme.accentForeground};
-//           --destructive: ${resolvedTheme.destructive};
-//           --destructive-foreground: ${resolvedTheme.destructiveForeground};
-//           --success: ${resolvedTheme.success};
-//           --success-foreground: ${resolvedTheme.successForeground};
-//           --border: ${resolvedTheme.border};
-//           --input: ${resolvedTheme.input};
-//           --ring: ${resolvedTheme.ring};

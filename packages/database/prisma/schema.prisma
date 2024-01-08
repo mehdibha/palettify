@@ -77,15 +77,45 @@ model Customer {
 }
 
 model Theme {
-  id           String   @id @default(cuid())
-  name         String?
-  slug         String?  @unique
-  tags         String[]
-  darkPalette  Json?    @map(name: "dark_palette")
-  lightPalette Json?    @map(name: "light_palette")
-  radius       Float?
-  user         User?    @relation(fields: [userId], references: [id])
-  userId       String?
+  id          String      @id @default(cuid())
+  name        String?
+  slug        String?     @unique
+  tags        String[]
+  defaultMode PaletteMode @default(light)
+
+  palettes Palette[]
+  radius   Float?
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model Palette {
+  id                    String      @id @default(cuid())
+  mode                  PaletteMode
+  background            String?
+  foreground            String?
+  card                  String?
+  cardForeground        String?     @map(name: "card_foreground")
+  popover               String?
+  popoverForeground     String?     @map(name: "popover_foreground")
+  primary               String?
+  primaryForeground     String?     @map(name: "primary_foreground")
+  secondary             String?
+  secondaryForeground   String?     @map(name: "secondary_foreground")
+  muted                 String?
+  mutedForeground       String?     @map(name: "muted_foreground")
+  accent                String?
+  accentForeground      String?     @map(name: "accent_foreground")
+  destructive           String?
+  destructiveForeground String?     @map(name: "destructive_foreground")
+  success               String?
+  successForeground     String?     @map(name: "success_foreground")
+  border                String?
+  input                 String?
+  ring                  String?
+  theme                 Theme?      @relation(fields: [themeId], references: [id])
+  themeId               String?
 }
 
 model Product {
