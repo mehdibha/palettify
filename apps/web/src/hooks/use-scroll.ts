@@ -1,12 +1,13 @@
 import React from "react";
 
 export const useScroll = (threshold: number = 0) => {
-  const [scrolled, setScrolled] = React.useState(
-    typeof window !== "undefined" ? window.scrollY > threshold : false
-  );
+  const [scrolled, setScrolled] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     // Function to handle scroll events
+    setMounted(true);
+    setScrolled(window.scrollY > threshold);
     function handleScroll() {
       // Check if the user has scrolled beyond the top of the page (scrollY > 0)
       setScrolled(window.scrollY > threshold);
@@ -22,5 +23,5 @@ export const useScroll = (threshold: number = 0) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array, so this effect runs only once
 
-  return { scrolled };
+  return { scrolled, mounted };
 };

@@ -38,8 +38,9 @@ export const Banner = () => {
       </div>
       <p className="text-sm leading-6">
         <span className="mr-2">
-          <strong className="font-semibold">palettify •</strong> We are going live soon!
-          Get notified when launched.
+          <strong className="font-semibold">Palettify •</strong> Warning This app is a
+          work in progress. I&apos;m building this in public. You can follow the progress
+          on Twitter @mehdibha_. See the roadmap below.
         </span>
         <CollectEmailsModal>
           <Button size="sm" color="primary">

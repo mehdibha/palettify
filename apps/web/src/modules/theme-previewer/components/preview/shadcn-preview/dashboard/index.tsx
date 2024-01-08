@@ -41,6 +41,7 @@ export function DashboardPage() {
           <div className="flex items-center space-x-2">
             <CalendarDateRangePicker />
             <Button>Download</Button>
+            <Button variant="secondary">Export</Button>
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">

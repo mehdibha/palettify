@@ -1,41 +1,101 @@
 "use client";
 
-import React from "react";
+import React, { useTransition } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { HslColor } from "react-colorful";
 import { useFormContext } from "react-hook-form";
-import { Button, CopyIcon, FormControl, FormField, FormItem } from "@palettify/ui";
+import { ThemeWithPalettes } from "@palettify/database";
+import {
+  Button,
+  FormControl,
+  FormField,
+  FormItem,
+  Input,
+  Label,
+  useToast,
+} from "@palettify/ui";
 import { cn } from "@palettify/utils";
+import { updateTheme } from "@/modules/themes/actions";
+import { CreateThemeModal } from "@/modules/themes/components/create-theme-modal";
 import { ColorInput } from "./color-input";
-import CopyButton from "./copy-button";
+import { CopyButton } from "./copy-button";
 import { LibrarySelect } from "./library-select";
 import { ThemeSelect } from "./theme-select";
 
 interface FormProps {
   className?: string;
+  theme: ThemeWithPalettes;
 }
 
-export const UpdateSiteAppearance = (props: FormProps) => {
-  const { className } = props;
+export const ThemeForm = (props: FormProps) => {
+  const { theme: themeDB, className } = props;
 
+  const router = useRouter();
   const form = useFormContext();
-
+  const [open, setOpen] = React.useState(false);
+  const { themeId } = useParams();
+  const { toast } = useToast();
   const { theme, setTheme } = useTheme();
+  const [isPending, startTransition] = useTransition();
+
   const mode = theme as "dark" | "light";
+
   const handleChangeTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
   const handleChangeLibrary = (library: "shadcn" | "mui") => {
     form.setValue("library", library);
   };
 
-  async function onSubmit(values: any) {}
+  async function onSubmit(values: any) {
+    startTransition(async () => {
+      if (typeof themeId === "string") {
+        const result = await updateTheme({
+          id: themeId,
+          name: values.name,
+          lightPalette: values.lightPalette,
+          darkPalette: values.darkPalette,
+          radius: values.radius,
+          defaultMode: values.defaultMode,
+        });
+        if (result?.error) {
+          toast({ title: result?.error, variant: "destructive" });
+        }
+        if (result.success) {
+          toast({
+            title: "Your theme has been saved",
+          });
+          router.refresh();
+        }
+        setOpen(false);
+      }
+    });
+  }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className={cn("", className)}>
-      <div className="">
-        <div className="flex space-x-2">
+    <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
+      <div>
+        <div className="mb-4 flex justify-end space-x-2">
+          <Button
+            onClick={() => {
+              form.reset();
+            }}
+          >
+            Cancel
+          </Button>
+          {themeDB.name ? (
+            <Button loading={isPending} type="submit" color="primary">
+              Save changes
+            </Button>
+          ) : (
+            <CreateThemeModal open={open} onOpenChange={setOpen}>
+              <Button loading={isPending} type="submit" color="primary">
+                Save changes
+              </Button>
+            </CreateThemeModal>
+          )}
+        </div>
+        <div className="flex flex-wrap justify-start gap-2">
           <LibrarySelect
             selectedLibrary={form.watch("library")}
             onChange={handleChangeLibrary}
@@ -57,24 +117,15 @@ export const UpdateSiteAppearance = (props: FormProps) => {
                       <span>{field.label}</span>
                       <FormField
                         control={form.control}
-                        name={`lightTheme.${field.name}` as any}
+                        name={`lightPalette.${field.name}` as any}
                         render={({ field }) => {
-                          const values = field.value.split(" ");
-
-                          const h = parseInt(values[0], 10);
-                          const s = parseInt(values[1], 10);
-                          const l = parseInt(values[2], 10);
-
-                          const color: HslColor = { h, s, l };
                           return (
                             <FormItem>
                               <FormControl>
                                 <ColorInput
-                                  color={color}
-                                  onChange={(newColor: HslColor) => {
-                                    field.onChange(
-                                      `${newColor.h} ${newColor.s}% ${newColor.l}%`
-                                    );
+                                  color={field.value}
+                                  onChange={(newColor: string) => {
+                                    field.onChange(newColor);
                                   }}
                                 />
                               </FormControl>
@@ -95,24 +146,15 @@ export const UpdateSiteAppearance = (props: FormProps) => {
                       <span>{field.label}</span>
                       <FormField
                         control={form.control}
-                        name={`darkTheme.${field.name}` as any}
+                        name={`darkPalette.${field.name}` as any}
                         render={({ field }) => {
-                          const values = field.value.split(" ");
-
-                          const h = parseInt(values[0], 10);
-                          const s = parseInt(values[1], 10);
-                          const l = parseInt(values[2], 10);
-
-                          const color: HslColor = { h, s, l };
                           return (
                             <FormItem>
                               <FormControl>
                                 <ColorInput
-                                  color={color}
-                                  onChange={(newColor: HslColor) => {
-                                    field.onChange(
-                                      `${newColor.h} ${newColor.s}% ${newColor.l}%`
-                                    );
+                                  color={field.value}
+                                  onChange={(newColor: string) => {
+                                    field.onChange(newColor);
                                   }}
                                 />
                               </FormControl>
@@ -126,6 +168,22 @@ export const UpdateSiteAppearance = (props: FormProps) => {
             </ColorContainer>
           );
         })}
+        <div className="mt-4 rounded-md border p-4">
+          <Label>Radius</Label>
+          <FormField
+            control={form.control}
+            name="lightTheme.radius"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              );
+            }}
+          />
+        </div>
       </div>
     </form>
   );
@@ -277,15 +335,6 @@ const themeForm = {
       {
         label: "Background",
         name: "ring",
-      },
-    ],
-  },
-  radius: {
-    label: "Radius",
-    fields: [
-      {
-        label: "Background",
-        name: "radius",
       },
     ],
   },

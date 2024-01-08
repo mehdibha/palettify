@@ -41,10 +41,10 @@ export const siteConfig = {
         label: "Playground",
         href: "/playground",
       },
-      // secondary: {
-      //   label: "Sign in",
-      //   href: "/login",
-      // },
+      secondary: {
+        label: "Sign in",
+        href: "/login",
+      },
     },
   },
   footer: {

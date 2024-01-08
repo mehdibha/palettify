@@ -19,7 +19,7 @@ const buttonVariants = cva(
         md: "px-4 py-2 min-h-[36px]",
         lg: "px-8 py-3 min-h-[50px]",
         icon: "h-10 w-10 min-w-0",
-        "icon-sm": "h-8 w-8 min-w-0",
+        "icon-sm": "h-7 w-7 min-w-0",
       },
       color: {
         primary: "",
@@ -80,7 +80,7 @@ const buttonVariants = cva(
       {
         variant: "text",
         color: "neutral",
-        className: "hover:bg-accent/50 text-accent-foreground",
+        className: "hover:bg-accent/50 hover:text-accent-foreground",
       },
     ],
     defaultVariants: {

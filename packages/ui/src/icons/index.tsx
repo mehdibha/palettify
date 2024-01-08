@@ -48,4 +48,6 @@ export {
   BadgeCheck as BadgeCheckIcon,
   ArrowBigUp as ArrowBigUpIcon,
   ArrowBigDown as ArrowBigDownIcon,
+  MoreVertical as MoreVerticalIcon,
+  Heart as HeartIcon,
 } from "lucide-react";

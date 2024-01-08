@@ -1,7 +1,7 @@
-import { UpdateSiteAppearance } from "@/modules/theme-previewer/components/theme-form";
+import { redirect } from "next/navigation";
+import { createTheme } from "@/modules/themes/services";
 
-function PalettesPage() {
-  return <UpdateSiteAppearance />;
+export default async function Page() {
+  const theme = await createTheme();
+  redirect(`/playground/${theme.id}`);
 }
-
-export default PalettesPage;

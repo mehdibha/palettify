@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="text-lg text-stone-500 dark:text-stone-400">
         This page does not exist, or you do not have permission to view it
       </p>
-      <Button href="/" className="mt-4">
+      <Button href="/" color="primary" className="mt-4">
         Back to Home page
       </Button>
     </div>
