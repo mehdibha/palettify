@@ -77,11 +77,11 @@ model Customer {
 }
 
 model Theme {
-  id          String      @id @default(cuid())
+  id          String       @id @default(cuid())
   name        String?
-  slug        String?     @unique
+  slug        String?      @unique
   tags        String[]
-  defaultMode PaletteMode @default(light)
+  defaultMode PaletteMode?
 
   palettes Palette[]
   radius   Float?

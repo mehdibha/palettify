@@ -74,13 +74,15 @@ export const FormProvider = (props: FormProviderProps) => {
       lightPalette,
       darkPalette,
       radius,
-      defaultMode: "light",
-      name: theme?.name ?? "",
+      defaultMode: theme.defaultMode,
+      name: theme.name ?? "",
     },
   });
 
   React.useEffect(() => {
-    setTheme(theme.defaultMode);
+    if (theme.defaultMode) {
+      setTheme(theme.defaultMode);
+    }
     setMounted(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

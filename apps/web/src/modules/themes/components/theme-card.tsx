@@ -31,10 +31,10 @@ interface Palette {
   foreground: string;
   primary: string;
   primaryForeground: string;
-  secondary: string | null;
+  secondary: string;
   secondaryForeground: string;
   card: string;
-  cardForeground?: string;
+  cardForeground: string;
   muted: string;
   mutedForeground: string;
   border: string;
@@ -43,12 +43,13 @@ interface Palette {
 interface ThemeCardProps {
   themeId: string;
   palette: Palette;
+  view?: "website" | "placeholder" | "palette";
 }
 
 export const ThemeCard = (props: ThemeCardProps) => {
-  const { themeId, palette } = props;
+  const { themeId, palette, view = "website" } = props;
 
-  const { background, primary, secondary, card } = palette;
+  const { background, foreground, primary, secondary, card } = palette;
 
   const [liked, setLike] = React.useState<boolean>(false);
   const { toast } = useToast();
@@ -59,7 +60,7 @@ export const ThemeCard = (props: ThemeCardProps) => {
   };
 
   return (
-    <div className="group/card bg-card/20 hover:bg-card/70 rounded-lg p-2 pt-1 shadow-sm duration-150 hover:shadow-md">
+    <div className="group/card hover:bg-card/70 rounded-lg p-2 pt-1 duration-150 hover:shadow">
       <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
         <Link
           href={`/playground/${themeId}`}
@@ -90,7 +91,16 @@ export const ThemeCard = (props: ThemeCardProps) => {
         </a>
         <ThemeCardMenu />
       </div>
-      <WebsitePreview palette={palette} />
+      {(view === "website" || view === "placeholder") && (
+        <ScrollArea
+          className="h-[300px] w-full rounded border text-[6px] shadow"
+          type="always"
+          style={{ background: background, color: foreground }}
+        >
+          {view === "website" && <WebsitePreview palette={palette} />}
+          {view === "placeholder" && <PlaceholderPreview palette={palette} />}
+        </ScrollArea>
+      )}
       <div className="mt-2 flex w-full space-x-2">
         {[
           { label: "Background", value: background },
@@ -157,11 +167,7 @@ export const WebsitePreview = (props: WebsitePreviewProps) => {
   } = palette;
 
   return (
-    <ScrollArea
-      className={cn("h-[300px] w-full rounded border text-[6px] shadow", className)}
-      type="always"
-      style={{ background: background, color: foreground }}
-    >
+    <>
       {/* Navbar */}
       <div className="flex items-center justify-between px-4 py-2">
         <div className="font-bold">Acme</div>
@@ -399,14 +405,118 @@ export const WebsitePreview = (props: WebsitePreviewProps) => {
           <CodepenIcon size={7} />
         </div>
       </div>
-    </ScrollArea>
+    </>
   );
 };
 
-interface ButtonProps {
-  children: React.ReactNode;
-}
+export const PlaceholderPreview = (props: WebsitePreviewProps) => {
+  const { palette, className } = props;
+  const {
+    background,
+    foreground,
+    primary,
+    primaryForeground,
+    secondary,
+    secondaryForeground,
+    card,
+    cardForeground,
+    mutedForeground,
+    border,
+  } = palette;
 
-const Button = (props: ButtonProps) => {
-  return <button className="h-2 w-6 rounded" {...props} />;
+  return (
+    <>
+      {/* Navbar */}
+      <div className="flex justify-between px-4 py-2">
+        <div className="w-6">
+          <div className="h-2 w-4 rounded bg-black" style={{ background: foreground }} />
+        </div>
+        <div className="flex items-center space-x-1">
+          <div className="h-2 w-4 rounded-full" style={{ background: foreground }} />
+          <div className="h-2 w-4 rounded-full" style={{ background: foreground }} />
+          <div className="h-2 w-4 rounded-full" style={{ background: foreground }} />
+        </div>
+        <div className="h-2 w-6 rounded" style={{ background: primary }} />
+      </div>
+      {/* main */}
+      <div className="mx-auto px-4 pb-6">
+        {/* Hero */}
+        <div className="flex flex-col items-center pt-8">
+          <div className="h-2 w-[120px] rounded" style={{ background: foreground }} />
+          <div className="mt-1 h-2 w-[60px] rounded" style={{ background: foreground }} />
+          {/* CTA */}
+          <div className="mt-4 flex justify-center space-x-2">
+            <div className="h-3 w-8 rounded" style={{ background: primary }} />
+            <div className="h-3 w-8 rounded" style={{ background: secondary }} />
+          </div>
+        </div>
+        {/* trusted by */}
+        <div className="mt-6 flex flex-col items-center">
+          <div className="h-1 w-[40px] rounded" style={{ background: foreground }} />
+          <div className="mt-1 flex justify-center space-x-1">
+            {Array(5)
+              .fill(null)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="h-2 w-4 rounded-full"
+                  style={{ background: foreground }}
+                />
+              ))}
+          </div>
+        </div>
+        {/* features */}
+        <div className="mt-4 flex flex-col items-center">
+          <div className="mt-1 h-2 w-[40px] rounded" style={{ background: foreground }} />
+          <div className="mt-2 grid w-full grid-cols-3 gap-2">
+            {Array(6)
+              .fill(null)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="h-5 rounded shadow"
+                  style={{ background: card }}
+                />
+              ))}
+          </div>
+        </div>
+        {/* testimonials */}
+        <div className="mt-4 flex flex-col items-center">
+          <div className="mt-1 h-2 w-[70px] rounded" style={{ background: foreground }} />
+          <div className="mt-2 grid w-full grid-cols-4 gap-2">
+            {Array(4)
+              .fill(null)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="h-8 rounded shadow"
+                  style={{ background: card }}
+                />
+              ))}
+          </div>
+        </div>
+        {/* CTA */}
+        <div className="mt-8 flex flex-col items-center">
+          <div className="h-3 w-[50px] rounded-full" style={{ background: foreground }} />
+          <div className="mt-1 h-2 w-[70px] rounded" style={{ background: foreground }} />
+          <div className="mt-2 h-3 w-8 rounded" style={{ background: primary }} />
+        </div>
+      </div>
+      {/* footer */}
+      <div className="flex justify-between border-t px-2 py-2">
+        <div className="h-2 w-[70px] rounded" style={{ background: foreground }} />
+        <div className="flex items-center space-x-1">
+          {Array(5)
+            .fill(null)
+            .map((_, i) => (
+              <div
+                key={i}
+                className="h-2 w-2 rounded-[3px]"
+                style={{ background: foreground }}
+              />
+            ))}
+        </div>
+      </div>
+    </>
+  );
 };
