@@ -72,9 +72,16 @@ If you want to clone the project and use palettify as your starter project
 
 - [x] Site structure
 - [x] Home page
-- [ ] Playground page
-- [ ] Themes page
-- [ ] User management
+- [x] Playground page
+- [x] Themes page
+- [x] User management
+- [ ] Saved themes
+- [ ] Account page
+- [ ] Landing view in preview
+- [ ] Integrate gradients
+- [ ] Add fonts to theme model
+- [ ] MUI integration
+- [ ] Optimization
 
 <!-- CONTRIBUTING -->
 
