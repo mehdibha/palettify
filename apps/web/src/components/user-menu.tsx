@@ -14,19 +14,17 @@ import {
   LogOutIcon,
 } from "@palettify/ui";
 import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
+import { getSession } from "@/modules/auth/services";
 
-interface UserMenuProps {
-  user: {
-    id: string;
-    name?: string;
-    username?: string;
-    email: string;
-    image: string;
-  };
-}
+interface UserMenuProps {}
 
-export const UserMenu = (props: UserMenuProps) => {
-  const { user } = props;
+export const UserMenu = async (_: UserMenuProps) => {
+  const session = await getSession();
+  const user = session?.user;
+
+  if (!user) {
+    return null;
+  }
 
   const displayedName = user?.name ?? user?.username ?? null;
 

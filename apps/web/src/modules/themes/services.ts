@@ -16,8 +16,11 @@ export const getThemeById = async (
   return theme;
 };
 
-export const getAllThemesWithMainColors = async () => {
+export const getTrendingThemes = async () => {
   const themes = await prisma.theme.findMany({
+    where: {
+      userId: "clqzcfga3000014myn9agr9w8",
+    },
     select: {
       id: true,
       defaultMode: true,
