@@ -2,11 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@palettify/ui";
 
 interface ProfileAvatarProps {
   user?: {
-    id: string;
-    name?: string;
-    username?: string;
-    email: string;
-    image: string;
+    name?: string | null;
+    username?: string | null;
+    email?: string | null;
+    image?: string | null;
   } | null;
 }
 
@@ -17,7 +16,10 @@ export function ProfileAvatar(props: ProfileAvatarProps) {
 
   return (
     <Avatar className="h-8 w-8">
-      <AvatarImage src={user?.image} alt={user?.name ?? user?.username ?? ""} />
+      <AvatarImage
+        src={user?.image ?? undefined}
+        alt={user?.name ?? user?.username ?? ""}
+      />
       <AvatarFallback className="uppercase">{initials}</AvatarFallback>
     </Avatar>
   );

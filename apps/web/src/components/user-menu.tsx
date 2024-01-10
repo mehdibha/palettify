@@ -19,11 +19,10 @@ import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
 
 interface UserMenuProps {
   user: {
-    id: string;
-    name?: string;
-    username?: string;
-    email: string;
-    image: string;
+    name?: string | null;
+    username?: string | null;
+    email?: string | null;
+    image?: string | null;
   };
 }
 

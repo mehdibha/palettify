@@ -5,10 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useAnimate } from "framer-motion";
+import { useSession } from "next-auth/react";
 import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { siteConfig } from "@/config";
+import { UserMenu } from "../user-menu";
 
 const config = siteConfig.header;
 
@@ -20,6 +22,7 @@ interface HeaderProps {
 export const Header = (props: HeaderProps) => {
   const { children, cta } = props;
 
+  const { data, status } = useSession();
   const { scrolled } = useScroll();
   const [refLogo, animate] = useAnimate();
   const [refCTA] = useAnimate();
@@ -120,12 +123,16 @@ export const Header = (props: HeaderProps) => {
           )}
         >
           <div className="flex items-center space-x-2">
-            {cta}
+            {status === "unauthenticated" && (
+              <Button href={config.cta.secondary.href} variant="text" size="sm">
+                {config.cta.secondary.label}
+              </Button>
+            )}
             <Button href={config.cta.primary.href} color="primary" size="sm">
               {config.cta.primary.label}
             </Button>
           </div>
-          {children}
+          {status === "authenticated" && data.user && <UserMenu user={data.user} />}
         </div>
         <MobileNav />
       </div>

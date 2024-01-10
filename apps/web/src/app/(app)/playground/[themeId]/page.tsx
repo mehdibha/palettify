@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { ThemeForm } from "@/modules/theme-previewer/components/theme-form";
 import { getThemeById } from "@/modules/themes/services";
 import { FormProvider } from "./form-provider";
