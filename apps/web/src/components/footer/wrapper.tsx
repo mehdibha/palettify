@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 export const Wrapper = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
 
-  if (pathname === "/playground") {
+  if (pathname.slice(0, 11) === "/playground") {
     return null;
   } else return children;
 };

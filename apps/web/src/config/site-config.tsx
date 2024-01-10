@@ -137,7 +137,7 @@ export const siteConfig = {
       headline: "Proudly **open source**",
       subheadline: "palettify is open source and available on GitHub",
       cta: {
-        label: "GitHub Repo",
+        label: "Star on GitHub",
         href: "https://github.com/mehdibha/palettify",
       },
     },

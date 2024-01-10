@@ -14,7 +14,6 @@ import {
   Label,
   useToast,
 } from "@palettify/ui";
-import { cn } from "@palettify/utils";
 import { updateTheme } from "@/modules/themes/actions";
 import { CreateThemeModal } from "@/modules/themes/components/create-theme-modal";
 import { ColorInput } from "./color-input";
@@ -24,7 +23,7 @@ import { ThemeSelect } from "./theme-select";
 
 interface FormProps {
   className?: string;
-  theme: ThemeWithPalettes;
+  theme?: ThemeWithPalettes;
 }
 
 export const ThemeForm = (props: FormProps) => {
@@ -83,17 +82,18 @@ export const ThemeForm = (props: FormProps) => {
           >
             Cancel
           </Button>
-          {themeDB.name ? (
-            <Button loading={isPending} type="submit" color="primary">
-              Save changes
-            </Button>
-          ) : (
-            <CreateThemeModal open={open} onOpenChange={setOpen}>
+          {themeDB &&
+            (themeDB.name ? (
               <Button loading={isPending} type="submit" color="primary">
                 Save changes
               </Button>
-            </CreateThemeModal>
-          )}
+            ) : (
+              <CreateThemeModal open={open} onOpenChange={setOpen}>
+                <Button loading={isPending} type="submit" color="primary">
+                  Save changes
+                </Button>
+              </CreateThemeModal>
+            ))}
         </div>
         <div className="flex flex-wrap justify-start gap-2">
           <LibrarySelect
@@ -172,7 +172,7 @@ export const ThemeForm = (props: FormProps) => {
           <Label>Radius</Label>
           <FormField
             control={form.control}
-            name="lightTheme.radius"
+            name="radius"
             render={({ field }) => {
               return (
                 <FormItem>

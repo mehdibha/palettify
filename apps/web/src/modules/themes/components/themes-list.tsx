@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Tabs, TabsList, TabsTrigger } from "@palettify/ui";
+import { Label, Tabs, TabsList, TabsTrigger } from "@palettify/ui";
 import { ThemeCard } from "./theme-card";
 
 interface ThemesListProps {
@@ -17,19 +17,21 @@ export const ThemesList = (props: ThemesListProps) => {
 
   return (
     <div className={className}>
-      <Tabs
-        value={view}
-        onValueChange={(newValue: "website" | "placeholder" | "palette") =>
-          setView(newValue)
-        }
-        className="flex justify-end"
-      >
-        <TabsList>
-          <TabsTrigger value="placeholder">Placeholder</TabsTrigger>
-          <TabsTrigger value="website">Website</TabsTrigger>
-          <TabsTrigger value="palette">Palettes</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <div className="flex items-center justify-end">
+        <Label className="mr-4">View</Label>
+        <Tabs
+          value={view}
+          onValueChange={(newValue: "website" | "placeholder" | "palette") =>
+            setView(newValue)
+          }
+        >
+          <TabsList>
+            <TabsTrigger value="placeholder">Placeholder</TabsTrigger>
+            <TabsTrigger value="website">Website</TabsTrigger>
+            <TabsTrigger value="palette">Palettes</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
       <div className="xs:grid-cols-2 mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {themes.map((theme, index) => {
           if (theme.palettes.length === 0) return null;

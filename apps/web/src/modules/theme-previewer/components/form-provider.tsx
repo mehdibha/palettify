@@ -54,7 +54,7 @@ const defaultRadius = 0.5;
 
 interface FormProviderProps {
   children: React.ReactNode;
-  theme: ThemeWithPalettes;
+  theme?: ThemeWithPalettes;
 }
 
 export const FormProvider = (props: FormProviderProps) => {
@@ -74,13 +74,13 @@ export const FormProvider = (props: FormProviderProps) => {
       lightPalette,
       darkPalette,
       radius,
-      defaultMode: theme.defaultMode,
-      name: theme.name ?? "",
+      defaultMode: theme?.defaultMode,
+      name: theme?.name ?? "",
     },
   });
 
   React.useEffect(() => {
-    if (theme.defaultMode) {
+    if (theme && theme.defaultMode) {
       setTheme(theme.defaultMode);
     }
     setMounted(true);

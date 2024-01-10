@@ -18,10 +18,10 @@ const options = [
     value: "shadcn",
     label: "shadcn-ui",
   },
-  {
-    value: "mui",
-    label: "MUI",
-  },
+  // {
+  //   value: "mui",
+  //   label: "MUI",
+  // },
 ];
 
 interface LibrarySelectProps {
