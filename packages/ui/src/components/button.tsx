@@ -65,7 +65,7 @@ const buttonVariants = cva(
         variant: "outlined",
         color: "neutral",
         className:
-          "border-accent-foreground/40 hover:bg-accent hover:border-accent-foreground text-accent-foreground",
+          "border-accent-foreground/40 hover:bg-accent/20 hover:border-accent-foreground text-accent-foreground",
       },
       {
         variant: "text",
