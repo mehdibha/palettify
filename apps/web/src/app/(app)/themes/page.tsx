@@ -1,8 +1,8 @@
-import { prisma } from "@palettify/database";
 import { ThemesList } from "@/modules/themes/components/themes-list";
+import { getTrendingThemes } from "@/modules/themes/services";
 
 export default async function ThemesPage() {
-  const trendingThemes = [];
+  const trendingThemes = await getTrendingThemes();
 
   return (
     <div className="container pt-20">

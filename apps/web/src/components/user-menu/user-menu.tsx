@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -14,17 +16,19 @@ import {
   LogOutIcon,
 } from "@palettify/ui";
 import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
-import { getSession } from "@/modules/auth/services";
 
-interface UserMenuProps {}
+interface UserMenuProps {
+  user: {
+    id: string;
+    name?: string;
+    username?: string;
+    email: string;
+    image: string;
+  };
+}
 
-export const UserMenu = async (_: UserMenuProps) => {
-  const session = await getSession();
-  const user = session?.user;
-
-  if (!user) {
-    return null;
-  }
+export const UserMenu = (props: UserMenuProps) => {
+  const { user } = props;
 
   const displayedName = user?.name ?? user?.username ?? null;
 

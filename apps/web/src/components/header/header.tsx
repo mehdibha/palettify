@@ -9,8 +9,6 @@ import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon } from "@palettify/
 import { cn } from "@palettify/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { siteConfig } from "@/config";
-import { getSession } from "@/modules/auth/services";
-import { UserMenu } from "./user-menu";
 
 const config = siteConfig.header;
 
@@ -18,34 +16,6 @@ interface HeaderProps {
   cta?: React.ReactNode;
   children?: React.ReactNode;
 }
-
-const LoginButton = async () => {
-  const session = await getSession();
-  if (!session) {
-    return (
-      <Button href={config.cta.secondary.href} variant="text" size="sm">
-        {config.cta.secondary.label}
-      </Button>
-    );
-  }
-  return null;
-};
-
-const HeaderWrapper = () => {
-  return (
-    <Header
-      cta={
-        <React.Suspense fallback={null}>
-          <LoginButton />
-        </React.Suspense>
-      }
-    >
-      <React.Suspense fallback={null}>
-        <UserMenu />
-      </React.Suspense>
-    </Header>
-  );
-};
 
 export const Header = (props: HeaderProps) => {
   const { children, cta } = props;
