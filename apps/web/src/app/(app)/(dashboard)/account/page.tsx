@@ -3,6 +3,7 @@ import { getSession } from "@/modules/auth/services";
 
 export default async function AccountPage() {
   const session = await getSession();
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   return (
     <div>
       <h2 className="pl-2 text-2xl font-bold">Account</h2>
