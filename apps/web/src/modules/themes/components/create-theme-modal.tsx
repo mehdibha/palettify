@@ -20,7 +20,7 @@ import {
   FormMessage,
   DialogContentWithoutPortal,
 } from "@palettify/ui";
-import { WebsitePreview } from "./theme-card";
+import { PlaceholderPreview, WebsitePreview } from "./theme-card";
 
 interface CreateThemeModalProps {
   open: boolean;
@@ -89,7 +89,7 @@ export const CreateThemeModal = (props: CreateThemeModalProps) => {
                           htmlFor={item.value}
                           className="border-muted hover:bg-accent peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary flex cursor-pointer flex-col items-center justify-between rounded-md border-2 bg-transparent p-2"
                         >
-                          <WebsitePreview
+                          <PlaceholderPreview
                             palette={item.palette}
                             className="pointer-events-none h-[150px]"
                           />

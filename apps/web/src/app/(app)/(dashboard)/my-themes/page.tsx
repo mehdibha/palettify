@@ -2,16 +2,16 @@ import { ThemeCard } from "@/modules/themes/components/theme-card";
 import { getUserThemes } from "@/modules/themes/services";
 
 export default async function Page() {
-  const trendingThemes = await getUserThemes();
+  const userThemes = await getUserThemes();
 
   return (
     <div>
-      <h2 className="text-2xl font-bold ">My themes</h2>
-      <p className="text-muted-foreground">
+      <h2 className="pl-2 text-2xl font-bold">My themes</h2>
+      <p className="text-muted-foreground pl-2">
         Here you can find all the themes you created
       </p>
       <div className="xs:grid-cols-2 mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {trendingThemes.map((theme, index) => {
+        {userThemes.map((theme, index) => {
           if (theme.palettes.length === 0) return null;
           const palette = theme.palettes.find(
             (palette) => palette.mode === theme.defaultMode
@@ -36,6 +36,7 @@ export default async function Page() {
             <ThemeCard
               key={index}
               themeId={theme.id}
+              view="placeholder"
               palette={{
                 background: palette.background,
                 foreground: palette.foreground,

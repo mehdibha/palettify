@@ -35,6 +35,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           },
         ].map((link) => (
           <TabsTrigger
+            key={link.href}
             disabled={link.disabled}
             value={link.href}
             asChild={!link.disabled}

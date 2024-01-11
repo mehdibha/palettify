@@ -64,11 +64,12 @@ export const ThemeCard = (props: ThemeCardProps) => {
       <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
         <Link
           href={`/playground/${themeId}`}
-          className="my-1 flex flex-1 items-center space-x-1 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 group-hover/card:hover:opacity-100"
+          className="my-1 flex items-center space-x-1 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 group-hover/card:hover:opacity-100"
         >
           <span>playground</span>
           <ArrowRightIcon size={16} />
         </Link>
+        <div className="flex-1" />
         <a
           onClick={() => {
             setLike((prev) => !prev);
@@ -151,6 +152,28 @@ interface WebsitePreviewProps {
   className?: string;
 }
 
+const PreviewWrapper = ({
+  background,
+  foreground,
+  children,
+  className,
+}: {
+  background: string;
+  foreground: string;
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <ScrollArea
+      className={cn("h-[300px] w-full rounded border text-[6px] shadow", className)}
+      type="always"
+      style={{ background: background, color: foreground }}
+    >
+      {children}
+    </ScrollArea>
+  );
+};
+
 export const WebsitePreview = (props: WebsitePreviewProps) => {
   const { palette, className } = props;
   const {
@@ -167,7 +190,7 @@ export const WebsitePreview = (props: WebsitePreviewProps) => {
   } = palette;
 
   return (
-    <>
+    <PreviewWrapper background={background} foreground={foreground} className={className}>
       {/* Navbar */}
       <div className="flex items-center justify-between px-4 py-2">
         <div className="font-bold">Acme</div>
@@ -405,27 +428,16 @@ export const WebsitePreview = (props: WebsitePreviewProps) => {
           <CodepenIcon size={7} />
         </div>
       </div>
-    </>
+    </PreviewWrapper>
   );
 };
 
 export const PlaceholderPreview = (props: WebsitePreviewProps) => {
   const { palette, className } = props;
-  const {
-    background,
-    foreground,
-    primary,
-    primaryForeground,
-    secondary,
-    secondaryForeground,
-    card,
-    cardForeground,
-    mutedForeground,
-    border,
-  } = palette;
+  const { background, foreground, primary, secondary, card, border } = palette;
 
   return (
-    <>
+    <PreviewWrapper background={background} foreground={foreground} className={className}>
       {/* Navbar */}
       <div className="flex justify-between px-4 py-2">
         <div className="w-6">
@@ -474,8 +486,8 @@ export const PlaceholderPreview = (props: WebsitePreviewProps) => {
               .map((_, i) => (
                 <div
                   key={i}
-                  className="h-5 rounded shadow"
-                  style={{ background: card }}
+                  className="h-5 rounded border shadow-sm"
+                  style={{ background: card, borderColor: border }}
                 />
               ))}
           </div>
@@ -489,8 +501,8 @@ export const PlaceholderPreview = (props: WebsitePreviewProps) => {
               .map((_, i) => (
                 <div
                   key={i}
-                  className="h-8 rounded shadow"
-                  style={{ background: card }}
+                  className="h-8 rounded border shadow-sm"
+                  style={{ background: card, borderColor: border }}
                 />
               ))}
           </div>
@@ -503,7 +515,10 @@ export const PlaceholderPreview = (props: WebsitePreviewProps) => {
         </div>
       </div>
       {/* footer */}
-      <div className="flex justify-between border-t px-2 py-2">
+      <div
+        className="flex justify-between border-t px-2 py-2"
+        style={{ borderColor: border }}
+      >
         <div className="h-2 w-[70px] rounded" style={{ background: foreground }} />
         <div className="flex items-center space-x-1">
           {Array(5)
@@ -517,6 +532,6 @@ export const PlaceholderPreview = (props: WebsitePreviewProps) => {
             ))}
         </div>
       </div>
-    </>
+    </PreviewWrapper>
   );
 };

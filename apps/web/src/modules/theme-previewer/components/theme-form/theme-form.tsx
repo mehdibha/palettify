@@ -2,6 +2,7 @@
 
 import React, { useTransition } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import { useFormContext } from "react-hook-form";
 import { ThemeWithPalettes } from "@palettify/database";
@@ -14,6 +15,7 @@ import {
   Label,
   useToast,
 } from "@palettify/ui";
+import { LoginModal } from "@/modules/auth/components/login-modal";
 import { updateTheme } from "@/modules/themes/actions";
 import { CreateThemeModal } from "@/modules/themes/components/create-theme-modal";
 import { ColorInput } from "./color-input";
@@ -29,6 +31,8 @@ interface FormProps {
 export const ThemeForm = (props: FormProps) => {
   const { theme: themeDB, className } = props;
 
+  const { data, status } = useSession();
+  const userId = data?.user.id;
   const router = useRouter();
   const form = useFormContext();
   const [open, setOpen] = React.useState(false);
@@ -48,26 +52,27 @@ export const ThemeForm = (props: FormProps) => {
 
   async function onSubmit(values: any) {
     startTransition(async () => {
-      if (typeof themeId === "string") {
-        const result = await updateTheme({
-          id: themeId,
-          name: values.name,
-          lightPalette: values.lightPalette,
-          darkPalette: values.darkPalette,
-          radius: values.radius,
-          defaultMode: values.defaultMode,
-        });
-        if (result?.error) {
-          toast({ title: result?.error, variant: "destructive" });
-        }
-        if (result.success) {
-          toast({
-            title: "Your theme has been saved",
-          });
-          router.refresh();
-        }
-        setOpen(false);
+      const result = await updateTheme({
+        id: themeId as string | undefined,
+        name: values.name,
+        lightPalette: values.lightPalette,
+        darkPalette: values.darkPalette,
+        radius: values.radius,
+        defaultMode: values.defaultMode ?? mode,
+      });
+      if (result?.error) {
+        toast({ title: result?.error, variant: "destructive" });
       }
+      if (result.success) {
+        toast({
+          title: "Your theme has been saved",
+        });
+        if (result.themeId !== themeId) {
+          router.push(`/playground/${result.themeId}`);
+        }
+        router.refresh();
+      }
+      setOpen(false);
     });
   }
 
@@ -82,18 +87,35 @@ export const ThemeForm = (props: FormProps) => {
           >
             Cancel
           </Button>
-          {themeDB &&
-            (themeDB.name ? (
-              <Button loading={isPending} type="submit" color="primary">
-                Save changes
-              </Button>
-            ) : (
-              <CreateThemeModal open={open} onOpenChange={setOpen}>
+          {themeDB ? (
+            status === "authenticated" ? (
+              themeDB.name && themeDB.defaultMode && themeDB.userId === userId ? (
                 <Button loading={isPending} type="submit" color="primary">
                   Save changes
                 </Button>
-              </CreateThemeModal>
-            ))}
+              ) : (
+                <CreateThemeModal open={open} onOpenChange={setOpen}>
+                  <Button loading={isPending} type="submit" color="primary">
+                    Save theme
+                  </Button>
+                </CreateThemeModal>
+              )
+            ) : (
+              <LoginModal>
+                <Button color="primary">Save theme</Button>
+              </LoginModal>
+            )
+          ) : status === "authenticated" ? (
+            <CreateThemeModal open={open} onOpenChange={setOpen}>
+              <Button loading={isPending} type="submit" color="primary">
+                Save theme
+              </Button>
+            </CreateThemeModal>
+          ) : (
+            <LoginModal>
+              <Button color="primary">Save theme</Button>
+            </LoginModal>
+          )}
         </div>
         <div className="flex flex-wrap justify-start gap-2">
           <LibrarySelect

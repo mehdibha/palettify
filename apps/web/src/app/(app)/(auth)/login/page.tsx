@@ -1,5 +1,3 @@
-"use client";
-
 import { Suspense } from "react";
 import { AuthLoginError } from "@/modules/auth/components/auth-login-error";
 import { GithubLoginButton } from "@/modules/auth/components/github-login-button";

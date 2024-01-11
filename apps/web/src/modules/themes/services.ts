@@ -79,7 +79,7 @@ export const getUserThemes = async () => {
   return themes;
 };
 
-export const createTheme = async () => {
+export const createTheme = async (data: any) => {
   const session = await getSession();
 
   const theme = await prisma.theme.create({
@@ -91,6 +91,7 @@ export const createTheme = async () => {
           },
         },
       }),
+      ...data,
     },
   });
 

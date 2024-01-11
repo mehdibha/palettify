@@ -1,9 +1,11 @@
 "use server";
 
 import { prisma } from "@palettify/database";
+import { getSession } from "@/modules/auth/services";
+import { exclude } from "@/utils";
 
 interface FormData {
-  id: string;
+  id?: string;
   name?: string;
   slug?: string;
   lightPalette?: any;
@@ -15,63 +17,131 @@ interface FormData {
 export const updateTheme = async (formData: FormData) => {
   const { id, name, slug, lightPalette, darkPalette, radius, defaultMode } = formData;
 
+  let themeId = id;
+  const session = await getSession();
+
+  if (!session) throw new Error("Unauthorized");
+
   try {
-    if (name || slug || radius) {
-      await prisma.theme.update({
-        where: {
-          id: id,
-        },
+    // if no id we create a new theme
+    if (!id) {
+      const theme = await prisma.theme.create({
         data: {
-          ...(name && { name }),
-          ...(slug && { slug }),
-          ...(radius && { radius }),
-          ...(defaultMode && { defaultMode }),
+          user: {
+            connect: {
+              id: session.user.id,
+            },
+          },
+          ...{ name, slug, radius, defaultMode },
         },
       });
-    }
-    if (darkPalette && lightPalette) {
-      const palettes = await prisma.palette.findMany({
-        where: {
-          themeId: id,
-        },
-      });
-      const lightPaletteDb = palettes.find((p) => p.mode === "light");
-      const darkPaletteDb = palettes.find((p) => p.mode === "dark");
-      if (palettes.length === 0) {
+      themeId = theme.id;
+      if (lightPalette || darkPalette) {
         await prisma.palette.createMany({
           data: [
-            {
-              mode: "light",
-              themeId: id,
-              ...lightPalette,
-            },
-            {
-              mode: "dark",
-              themeId: id,
-              ...darkPalette,
-            },
+            ...(lightPalette && [
+              {
+                mode: "light",
+                themeId,
+                ...exclude(lightPalette, ["id"]),
+              },
+            ]),
+            ...(darkPalette && [
+              {
+                mode: "dark",
+                themeId,
+                ...exclude(darkPalette, ["id"]),
+              },
+            ]),
           ],
         });
+      }
+    } else {
+      // if id we update the theme
+      const existingTheme = await prisma.theme.findUnique({
+        where: {
+          id,
+        },
+        select: {
+          userId: true,
+        },
+      });
+
+      // if the theme exists but the user is not the owner we create a new theme instead
+      if (existingTheme?.userId !== session?.user.id) {
+        const newTheme = await prisma.theme.create({
+          data: {
+            user: {
+              connect: {
+                id: session.user.id,
+              },
+            },
+            ...{ name, slug, radius, defaultMode },
+          },
+        });
+        themeId = newTheme.id;
       } else {
-        await prisma.palette.update({
+        // if the theme exists and the user is the owner we update the theme
+        if (name || slug || radius || defaultMode) {
+          await prisma.theme.update({
+            where: {
+              id: id,
+            },
+            data: {
+              ...(name && { name }),
+              ...(slug && { slug }),
+              ...(radius && { radius }),
+              ...(defaultMode && { defaultMode }),
+            },
+          });
+        }
+      }
+
+      // we create or update the palettes for the theme
+      if (darkPalette && lightPalette) {
+        const palettes = await prisma.palette.findMany({
           where: {
-            id: lightPaletteDb?.id,
-          },
-          data: {
-            ...lightPalette,
+            themeId,
           },
         });
-        await prisma.palette.update({
-          where: {
-            id: darkPaletteDb?.id,
-          },
-          data: {
-            ...darkPalette,
-          },
-        });
+        const lightPaletteDb = palettes.find((p) => p.mode === "light");
+        const darkPaletteDb = palettes.find((p) => p.mode === "dark");
+        if (palettes.length === 0) {
+          await prisma.palette.createMany({
+            data: [
+              {
+                ...exclude(lightPalette, ["id"]),
+                mode: "light",
+                themeId,
+              },
+              {
+                ...exclude(darkPalette, ["id"]),
+                mode: "dark",
+                themeId,
+              },
+            ],
+          });
+        } else {
+          await prisma.palette.update({
+            where: {
+              id: lightPaletteDb?.id,
+            },
+            data: {
+              ...exclude(lightPalette, ["id"]),
+            },
+          });
+          await prisma.palette.update({
+            where: {
+              id: darkPaletteDb?.id,
+            },
+            data: {
+              ...exclude(darkPalette, ["id"]),
+            },
+          });
+        }
       }
     }
-    return { success: true };
+    return { success: true, themeId };
   } catch (error: any) {
     return {
       error: error.message,
