@@ -7,12 +7,13 @@ import { ThemeCard } from "./theme-card";
 
 interface ThemesListProps {
   themes: any[];
+  userLikes: string[];
   className?: string;
   features?: Features[];
 }
 
 export const ThemesList = (props: ThemesListProps) => {
-  const { themes, features, className } = props;
+  const { themes, userLikes, features, className } = props;
   const [view, setView] = React.useState<"website" | "placeholder" | "palette">(
     "placeholder"
   );
@@ -75,6 +76,8 @@ export const ThemesList = (props: ThemesListProps) => {
                 border: palette.border,
               }}
               features={features}
+              isLiked={userLikes.includes(theme.id)}
+              likesCount={theme._count.likedBy}
             />
           );
         })}

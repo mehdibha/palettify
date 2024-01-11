@@ -1,8 +1,9 @@
 import { ThemesList } from "@/modules/themes/components/themes-list";
-import { getTrendingThemes } from "@/modules/themes/services";
+import { getTrendingThemes, getUserLikes } from "@/modules/themes/services";
 
 export default async function ThemesPage() {
   const trendingThemes = await getTrendingThemes();
+  const userLikes = await getUserLikes();
 
   return (
     <div className="container pt-20">
@@ -10,7 +11,7 @@ export default async function ThemesPage() {
       <p className="text-muted-foreground mt-4 text-center">
         Get inspired by thousands of themes and easily export for your popular ui library.
       </p>
-      <ThemesList themes={trendingThemes} className="mt-8" />
+      <ThemesList themes={trendingThemes} userLikes={userLikes} className="mt-8" />
     </div>
   );
 }

@@ -40,6 +40,16 @@ export const getTrendingThemes = async () => {
           border: true,
         },
       },
+      _count: {
+        select: {
+          likedBy: true,
+        },
+      },
+    },
+    orderBy: {
+      likedBy: {
+        _count: "desc",
+      },
     },
   });
   return themes;
@@ -74,6 +84,11 @@ export const getUserThemes = async () => {
           border: true,
         },
       },
+      _count: {
+        select: {
+          likedBy: true,
+        },
+      },
     },
   });
   return themes;
@@ -85,8 +100,10 @@ export const getUserLikedThemes = async () => {
 
   const themes = await prisma.theme.findMany({
     where: {
-      user: {
-        id: session.user.id,
+      likedBy: {
+        some: {
+          id: session.user.id,
+        },
       },
     },
     select: {
@@ -108,9 +125,33 @@ export const getUserLikedThemes = async () => {
           border: true,
         },
       },
+      _count: {
+        select: {
+          likedBy: true,
+        },
+      },
     },
   });
   return themes;
+};
+
+export const getUserLikes = async () => {
+  const session = await getSession();
+  if (!session) return [];
+  const userWithLikes = await prisma.user.findUnique({
+    where: {
+      id: session.user.id,
+    },
+    select: {
+      likes: {
+        select: {
+          id: true,
+        },
+      },
+    },
+  });
+  const likes = userWithLikes ? userWithLikes.likes.map((like) => like.id) : [];
+  return likes;
 };
 
 export const createTheme = async (data: any) => {

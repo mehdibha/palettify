@@ -24,9 +24,9 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
             disabled: false,
           },
           {
-            href: "/saved",
+            href: "/liked",
             label: "Likes",
-            disabled: true,
+            disabled: false,
           },
           {
             href: "/account",

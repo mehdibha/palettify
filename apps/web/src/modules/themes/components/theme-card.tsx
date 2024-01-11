@@ -3,6 +3,7 @@
 import React, { useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Color from "color";
 import { useSession } from "next-auth/react";
 import {
@@ -48,8 +49,8 @@ interface ThemeCardProps {
   themeId: string;
   palette: Palette;
   view?: "website" | "placeholder" | "palette";
-  isLiked?: boolean;
-  likesCount?: number;
+  isLiked: boolean;
+  likesCount: number;
   features?: Features[];
 }
 
@@ -65,6 +66,7 @@ export const ThemeCard = (props: ThemeCardProps) => {
 
   const { background, primary, secondary, card } = palette;
 
+  const router = useRouter();
   const [pending, startTransition] = useTransition();
   const { toast } = useToast();
   const [liked, setLiked] = React.useState(isLiked);
@@ -85,6 +87,7 @@ export const ThemeCard = (props: ThemeCardProps) => {
         if (result?.error) {
           setLiked((prev) => !prev);
         }
+        router.refresh();
       }
     });
   };
