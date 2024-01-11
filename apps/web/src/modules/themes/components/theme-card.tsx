@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Color from "color";
+import { useSession } from "next-auth/react";
 import {
   ArrowRightIcon,
   CodepenIcon,
@@ -24,6 +25,8 @@ import logoStatamic from "@/assets/images/logos/statamic.svg";
 import logoStaticKit from "@/assets/images/logos/statickit.svg";
 import logoTransistor from "@/assets/images/logos/transistor.svg";
 import logoTuple from "@/assets/images/logos/tuple.svg";
+import { LoginModal } from "@/modules/auth/components/login-modal";
+import { toggleLikeTheme } from "../actions";
 import { ThemeCardMenu } from "./theme-card-menu";
 
 interface Palette {
@@ -44,19 +47,36 @@ interface ThemeCardProps {
   themeId: string;
   palette: Palette;
   view?: "website" | "placeholder" | "palette";
+  isLiked?: boolean;
+  likesCount?: number;
 }
 
 export const ThemeCard = (props: ThemeCardProps) => {
-  const { themeId, palette, view = "website" } = props;
+  const { themeId, palette, view = "website", isLiked = false, likesCount = 0 } = props;
 
-  const { background, foreground, primary, secondary, card } = palette;
+  const { background, primary, secondary, card } = palette;
 
-  const [liked, setLike] = React.useState<boolean>(false);
+  const [pending, startTransition] = useTransition();
   const { toast } = useToast();
+  const [liked, setLiked] = React.useState(isLiked);
+  const totalLikes = likesCount + (isLiked && !liked ? -1 : !isLiked && liked ? 1 : 0);
 
   const handleCopy = (value: string) => {
     navigator.clipboard.writeText(value);
     toast({ title: "Color copied successfully", variant: "default" });
+  };
+
+  const handleLikeClick = () => {
+    setLiked((prev) => !prev);
+    startTransition(async () => {
+      if (!pending) {
+        // optimistic update
+        const result = await toggleLikeTheme(themeId);
+        if (result?.error) {
+          setLiked((prev) => !prev);
+        }
+      }
+    });
   };
 
   return (
@@ -70,38 +90,11 @@ export const ThemeCard = (props: ThemeCardProps) => {
           <ArrowRightIcon size={16} />
         </Link>
         <div className="flex-1" />
-        <a
-          onClick={() => {
-            setLike((prev) => !prev);
-          }}
-          className="flex cursor-pointer items-center space-x-2 opacity-70 duration-150 hover:opacity-100"
-        >
-          <span
-            className={cn("mb-0.5 inline", {
-              "text-red-600": liked,
-            })}
-          >
-            {liked ? 1 : 0}
-          </span>
-          <HeartIcon
-            size={15}
-            className={cn({
-              "fill-red-600 text-red-600": liked,
-            })}
-          />
-        </a>
+        <LikeButton likesCount={totalLikes} liked={liked} onLikeClick={handleLikeClick} />
         <ThemeCardMenu />
       </div>
-      {(view === "website" || view === "placeholder") && (
-        <ScrollArea
-          className="h-[300px] w-full rounded border text-[6px] shadow"
-          type="always"
-          style={{ background: background, color: foreground }}
-        >
-          {view === "website" && <WebsitePreview palette={palette} />}
-          {view === "placeholder" && <PlaceholderPreview palette={palette} />}
-        </ScrollArea>
-      )}
+      {view === "website" && <WebsitePreview palette={palette} />}
+      {view === "placeholder" && <PlaceholderPreview palette={palette} />}
       <div className="mt-2 flex w-full space-x-2">
         {[
           { label: "Background", value: background },
@@ -144,6 +137,61 @@ export const ThemeCard = (props: ThemeCardProps) => {
         })}
       </div>
     </div>
+  );
+};
+
+interface LikeButtonProps {
+  likesCount: number;
+  liked: boolean;
+  onLikeClick: () => void;
+}
+
+const LikeButton = (props: LikeButtonProps) => {
+  const { likesCount, liked, onLikeClick } = props;
+
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    return (
+      <LoginModal>
+        <a className="flex cursor-pointer items-center space-x-2 opacity-70 duration-150 hover:opacity-100">
+          <span
+            className={cn("mb-0.5 inline", {
+              "text-red-600": liked,
+            })}
+          >
+            {likesCount}
+          </span>
+          <HeartIcon
+            size={15}
+            className={cn({
+              "fill-red-600 text-red-600": liked,
+            })}
+          />
+        </a>
+      </LoginModal>
+    );
+  }
+
+  return (
+    <a
+      onClick={status === "loading" ? undefined : onLikeClick}
+      className="flex cursor-pointer items-center space-x-2 opacity-70 duration-150 hover:opacity-100"
+    >
+      <span
+        className={cn("mb-0.5 inline", {
+          "text-red-600": liked,
+        })}
+      >
+        {likesCount}
+      </span>
+      <HeartIcon
+        size={15}
+        className={cn({
+          "fill-red-600 text-red-600": liked,
+        })}
+      />
+    </a>
   );
 };
 

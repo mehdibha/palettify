@@ -24,6 +24,7 @@ model User {
   subscription  Subscription[]
   Invoice       Invoice[]
   themes        Theme[]
+  likes         Theme[]        @relation(name: "likedBy")
 }
 
 model Account {
@@ -88,6 +89,8 @@ model Theme {
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
+
+  likedBy User[] @relation(name: "likedBy")
 }
 
 model Palette {

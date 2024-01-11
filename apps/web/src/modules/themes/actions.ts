@@ -148,3 +148,56 @@ export const updateTheme = async (formData: FormData) => {
     };
   }
 };
+
+export const toggleLikeTheme = async (themeId: string) => {
+  const session = await getSession();
+  if (!session) throw new Error("Unauthorized");
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+      select: {
+        likes: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (!user) throw new Error("User not found");
+    const like = user.likes.find((l) => l.id === themeId);
+    if (like) {
+      await prisma.user.update({
+        where: {
+          id: session.user.id,
+        },
+        data: {
+          likes: {
+            disconnect: {
+              id: themeId,
+            },
+          },
+        },
+      });
+    } else {
+      await prisma.user.update({
+        where: {
+          id: session.user.id,
+        },
+        data: {
+          likes: {
+            connect: {
+              id: themeId,
+            },
+          },
+        },
+      });
+    }
+    return { success: true, liked: !like };
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};

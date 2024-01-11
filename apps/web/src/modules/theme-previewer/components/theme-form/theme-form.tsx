@@ -50,7 +50,7 @@ export const ThemeForm = (props: FormProps) => {
     form.setValue("library", library);
   };
 
-  async function onSubmit(values: any) {
+  function onSubmit(values: any) {
     startTransition(async () => {
       const result = await updateTheme({
         id: themeId as string | undefined,

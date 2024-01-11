@@ -38,7 +38,7 @@ export const UserMenu = (props: UserMenuProps) => {
           <ProfileAvatar user={user} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-36" forceMount>
+      <DropdownMenuContent align="end" className="w-40" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             {displayedName && (
