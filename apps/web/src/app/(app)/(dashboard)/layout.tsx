@@ -31,7 +31,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           {
             href: "/account",
             label: "Account",
-            disabled: true,
+            disabled: false,
           },
         ].map((link) => (
           <TabsTrigger
