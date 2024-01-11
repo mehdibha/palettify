@@ -45,7 +45,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           </TabsTrigger>
         ))}
       </TabsList>
-      <div className="mt-4">{children}</div>
+      <div className="mt-8">{children}</div>
     </Tabs>
   );
 }

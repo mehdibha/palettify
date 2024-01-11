@@ -201,3 +201,31 @@ export const toggleLikeTheme = async (themeId: string) => {
     };
   }
 };
+
+export const deleteTheme = async (themeId: string) => {
+  const session = await getSession();
+  console.log("start deleting");
+  if (!session) throw new Error("Unauthorized");
+  try {
+    const theme = await prisma.theme.findUnique({
+      where: {
+        id: themeId,
+      },
+      select: {
+        userId: true,
+      },
+    });
+    if (!theme) throw new Error("Theme not found");
+    if (theme.userId !== session.user.id) throw new Error("Unauthorized");
+    await prisma.theme.delete({
+      where: {
+        id: themeId,
+      },
+    });
+    return { success: true };
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};

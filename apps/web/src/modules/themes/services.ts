@@ -79,6 +79,40 @@ export const getUserThemes = async () => {
   return themes;
 };
 
+export const getUserLikedThemes = async () => {
+  const session = await getSession();
+  if (!session) return [];
+
+  const themes = await prisma.theme.findMany({
+    where: {
+      user: {
+        id: session.user.id,
+      },
+    },
+    select: {
+      id: true,
+      defaultMode: true,
+      palettes: {
+        select: {
+          mode: true,
+          background: true,
+          foreground: true,
+          primary: true,
+          primaryForeground: true,
+          secondary: true,
+          secondaryForeground: true,
+          card: true,
+          cardForeground: true,
+          muted: true,
+          mutedForeground: true,
+          border: true,
+        },
+      },
+    },
+  });
+  return themes;
+};
+
 export const createTheme = async (data: any) => {
   const session = await getSession();
 

@@ -2,15 +2,17 @@
 
 import React from "react";
 import { Label, Tabs, TabsList, TabsTrigger } from "@palettify/ui";
+import { Features } from "../types";
 import { ThemeCard } from "./theme-card";
 
 interface ThemesListProps {
   themes: any[];
   className?: string;
+  features?: Features[];
 }
 
 export const ThemesList = (props: ThemesListProps) => {
-  const { themes, className } = props;
+  const { themes, features, className } = props;
   const [view, setView] = React.useState<"website" | "placeholder" | "palette">(
     "placeholder"
   );
@@ -72,6 +74,7 @@ export const ThemesList = (props: ThemesListProps) => {
                 mutedForeground: palette.mutedForeground,
                 border: palette.border,
               }}
+              features={features}
             />
           );
         })}

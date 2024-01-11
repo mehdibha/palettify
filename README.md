@@ -11,7 +11,7 @@
   </a>
   <h1 align="center">palettify</h1>
   <p align="center">
-    Get an instant theme preview for your popular react ui librairies. mui, shadcn-ui, and more.
+    Get an instant theme preview for your popular ui libraries. mui, shadcn-ui, and more.
   </p>
   <p>
     

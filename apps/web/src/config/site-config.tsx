@@ -79,7 +79,7 @@ export const siteConfig = {
           image: "https://mui.com/static/logo.svg",
           cta: {
             label: "Go to playground",
-            href: "/playground?librairy=mui",
+            href: "/playground?library=mui",
           },
           soon: true,
         },
@@ -89,7 +89,7 @@ export const siteConfig = {
           image: "/images/shadcn.svg",
           cta: {
             label: "Go to playground",
-            href: "/playground?librairy=shadcn",
+            href: "/playground?library=shadcn",
           },
         },
       ],

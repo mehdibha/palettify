@@ -27,6 +27,7 @@ import logoTransistor from "@/assets/images/logos/transistor.svg";
 import logoTuple from "@/assets/images/logos/tuple.svg";
 import { LoginModal } from "@/modules/auth/components/login-modal";
 import { toggleLikeTheme } from "../actions";
+import { Features } from "../types";
 import { ThemeCardMenu } from "./theme-card-menu";
 
 interface Palette {
@@ -49,16 +50,25 @@ interface ThemeCardProps {
   view?: "website" | "placeholder" | "palette";
   isLiked?: boolean;
   likesCount?: number;
+  features?: Features[];
 }
 
 export const ThemeCard = (props: ThemeCardProps) => {
-  const { themeId, palette, view = "website", isLiked = false, likesCount = 0 } = props;
+  const {
+    themeId,
+    palette,
+    view = "website",
+    isLiked = false,
+    likesCount = 0,
+    features,
+  } = props;
 
   const { background, primary, secondary, card } = palette;
 
   const [pending, startTransition] = useTransition();
   const { toast } = useToast();
   const [liked, setLiked] = React.useState(isLiked);
+  const [deleted, setDeleted] = React.useState(false);
   const totalLikes = likesCount + (isLiked && !liked ? -1 : !isLiked && liked ? 1 : 0);
 
   const handleCopy = (value: string) => {
@@ -79,6 +89,8 @@ export const ThemeCard = (props: ThemeCardProps) => {
     });
   };
 
+  if (deleted) return null;
+
   return (
     <div className="group/card hover:bg-card/70 rounded-lg p-2 pt-1 duration-150 hover:shadow">
       <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
@@ -91,7 +103,12 @@ export const ThemeCard = (props: ThemeCardProps) => {
         </Link>
         <div className="flex-1" />
         <LikeButton likesCount={totalLikes} liked={liked} onLikeClick={handleLikeClick} />
-        <ThemeCardMenu />
+        <ThemeCardMenu
+          themeId={themeId}
+          features={features}
+          deleted={deleted}
+          onDeleteChange={setDeleted}
+        />
       </div>
       {view === "website" && <WebsitePreview palette={palette} />}
       {view === "placeholder" && <PlaceholderPreview palette={palette} />}
