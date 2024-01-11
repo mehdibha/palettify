@@ -52,6 +52,8 @@ interface ThemeCardProps {
   isLiked: boolean;
   likesCount: number;
   features?: Features[];
+  name?: string;
+  owner?: string;
 }
 
 export const ThemeCard = (props: ThemeCardProps) => {
@@ -62,6 +64,8 @@ export const ThemeCard = (props: ThemeCardProps) => {
     isLiked = false,
     likesCount = 0,
     features,
+    name,
+    owner,
   } = props;
 
   const { background, primary, secondary, card } = palette;
@@ -156,6 +160,12 @@ export const ThemeCard = (props: ThemeCardProps) => {
           );
         })}
       </div>
+      {(name || owner) && (
+        <div className="mt-2 flex justify-between px-1 text-xs">
+          <p className="font-bold">{name}</p>
+          {owner && <p className="text-muted-foreground">by {owner}</p>}
+        </div>
+      )}
     </div>
   );
 };

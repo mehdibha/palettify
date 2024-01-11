@@ -23,6 +23,7 @@ export const getTrendingThemes = async () => {
     },
     select: {
       id: true,
+      name: true,
       defaultMode: true,
       palettes: {
         select: {
@@ -43,6 +44,13 @@ export const getTrendingThemes = async () => {
       _count: {
         select: {
           likedBy: true,
+        },
+      },
+      user: {
+        select: {
+          id: true,
+          name: true,
+          username: true,
         },
       },
     },
@@ -68,6 +76,7 @@ export const getUserThemes = async () => {
     select: {
       id: true,
       defaultMode: true,
+      name: true,
       palettes: {
         select: {
           mode: true,

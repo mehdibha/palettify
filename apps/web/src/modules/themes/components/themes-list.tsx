@@ -20,7 +20,7 @@ export const ThemesList = (props: ThemesListProps) => {
 
   return (
     <div className={className}>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end pr-3">
         <Label className="mr-4">View</Label>
         <Tabs
           value={view}
@@ -78,6 +78,12 @@ export const ThemesList = (props: ThemesListProps) => {
               features={features}
               isLiked={userLikes.includes(theme.id)}
               likesCount={theme._count.likedBy}
+              name={theme.name}
+              owner={
+                theme?.user?.id === "clqzcfga3000014myn9agr9w8"
+                  ? "Palettify"
+                  : theme?.user?.username ?? theme?.user?.name
+              }
             />
           );
         })}
