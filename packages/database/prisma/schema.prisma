@@ -83,6 +83,7 @@ model Theme {
   slug        String?      @unique
   tags        String[]
   defaultMode PaletteMode?
+  published   Boolean      @default(false)
 
   palettes Palette[]
   radius   Float?

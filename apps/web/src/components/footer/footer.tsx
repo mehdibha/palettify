@@ -28,7 +28,7 @@ type IconKey = "github" | "linkedin" | "twitter" | "mail" | "instagram" | "codep
 export const Footer = async () => {
   return (
     <Wrapper>
-      <div className="container pb-8">
+      <div className="container mt-36 pb-8">
         <Separator className="mb-4" />
         <div>
           <p>Copyright © 2023 palettify Inc. All rights reserved.</p>

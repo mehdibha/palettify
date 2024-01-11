@@ -10,12 +10,14 @@ interface FormData {
   slug?: string;
   lightPalette?: any;
   darkPalette?: any;
+  published?: boolean;
   radius?: number;
   defaultMode?: "light" | "dark";
 }
 
 export const updateTheme = async (formData: FormData) => {
-  const { id, name, slug, lightPalette, darkPalette, radius, defaultMode } = formData;
+  const { id, name, slug, lightPalette, darkPalette, radius, defaultMode, published } =
+    formData;
 
   let themeId = id;
   const session = await getSession();
@@ -32,7 +34,7 @@ export const updateTheme = async (formData: FormData) => {
               id: session.user.id,
             },
           },
-          ...{ name, slug, radius, defaultMode },
+          ...{ name, slug, radius, defaultMode, published },
         },
       });
       themeId = theme.id;
@@ -76,13 +78,13 @@ export const updateTheme = async (formData: FormData) => {
                 id: session.user.id,
               },
             },
-            ...{ name, slug, radius, defaultMode },
+            ...{ name, slug, radius, defaultMode, published },
           },
         });
         themeId = newTheme.id;
       } else {
         // if the theme exists and the user is the owner we update the theme
-        if (name || slug || radius || defaultMode) {
+        if (name || slug || radius || defaultMode || published) {
           await prisma.theme.update({
             where: {
               id: id,
@@ -92,6 +94,7 @@ export const updateTheme = async (formData: FormData) => {
               ...(slug && { slug }),
               ...(radius && { radius }),
               ...(defaultMode && { defaultMode }),
+              ...(published && { published }),
             },
           });
         }

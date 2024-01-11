@@ -11,8 +11,10 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   Input,
   Label,
+  Switch,
   useToast,
 } from "@palettify/ui";
 import { LoginModal } from "@/modules/auth/components/login-modal";
@@ -59,6 +61,7 @@ export const ThemeForm = (props: FormProps) => {
         darkPalette: values.darkPalette,
         radius: values.radius,
         defaultMode: values.defaultMode ?? mode,
+        published: values.published,
       });
       if (result?.error) {
         toast({ title: result?.error, variant: "destructive" });
@@ -79,43 +82,68 @@ export const ThemeForm = (props: FormProps) => {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
       <div>
-        <div className="mb-4 flex justify-end space-x-2">
-          <Button
-            onClick={() => {
-              form.reset();
-            }}
-          >
-            Cancel
-          </Button>
-          {themeDB ? (
-            status === "authenticated" ? (
-              themeDB.name && themeDB.defaultMode && themeDB.userId === userId ? (
-                <Button loading={isPending} type="submit" color="primary">
-                  Save changes
-                </Button>
-              ) : (
-                <CreateThemeModal open={open} onOpenChange={setOpen}>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            {themeDB && (
+              <FormField
+                control={form.control}
+                name="published"
+                render={({ field }) => {
+                  console.log(field.value);
+                  return (
+                    <FormItem className="flex items-center space-x-2 space-y-0">
+                      <FormLabel htmlFor="published">Published</FormLabel>
+                      <FormControl>
+                        <Switch
+                          id="published"
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  );
+                }}
+              />
+            )}
+          </div>
+          <div className="flex space-x-2">
+            <Button
+              onClick={() => {
+                form.reset();
+              }}
+            >
+              Cancel
+            </Button>
+            {themeDB ? (
+              status === "authenticated" ? (
+                themeDB.name && themeDB.defaultMode && themeDB.userId === userId ? (
                   <Button loading={isPending} type="submit" color="primary">
-                    Save theme
+                    Save changes
                   </Button>
-                </CreateThemeModal>
+                ) : (
+                  <CreateThemeModal open={open} onOpenChange={setOpen}>
+                    <Button loading={isPending} type="submit" color="primary">
+                      Save theme
+                    </Button>
+                  </CreateThemeModal>
+                )
+              ) : (
+                <LoginModal>
+                  <Button color="primary">Save theme</Button>
+                </LoginModal>
               )
+            ) : status === "authenticated" ? (
+              <CreateThemeModal open={open} onOpenChange={setOpen}>
+                <Button loading={isPending} type="submit" color="primary">
+                  Save theme
+                </Button>
+              </CreateThemeModal>
             ) : (
               <LoginModal>
                 <Button color="primary">Save theme</Button>
               </LoginModal>
-            )
-          ) : status === "authenticated" ? (
-            <CreateThemeModal open={open} onOpenChange={setOpen}>
-              <Button loading={isPending} type="submit" color="primary">
-                Save theme
-              </Button>
-            </CreateThemeModal>
-          ) : (
-            <LoginModal>
-              <Button color="primary">Save theme</Button>
-            </LoginModal>
-          )}
+            )}
+          </div>
         </div>
         <div className="flex flex-wrap justify-start gap-2">
           <LibrarySelect

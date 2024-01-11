@@ -76,6 +76,7 @@ export const FormProvider = (props: FormProviderProps) => {
       radius,
       defaultMode: theme?.defaultMode,
       name: theme?.name ?? "",
+      published: theme?.published ?? true,
     },
   });
 

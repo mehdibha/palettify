@@ -19,7 +19,7 @@ export const getThemeById = async (
 export const getTrendingThemes = async () => {
   const themes = await prisma.theme.findMany({
     where: {
-      userId: "clqzcfga3000014myn9agr9w8",
+      published: true,
     },
     select: {
       id: true,

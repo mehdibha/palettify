@@ -37,9 +37,11 @@ export const CreateThemeModal = (props: CreateThemeModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange} modal={false}>
       <DialogTrigger asChild>
-        <Button type="button" color="primary">
-          Save changes
-        </Button>
+        {
+          <Button type="button" color="primary">
+            Save theme
+          </Button>
+        }
       </DialogTrigger>
       <DialogContentWithoutPortal className="sm:max-w-[600px]">
         <DialogHeader>
