@@ -21,7 +21,7 @@ export default async function PlaygroundPage(props: PlaygroundPageProps) {
     <FormProvider theme={theme}>
       <div className="min-h-screen">
         <div className="lg:w-[460px]">
-          <div className="container px-8">
+          <div className="sm:container sm:px-8">
             <div className="bg-card animate-in fade-in slide-in-from-top-1 rounded-xl p-4 shadow-xl duration-150">
               <ThemeForm theme={theme} />
             </div>
