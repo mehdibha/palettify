@@ -6,7 +6,7 @@ import { GoogleLoginButton } from "@/modules/auth/components/google-login-button
 export default function LoginPage() {
   return (
     <div>
-      <h1 className="font-cal text-center text-3xl dark:text-white">Sign in</h1>
+      <h1 className="text-center text-3xl dark:text-white">Sign in</h1>
       <p className="mt-2 text-center text-sm text-stone-600 dark:text-stone-400">
         Build incredible websites in seconds. <br />
       </p>

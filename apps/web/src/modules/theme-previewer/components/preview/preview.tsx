@@ -10,6 +10,9 @@ import {
   ScrollArea,
   ScrollBar,
   SmartphoneIcon,
+  Tabs,
+  TabsList,
+  TabsTrigger,
 } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
@@ -22,8 +25,9 @@ interface PreviewProps {
 export const Preview = (props: PreviewProps) => {
   const { className } = props;
 
-  const [mobileView, setMobileView] = React.useState(false);
-  const [fullScreen, setFullScreen] = React.useState(false);
+  const [view, setView] = React.useState<"landing" | "dashboard">("dashboard");
+  const [mobileView, setMobileView] = React.useState<boolean>(false);
+  const [fullScreen, setFullScreen] = React.useState<boolean>(false);
   const form = useFormContext();
   useScrollLock(fullScreen);
 
@@ -39,7 +43,29 @@ export const Preview = (props: PreviewProps) => {
     <PreviewWrapper className={className} fullScreen={fullScreen}>
       <div className="bg-card h-full overflow-hidden rounded-md pb-10 shadow-xl">
         <div className="relative flex w-full items-center justify-between border-b px-2 py-1">
-          <span />
+          <Tabs
+            value={view}
+            onValueChange={(newValue: "dashboard" | "landing") => {
+              setView(newValue);
+            }}
+          >
+            <TabsList className="rounded-xl">
+              {[
+                {
+                  value: "dashboard",
+                  label: "Dashboard",
+                },
+                {
+                  value: "landing",
+                  label: "Landing",
+                },
+              ].map((tab) => (
+                <TabsTrigger key={tab.value} value={tab.value} className="rounded-lg">
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
           <div className="flex items-center">
             <Button variant="text" size="icon-sm" onClick={handleChangeMobileView}>
               {mobileView ? <MonitorIcon size={18} /> : <SmartphoneIcon size={18} />}
@@ -59,7 +85,11 @@ export const Preview = (props: PreviewProps) => {
               "max-h-[600px] max-w-sm rounded-lg": mobileView,
             })}
           >
-            <LibraryPreview library={form.watch("library")} mobileView={mobileView} />
+            <LibraryPreview
+              library={form.watch("library")}
+              view={view}
+              mobileView={mobileView}
+            />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>

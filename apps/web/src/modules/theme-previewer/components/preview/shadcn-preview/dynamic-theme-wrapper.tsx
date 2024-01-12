@@ -31,7 +31,7 @@ export function DynamicThemeWrapper(props: ThemeWrapperProps) {
   );
 
   return (
-    <div className="preview-mode dark:preview-mode">
+    <div className="preview-mode dark:preview-mode h-full">
       <style jsx global>{`
         .preview-mode {
           --background: ${formatColor(resolvedPalette.background)};
@@ -82,7 +82,7 @@ export function DynamicThemeWrapper(props: ThemeWrapperProps) {
           --radius: ${radius}rem;
         }
       `}</style>
-      <div className="text-foreground bg-background">{children}</div>
+      <div className="text-foreground bg-background h-full">{children}</div>
     </div>
   );
 }

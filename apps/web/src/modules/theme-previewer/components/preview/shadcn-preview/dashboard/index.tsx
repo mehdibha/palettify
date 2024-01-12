@@ -18,12 +18,7 @@ import { Search } from "./components/search";
 import TeamSwitcher from "./components/team-switcher";
 import { UserNav } from "./components/user-nav";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
-
-export function DashboardPage({ mobileView }: { mobileView?: boolean }) {
+export function Dashboard({ mobileView }: { mobileView?: boolean }) {
   return (
     <div className="light-mode flex flex-col">
       <div className="border-b">

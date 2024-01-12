@@ -50,4 +50,5 @@ export {
   ArrowBigDown as ArrowBigDownIcon,
   MoreVertical as MoreVerticalIcon,
   Heart as HeartIcon,
+  Command as CommandIcon,
 } from "lucide-react";
