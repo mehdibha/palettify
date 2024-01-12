@@ -98,74 +98,78 @@ export const ThemeCard = (props: ThemeCardProps) => {
   if (deleted) return null;
 
   return (
-    <div className="group/card hover:bg-card/70 rounded-lg p-2 pt-1 duration-150 hover:shadow">
-      <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
-        <Link
-          href={`/playground/${themeId}`}
-          className="my-1 flex items-center space-x-1 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 group-hover/card:hover:opacity-100"
-        >
-          <span>playground</span>
-          <ArrowRightIcon size={16} />
-        </Link>
-        <div className="flex-1" />
-        <LikeButton likesCount={totalLikes} liked={liked} onLikeClick={handleLikeClick} />
-        <ThemeCardMenu
-          themeId={themeId}
-          features={features}
-          deleted={deleted}
-          onDeleteChange={setDeleted}
-        />
-      </div>
-      {view === "website" && <WebsitePreview palette={palette} />}
-      {view === "placeholder" && <PlaceholderPreview palette={palette} />}
-      <div className="mt-2 flex w-full space-x-2">
-        {[
-          { label: "Background", value: background },
-          { label: "Primary", value: primary },
-          { label: "Secondary", value: secondary },
-          { label: "Card", value: card },
-        ].map((item, index) => {
-          if (!item.value) return null;
-
-          const isHex = item.value.startsWith("#");
-          const isDark = isHex ? Color(item.value).isDark() : false;
-
-          return (
-            <div
-              key={index}
-              className={cn(
-                "group/palette h-12 w-[1px] grow cursor-pointer overflow-hidden rounded px-2 py-1 shadow duration-300 hover:w-[45%]"
-              )}
-              onClick={() => {
-                handleCopy(item.value as string);
-              }}
-              style={{ background: item.value }}
-            >
-              <div
-                className={cn(
-                  "hidden h-full items-center justify-between text-xs text-black group-hover/palette:flex",
-                  {
-                    "text-white": isDark,
-                  }
-                )}
-              >
-                <div>
-                  <p className="font-bold">{item.label}</p>
-                  <p className="font-medium">{isHex ? item.value : "gradient"}</p>
-                </div>
-                <CopyIcon size={18} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {(name || owner) && (
-        <div className="mt-2 flex justify-between px-1 text-xs">
-          <p className="font-bold">{name}</p>
-          {owner && <p className="text-muted-foreground">by {owner}</p>}
+    <Link
+      href={`/playground/${themeId}`}
+    >
+      <div className="group/card hover:bg-card/70 rounded-lg p-2 pt-1 duration-150 hover:shadow">
+        <div className="flex items-center justify-between space-x-1 px-1 py-0.5 opacity-100 group-hover/card:opacity-100">
+          <Link
+            href={`/playground/${themeId}`}
+            className="my-1 flex items-center space-x-1 text-sm font-medium opacity-0 duration-150 group-hover/card:opacity-70 group-hover/card:hover:opacity-100"
+          >
+            <span>playground</span>
+            <ArrowRightIcon size={16} />
+          </Link>
+          <div className="flex-1" />
+          <LikeButton likesCount={totalLikes} liked={liked} onLikeClick={handleLikeClick} />
+          <ThemeCardMenu
+            themeId={themeId}
+            features={features}
+            deleted={deleted}
+            onDeleteChange={setDeleted}
+          />
         </div>
-      )}
-    </div>
+        {view === "website" && <WebsitePreview palette={palette} />}
+        {view === "placeholder" && <PlaceholderPreview palette={palette} />}
+        <div className="mt-2 flex w-full space-x-2">
+          {[
+            { label: "Background", value: background },
+            { label: "Primary", value: primary },
+            { label: "Secondary", value: secondary },
+            { label: "Card", value: card },
+          ].map((item, index) => {
+            if (!item.value) return null;
+
+            const isHex = item.value.startsWith("#");
+            const isDark = isHex ? Color(item.value).isDark() : false;
+
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "group/palette h-12 w-[1px] grow cursor-pointer overflow-hidden rounded px-2 py-1 shadow duration-300 hover:w-[45%]"
+                )}
+                onClick={() => {
+                  handleCopy(item.value as string);
+                }}
+                style={{ background: item.value }}
+              >
+                <div
+                  className={cn(
+                    "hidden h-full items-center justify-between text-xs text-black group-hover/palette:flex",
+                    {
+                      "text-white": isDark,
+                    }
+                  )}
+                >
+                  <div>
+                    <p className="font-bold">{item.label}</p>
+                    <p className="font-medium">{isHex ? item.value : "gradient"}</p>
+                  </div>
+                  <CopyIcon size={18} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {(name || owner) && (
+          <div className="mt-2 flex justify-between px-1 text-xs">
+            <p className="font-bold">{name}</p>
+            {owner && <p className="text-muted-foreground">by {owner}</p>}
+          </div>
+        )}
+      </div>
+    </Link>
   );
 };
 
