@@ -89,7 +89,6 @@ export const ThemeForm = (props: FormProps) => {
                 control={form.control}
                 name="published"
                 render={({ field }) => {
-                  console.log(field.value);
                   return (
                     <FormItem className="flex items-center space-x-2 space-y-0">
                       <FormLabel htmlFor="published">Published</FormLabel>
@@ -108,6 +107,7 @@ export const ThemeForm = (props: FormProps) => {
           </div>
           <div className="flex space-x-2">
             <Button
+              type="button"
               onClick={() => {
                 form.reset();
               }}
