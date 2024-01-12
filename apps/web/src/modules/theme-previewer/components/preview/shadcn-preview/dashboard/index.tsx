@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import { cn } from "@palettify/utils";
 import { Button } from "@/modules/shadcn-ui/ui/button";
 import {
   Card,
@@ -22,26 +23,39 @@ export const metadata: Metadata = {
   description: "Example dashboard app built using the components.",
 };
 
-export function DashboardPage() {
+export function DashboardPage({ mobileView }: { mobileView?: boolean }) {
   return (
     <div className="light-mode flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />
-          <MainNav className="mx-6 hidden xl:block" />
+          <MainNav className={cn("mx-6 hidden xl:block", { "xl:hidden": mobileView })} />
           <div className="ml-auto flex items-center space-x-4">
-            <Search />
+            <Search className={cn("hidden xl:block", { "xl:hidden": mobileView })} />
             <UserNav />
           </div>
         </div>
       </div>
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="mr-2 text-3xl font-bold tracking-tight">Dashboard</h2>
+      <div className={cn("flex-1 space-y-4 p-8 pt-6", { "px-4": mobileView })}>
+        <div className="flex items-end justify-between space-y-2">
+          <h2
+            className={cn("mr-2 text-3xl font-bold tracking-tight", {
+              "text-2xl": mobileView,
+            })}
+          >
+            Dashboard
+          </h2>
           <div className="flex items-center space-x-2">
-            <CalendarDateRangePicker />
+            <CalendarDateRangePicker
+              className={cn("hidden xl:block", { "xl:hidden": mobileView })}
+            />
             <Button>Download</Button>
-            <Button variant="secondary">Export</Button>
+            <Button
+              variant="secondary"
+              className={cn("hidden lg:block", { "lg:hidden": mobileView })}
+            >
+              Export
+            </Button>
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
@@ -58,7 +72,11 @@ export function DashboardPage() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
-            <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+            <div
+              className={cn("grid grid-cols-2 gap-4 xl:grid-cols-4", {
+                "grid-cols-1 xl:grid-cols-1": mobileView,
+              })}
+            >
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
@@ -148,7 +166,11 @@ export function DashboardPage() {
               </Card>
             </div>
             <div className="grid grid-cols-7 gap-4">
-              <Card className="col-span-7 xl:col-span-4">
+              <Card
+                className={cn("col-span-7 xl:col-span-4", {
+                  "xl:col-span-7": mobileView,
+                })}
+              >
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
@@ -156,7 +178,11 @@ export function DashboardPage() {
                   <Overview />
                 </CardContent>
               </Card>
-              <Card className="col-span-7  xl:col-span-3">
+              <Card
+                className={cn("col-span-7 xl:col-span-3", {
+                  "xl:col-span-7": mobileView,
+                })}
+              >
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
                   <CardDescription>You made 265 sales this month.</CardDescription>

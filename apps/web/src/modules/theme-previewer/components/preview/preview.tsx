@@ -49,16 +49,20 @@ export const Preview = (props: PreviewProps) => {
             </Button>
           </div>
         </div>
-        <ScrollArea className="h-full w-full">
-          <div
-            className={cn("bg-background/50 h-full w-full", {
-              "flex items-center justify-center p-2": mobileView,
+        <div
+          className={cn("bg-background/50 h-full w-full", {
+            "flex items-center justify-center p-2": mobileView,
+          })}
+        >
+          <ScrollArea
+            className={cn("h-full w-full", {
+              "max-h-[600px] max-w-sm rounded-lg": mobileView,
             })}
           >
-            <LibraryPreview library={form.watch("library")} />
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+            <LibraryPreview library={form.watch("library")} mobileView={mobileView} />
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
       </div>
     </PreviewWrapper>
   );
