@@ -77,15 +77,6 @@
 - Tailwind CSS
 - Shadcn-ui as starter components
 
-## Getting Started
-
-If you want to clone the project and use palettify as your starter project
-
-### Configuratuion
-
-- Star the repo
-- Fork this project
-
 ## Roadmap
 
 - [x] Site structure
@@ -116,7 +107,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contributors
 
 <table><tr align="left">
-  <td align="center"><a href="https://github.com/mehdibha"><img src="https://avatars.githubusercontent.com/u/12223900?v=4" width="64px;"alt="Mehdi BHA"/><br/><sub><b>Mehdi BHA</b></sub></a></td>
+  <td align="center"><a href="https://github.com/mehdibha"><img src="https://github.com/mehdibha.png" width="64px;"alt="Mehdi BHA"/><br/><sub><b>Mehdi BHA</b></sub></a></td>
+  <td align="center"><a href="https://github.com/spa5k"><img src="https://github.com/spa5k.png" width="64px;"alt="Spark"/><br/><sub><b>Spark</b></sub></a></td>
 </tr></table>
 
 [contributors-shield]: https://img.shields.io/github/contributors/mehdibha/palettify.svg?style=for-the-badge
