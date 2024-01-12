@@ -40,12 +40,7 @@ export const ThemeCardMenu = (props: ThemeCardMenuProps) => {
         const result = await deleteTheme(themeId);
         if (result?.error) {
           onDeleteChange(false);
-          toast({
-            title: "Error",
-            description: result.error,
-          });
         }
-        router.refresh();
       }
     });
   };
