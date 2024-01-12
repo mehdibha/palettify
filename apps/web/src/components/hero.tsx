@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "@palettify/ui";
 import { cn, stringReplace } from "@palettify/utils";
 import styles from "./styles.module.css";
@@ -60,6 +61,21 @@ export const Hero = (props: HeroProps) => {
             {cta[1].label}
           </Button>
         )}
+      </div>
+      <div className="flex justify-center">
+        <Link
+          href="https://www.producthunt.com/posts/palettify?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-palettify"
+          target="_blank"
+          className="mt-8"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=434268&theme=light"
+            alt="Palettify - Never&#0032;struggle&#0032;again&#0032;with&#0032;your&#0032;site&#0032;theme | Product Hunt"
+            style={{ width: "250px", height: "54px" }}
+            width="250"
+            height="54"
+          />
+        </Link>
       </div>
       <div className="mx-auto mt-20 flex max-w-[1000px] flex-wrap justify-center gap-2">
         {Array(84)
