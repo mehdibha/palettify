@@ -45,12 +45,21 @@
 
 ## About The Project
 
-<img src="https://palettify.co/images/demo.gif" />
+<details open><summary>Screenshots</summary>
+    <figure>
+      <img src="/images/themes.jpg" alt="Palettify themes">
+      <figcaption>Themes</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/playground" alt="Palettify playground">
+      <figcaption>Playground</figcaption>
+    </figure>
+</details>
 
 ### Supports
 
-- MUI
 - shadcn-ui
+- MUI (Soon)
 
 ### Built with
 
@@ -75,9 +84,9 @@ If you want to clone the project and use palettify as your starter project
 - [x] Playground page
 - [x] Themes page
 - [x] User management
-- [ ] Saved themes
-- [ ] Account page
-- [ ] Landing view in preview
+- [x] Saved themes
+- [x] Account page
+- [x] Landing view in preview
 - [ ] Integrate gradients
 - [ ] Add fonts to theme model
 - [ ] MUI integration
