@@ -176,7 +176,7 @@ export const Landing = () => {
       </section>
       <section id="open-source" className="container py-8 md:py-12 lg:py-24">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-          <h2 className="text-5xl font-medium leading-[1.1] xl:text-6xl">
+          <h2 className="text-4xl font-bold leading-[1.1] xl:text-6xl">
             Proudly Open Source
           </h2>
           <p className="text-muted-foreground max-w-[85%] leading-normal sm:text-lg sm:leading-7">
