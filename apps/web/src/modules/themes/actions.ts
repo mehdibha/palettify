@@ -146,6 +146,7 @@ export const updateTheme = async (formData: FormData) => {
     }
     return { success: true, themeId };
   } catch (error: any) {
+    console.log(error);
     return {
       error: error.message,
     };
@@ -199,6 +200,7 @@ export const toggleLikeTheme = async (themeId: string) => {
     }
     return { success: true, liked: !like };
   } catch (error: any) {
+    console.log(error);
     return {
       error: error.message,
     };
@@ -226,6 +228,7 @@ export const deleteTheme = async (themeId: string) => {
     });
     return { success: true };
   } catch (error: any) {
+    console.log(error);
     return {
       error: error.message,
     };
