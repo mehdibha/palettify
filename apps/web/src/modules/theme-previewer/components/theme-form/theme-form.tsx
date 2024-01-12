@@ -59,7 +59,7 @@ export const ThemeForm = (props: FormProps) => {
         name: values.name,
         lightPalette: values.lightPalette,
         darkPalette: values.darkPalette,
-        radius: parseFloat(values.radius),
+        radius: parseFloat(values.radius) ?? 0.5,
         defaultMode: values.defaultMode ?? mode,
         published: values.published,
       });
