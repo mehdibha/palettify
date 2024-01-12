@@ -53,6 +53,9 @@ export const ThemeForm = (props: FormProps) => {
   };
 
   function onSubmit(values: any) {
+    if (status !== "authenticated") {
+      return;
+    }
     startTransition(async () => {
       const result = await updateTheme({
         id: themeId as string | undefined,
