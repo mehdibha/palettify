@@ -45,15 +45,24 @@
 
 ## About The Project
 
-<details open><summary>Screenshots</summary>
-  <figure>
-    <img src="/images/themes.jpg" alt="Palettify themes">
-    <figcaption>Themes</figcaption>
-  </figure>
-  <figure>
-    <img src="/images/playground" alt="Palettify playground">
-    <figcaption>Playground</figcaption>
-  </figure>
+<details open>
+  <summary>Screenshots</summary>
+  <br>
+  <div align="center">
+    <figure>
+      <img src="/images/themes.jpg" alt="Palettify themes" width="600">
+      <div>
+        <figcaption>Themes</figcaption>
+      </div>
+    </figure>
+    <br>
+    <figure>
+      <img src="/images/playground.jpg" alt="Palettify playground" width="600">
+      <div>
+        <figcaption>Playground</figcaption>
+      </div>
+    </figure>
+  </div>
 </details>
 
 ### Supports
