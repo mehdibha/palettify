@@ -59,7 +59,7 @@ export const ThemeForm = (props: FormProps) => {
         name: values.name,
         lightPalette: values.lightPalette,
         darkPalette: values.darkPalette,
-        radius: values.radius,
+        radius: parseFloat(values.radius),
         defaultMode: values.defaultMode ?? mode,
         published: values.published,
       });
@@ -73,7 +73,6 @@ export const ThemeForm = (props: FormProps) => {
         if (result.themeId !== themeId) {
           router.push(`/playground/${result.themeId}`);
         }
-        router.refresh();
       }
       setOpen(false);
     });
