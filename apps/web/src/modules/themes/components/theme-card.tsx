@@ -91,7 +91,6 @@ export const ThemeCard = (props: ThemeCardProps) => {
         if (result?.error) {
           setLiked((prev) => !prev);
         }
-        router.refresh();
       }
     });
   };

@@ -73,6 +73,7 @@ export const ThemeForm = (props: FormProps) => {
         if (result.themeId !== themeId) {
           router.push(`/playground/${result.themeId}`);
         }
+        router.refresh();
       }
       setOpen(false);
     });
