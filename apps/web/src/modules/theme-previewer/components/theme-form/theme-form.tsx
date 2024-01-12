@@ -129,7 +129,9 @@ export const ThemeForm = (props: FormProps) => {
                 )
               ) : (
                 <LoginModal>
-                  <Button color="primary">Save theme</Button>
+                  <Button type="button" color="primary">
+                    Save theme
+                  </Button>
                 </LoginModal>
               )
             ) : status === "authenticated" ? (
@@ -140,7 +142,9 @@ export const ThemeForm = (props: FormProps) => {
               </CreateThemeModal>
             ) : (
               <LoginModal>
-                <Button color="primary">Save theme</Button>
+                <Button type="button" color="primary">
+                  Save theme
+                </Button>
               </LoginModal>
             )}
           </div>
