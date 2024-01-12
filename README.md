@@ -48,13 +48,14 @@
 <details open align="center">
   <summary>Screenshots</summary>
   <figure>
-    <img src="/images/themes.jpg" alt="Palettify themes" width="700">
+    <img src="/images/themes.jpg" alt="Palettify themes" width="600">
     <div align="center">
       <figcaption>Themes</figcaption>
     </div>
   </figure>
+  <br>
   <figure>
-    <img src="/images/playground.jpg" alt="Palettify playground" width="700">
+    <img src="/images/playground.jpg" alt="Palettify playground" width="600">
     <div align="center">
       <figcaption>Playground</figcaption>
     </div>
