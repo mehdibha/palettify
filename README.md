@@ -51,7 +51,7 @@
     <figcaption>Themes</figcaption>
   </figure>
   <figure>
-    <img src="/images/playground" alt="Palettify playground">
+    <img src="/images/playground.jpg" alt="Palettify playground">
     <figcaption>Playground</figcaption>
   </figure>
 </details>
