@@ -21,6 +21,7 @@
     ·
     <a href="https://github.com/mehdibha/palettify/issues">Request Feature</a>
   </p>
+  <a href="https://www.producthunt.com/posts/palettify?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-palettify" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=434268&theme=light" alt="Palettify - Never&#0032;struggle&#0032;again&#0032;with&#0032;your&#0032;site&#0032;theme | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </div>
 
 <details>
