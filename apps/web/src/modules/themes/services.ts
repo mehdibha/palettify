@@ -1,3 +1,4 @@
+import { unstable_cache as cache } from "next/cache";
 import { prisma } from "@palettify/database";
 import { getSession } from "@/modules/auth/services";
 
@@ -16,52 +17,60 @@ export const getThemeById = async (
   return theme;
 };
 
-export const getTrendingThemes = async () => {
-  const themes = await prisma.theme.findMany({
-    where: {
-      published: true,
-    },
-    select: {
-      id: true,
-      name: true,
-      defaultMode: true,
-      palettes: {
-        select: {
-          mode: true,
-          background: true,
-          foreground: true,
-          primary: true,
-          primaryForeground: true,
-          secondary: true,
-          secondaryForeground: true,
-          card: true,
-          cardForeground: true,
-          muted: true,
-          mutedForeground: true,
-          border: true,
+export async function getTrendingThemes() {
+  return await cache(
+    async () => {
+      return await prisma.theme.findMany({
+        where: {
+          published: true,
         },
-      },
-      _count: {
-        select: {
-          likedBy: true,
-        },
-      },
-      user: {
         select: {
           id: true,
           name: true,
-          username: true,
+          defaultMode: true,
+          palettes: {
+            select: {
+              mode: true,
+              background: true,
+              foreground: true,
+              primary: true,
+              primaryForeground: true,
+              secondary: true,
+              secondaryForeground: true,
+              card: true,
+              cardForeground: true,
+              muted: true,
+              mutedForeground: true,
+              border: true,
+            },
+          },
+          _count: {
+            select: {
+              likedBy: true,
+            },
+          },
+          user: {
+            select: {
+              id: true,
+              name: true,
+              username: true,
+            },
+          },
         },
-      },
+        orderBy: {
+          likedBy: {
+            _count: "desc",
+          },
+        },
+      });
     },
-    orderBy: {
-      likedBy: {
-        _count: "desc",
-      },
-    },
-  });
-  return themes;
-};
+    ["trending-themes"],
+    {
+      revalidate: 3600,
+      tags: ["trending-themes"],
+    }
+  )();
+}
 
 export const getUserThemes = async () => {
   const session = await getSession();

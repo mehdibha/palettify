@@ -6,7 +6,6 @@ import { cn } from "@palettify/utils";
 import { display, inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config";
-import { getSession } from "@/modules/auth/services";
 import { Providers } from "./providers";
 
 const config = siteConfig.global;

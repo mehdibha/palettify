@@ -15,5 +15,3 @@ export default async function ThemesPage() {
     </div>
   );
 }
-
-export const revalidate = 3600;

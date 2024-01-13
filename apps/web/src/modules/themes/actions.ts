@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { prisma } from "@palettify/database";
 import { getSession } from "@/modules/auth/services";
 import { exclude } from "@/utils";
@@ -144,6 +145,9 @@ export const updateTheme = async (formData: FormData) => {
         }
       }
     }
+    if (published) {
+      revalidateTag("trending-themes");
+    }
     return { success: true, themeId };
   } catch (error: any) {
     console.log(error);
@@ -198,6 +202,7 @@ export const toggleLikeTheme = async (themeId: string) => {
         },
       });
     }
+    revalidateTag("trending-themes");
     return { success: true, liked: !like };
   } catch (error: any) {
     console.log(error);
