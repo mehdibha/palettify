@@ -21,7 +21,7 @@ const defaultLightPalette = {
   mutedForeground: "#71717a",
   accent: "#f4f4f5",
   accentForeground: "#18181b",
-  destructive: "#dc2828",
+  destructive: "#ba2727",
   destructiveForeground: "#fafafa",
   border: "#e4e4e7",
   input: "#d6c6e8",

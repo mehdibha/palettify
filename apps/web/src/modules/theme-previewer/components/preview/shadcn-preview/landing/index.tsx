@@ -71,10 +71,7 @@ export const Landing = () => {
           </div>
         </div>
       </section>
-      <section
-        id="features"
-        className="container space-y-6 bg-slate-50 py-24 dark:bg-transparent"
-      >
+      <section id="features" className="container space-y-6 py-24">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="text-5xl font-bold leading-[1.1]">Features</h2>
           <p className="text-muted-foreground max-w-[85%] leading-normal sm:text-lg sm:leading-7">
@@ -189,7 +186,7 @@ export const Landing = () => {
             >
               GitHub
             </Link>
-            .{" "}
+            .
           </p>
           <Link href={"#"} target="_blank" rel="noreferrer" className="flex">
             <div className="border-muted bg-muted flex h-10 w-10 items-center justify-center space-x-2 rounded-md border">

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import { StarIcon } from "@radix-ui/react-icons";
+import { CircleIcon } from "@palettify/ui";
 import { cn } from "@palettify/utils";
 import { Button } from "@/modules/shadcn-ui/ui/button";
 import {
@@ -9,6 +11,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/modules/shadcn-ui/ui/card";
+import { Input } from "@/modules/shadcn-ui/ui/input";
+import { Label } from "@/modules/shadcn-ui/ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@/modules/shadcn-ui/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/modules/shadcn-ui/ui/tabs";
 import { CalendarDateRangePicker } from "./components/date-range-picker";
 import { MainNav } from "./components/main-nav";
@@ -54,18 +59,61 @@ export function Dashboard({ mobileView }: { mobileView?: boolean }) {
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
-              Analytics
-            </TabsTrigger>
-            <TabsTrigger value="reports" disabled>
-              Reports
-            </TabsTrigger>
-            <TabsTrigger value="notifications" disabled>
-              Notifications
-            </TabsTrigger>
-          </TabsList>
+          <div className="flex justify-between">
+            <TabsList>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="analytics" disabled>
+                Analytics
+              </TabsTrigger>
+              <TabsTrigger value="reports" disabled>
+                Reports
+              </TabsTrigger>
+              <TabsTrigger value="notifications" disabled>
+                Notifications
+              </TabsTrigger>
+            </TabsList>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline">Open popover</Button>
+              </PopoverTrigger>
+              <PopoverContent align="end" className="w-80">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Dimensions</h4>
+                    <p className="text-muted-foreground text-sm">
+                      Set the dimensions for the layer.
+                    </p>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="width">Width</Label>
+                      <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+                    </div>
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="maxWidth">Max. width</Label>
+                      <Input
+                        id="maxWidth"
+                        defaultValue="300px"
+                        className="col-span-2 h-8"
+                      />
+                    </div>
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="height">Height</Label>
+                      <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
+                    </div>
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="maxHeight">Max. height</Label>
+                      <Input
+                        id="maxHeight"
+                        defaultValue="none"
+                        className="col-span-2 h-8"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
           <TabsContent value="overview" className="space-y-4">
             <div
               className={cn("grid grid-cols-2 gap-4 xl:grid-cols-4", {
@@ -184,6 +232,50 @@ export function Dashboard({ mobileView }: { mobileView?: boolean }) {
                 </CardHeader>
                 <CardContent>
                   <RecentSales />
+                </CardContent>
+              </Card>
+            </div>
+            <div className="grid grid-cols-7 gap-4">
+              <Card
+                className={cn("col-span-7 xl:col-span-4", {
+                  "xl:col-span-7": mobileView,
+                })}
+              >
+                <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
+                  <div className="space-y-1">
+                    <CardTitle>Palettify</CardTitle>
+                    <CardDescription>
+                      Beautiful themes that you can copy and paste into your apps.
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-muted-foreground flex space-x-4 text-sm">
+                    <div className="flex items-center">
+                      <CircleIcon className="mr-1 h-3 w-3 fill-sky-400 text-sky-400" />
+                      TypeScript
+                    </div>
+                    <div className="flex items-center">
+                      <StarIcon className="mr-1 h-3 w-3" />
+                      150 stars
+                    </div>
+                    <div>Updated April 2023</div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card
+                className={cn("col-span-7 xl:col-span-3", {
+                  "xl:col-span-7": mobileView,
+                })}
+              >
+                <CardHeader>
+                  <CardTitle>Delete account</CardTitle>
+                  <CardDescription>
+                    Permanently delete your account. All your data will be removed.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex justify-end">
+                  <Button variant="destructive">Delete</Button>
                 </CardContent>
               </Card>
             </div>
