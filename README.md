@@ -76,7 +76,8 @@
 - Next.js (v14 with app dir) and React
 - Typescript
 - Tailwind CSS
-- Shadcn-ui as starter components
+- Shadcn-ui
+- Prisma
 
 ## Roadmap
 
