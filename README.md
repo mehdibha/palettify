@@ -90,8 +90,7 @@
 - [x] Landing view in preview
 - [ ] Integrate gradients
 - [ ] Add fonts to theme model
-- [ ] MUI integration
-- [ ] Optimization
+- [ ] Add multiple styles for components (start with new york and default then add custom styles)
 
 <!-- CONTRIBUTING -->
 
