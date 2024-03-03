@@ -82,7 +82,7 @@ export function CopyButton() {
       --border: ${formatColor(form.watch("darkPalette").border)};
       --input: ${formatColor(form.watch("darkPalette").input)};
       --ring: ${formatColor(form.watch("darkPalette").ring)};
-      --radius: ${form.watch("radius")};
+      --radius: ${form.watch("radius")}rem;
     }
   }`;
 
