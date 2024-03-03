@@ -234,7 +234,7 @@ export const ThemeForm = (props: FormProps) => {
               return (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} />
+                    <Input type="number" {...field} />
                   </FormControl>
                 </FormItem>
               );
